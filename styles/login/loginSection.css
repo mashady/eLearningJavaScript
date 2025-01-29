@@ -1,0 +1,78 @@
+.login {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+.login h1 {
+  font-size: 22px;
+  color: var(--black);
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.login .login-wrapper {
+  height: 700px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  background-color: var(--darkblue);
+  color: #fff;
+  border-radius: 10px;
+}
+.login .login-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.login .login-wrapper .loginRightSide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login .login-wrapper .loginRightSide h2 {
+  font-size: 28px;
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.login .login-wrapper .loginRightSide p {
+  font-size: 16px;
+  margin-bottom: 2rem;
+}
+.login .login-wrapper .loginRightSide input[type="email"],
+.login .login-wrapper .loginRightSide input[type="password"] {
+  display: block;
+  margin-bottom: 20px;
+  border: 0.1rem solid gray;
+  color: #fff;
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 1rem;
+  outline: none;
+  font-size: 18px;
+  width: 80%;
+}
+.login .login-wrapper .loginRightSide input[type="checkbox"] {
+  color: red;
+  display: block;
+  margin-left: 5px;
+}
+.login .login-wrapper .loginRightSide button {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  border: 1px solid #fff;
+  padding: 1rem;
+  background-color: var(--yellow);
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-size: 20px;
+  width: 86%;
+}
+.login .login-wrapper .loginRightSide span {
+  font-size: 18px;
+}
+.login .login-wrapper .loginRightSide span a {
+  color: var(--yellow);
+}

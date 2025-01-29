@@ -1,0 +1,5 @@
+@import "./utils/global.css";
+@import "../utils/global.css";
+@import "../utils/nav.css";
+@import "../login/loginSection.css";
+@import "../utils/footer.css";

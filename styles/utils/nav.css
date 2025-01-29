@@ -1,0 +1,36 @@
+nav {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--darkblue);
+  color: #fff;
+}
+nav .logo a {
+  font-size: 26px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li a {
+  font-size: 22px;
+  text-decoration: none;
+  color: #fff;
+  margin-right: 30px;
+}
+nav .loginBtn {
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+nav .loginBtn a {
+  text-decoration: none;
+  color: #fff;
+}

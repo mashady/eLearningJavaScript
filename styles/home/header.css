@@ -1,0 +1,38 @@
+header {
+  background-color: var(--darkblue);
+  height: 70vh;
+}
+header .container {
+  display: flex;
+  gap: 30px;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+header .container div {
+  padding: 0 30px;
+}
+header .container .headerTypo h1 {
+  font-size: 36px;
+}
+header .container .headerTypo p {
+  font-size: 16px;
+}
+header .container .headerTypo button {
+  font-size: 16px;
+  width: 185px;
+  height: 54px;
+  background-color: var(--yellow);
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+  font-family: "Poppins", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+header .container .headerTypo button a {
+  text-decoration: none;
+  color: var(--darkblue);
+}

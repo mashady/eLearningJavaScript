@@ -1,0 +1,28 @@
+.branding .container {
+  display: flex;
+  gap: 50px;
+}
+.branding .container span {
+  font-size: 18px;
+
+  color: var(--black);
+  opacity: 87%;
+}
+.branding .container p {
+  font-size: 16px;
+
+  color: var(--black);
+  opacity: 60%;
+}
+.branding .container h2 {
+  font-size: 38px;
+  font-family: "Poppins", serif;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--black);
+}
+.branding .container img {
+  width: 575px;
+  height: 398px;
+  border-radius: 10px;
+}
