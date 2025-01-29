@@ -41,7 +41,8 @@
   margin-bottom: 2rem;
 }
 .login .login-wrapper .loginRightSide input[type="email"],
-.login .login-wrapper .loginRightSide input[type="password"] {
+.login .login-wrapper .loginRightSide input[type="password"],
+.login .login-wrapper .loginRightSide input[type="text"] {
   display: block;
   margin-bottom: 20px;
   border: 0.1rem solid gray;
