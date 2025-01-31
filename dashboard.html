@@ -1,0 +1,144 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+    <script src="./dashboard.js"></script>
+</head>
+
+<body>
+    <!-- courses section -->
+    <div>
+        <h2>Courses</h2>
+        <form id="course-form">
+            <input type="hidden" id="course-id">
+
+            <label for="title">Name of course:</label>
+            <input type="text" id="title" required>
+
+            <label for="category">Category:</label>
+            <select id="category" required>
+                <option value="">Select Category</option>
+                <option value="Programming">Programming</option>
+                <option value="Design">Design</option>
+                <option value="Business">Business</option>
+                <!-- Add more categories as needed -->
+            </select>
+
+            <label for="instructor">Instructor Name:</label>
+            <input type="text" id="instructor" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" required></textarea>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" required>
+
+            <label for="duration">Duration:</label>
+            <input type="text" id="duration" required>
+            <button type="submit">Add Course</button>
+            <button type="button" id="update-course" style="display:none;">Update Course</button>
+            <button type="button" id="delete-course" style="display:none;">Delete Course</button>
+        </form>
+
+        <div>
+            <h2>Available Courses</h2>
+            <div id="courses-list"></div>
+        </div>
+    </div>
+    <!-- student section -->
+    <div>
+        <h2>Students</h2>
+        <form id="student-form">
+            <!-- <input type="hidden" id="student-id"> -->
+
+            <label for="student-id">Student ID:</label>
+            <input type="text" id="ID" required>
+
+            <label for="name">Name of student:</label>
+            <input type="text" id="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" required></textarea>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+
+            <label for="course">Course:</label>
+            <select id="course" required>
+                <option value="">Select Course</option>
+                <option value="HTML">HTML</option>
+                <option value="CSS">CSS</option>
+                <option value="JS">JS</option>
+            </select>
+
+            <button type="button" id="add-student">Add Student</button>
+            <button type="button" id="update-student">Update Student</button>
+            <button type="button" id="delete-student">Delete Student</button>
+            <button type="button" id="view-student">View Student</button>
+        </form>
+
+        <div>
+            <h2>Available Students</h2>
+            <button type="button" id="export-students" >Export Students</button>
+            <div id="students-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
