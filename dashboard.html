@@ -39,7 +39,9 @@
             text-align: left;
         }
     </style>
-    <script src="./dashboard.js"></script>
+    <script src="./student.js"></script>
+    <script src="./courses.js"></script>
+    <script src="./category.js"></script>
 </head>
 
 <body>
@@ -47,18 +49,12 @@
     <div>
         <h2>Courses</h2>
         <form id="course-form">
-            <input type="hidden" id="course-id">
-
             <label for="title">Name of course:</label>
             <input type="text" id="title" required>
 
-            <label for="category">Category:</label>
-            <select id="category" required>
+            <label for="course-category">Category:</label>
+            <select id="course-category" required>
                 <option value="">Select Category</option>
-                <option value="Programming">Programming</option>
-                <option value="Design">Design</option>
-                <option value="Business">Business</option>
-                <!-- Add more categories as needed -->
             </select>
 
             <label for="instructor">Instructor Name:</label>
@@ -137,6 +133,38 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <!-- category section -->
+    <div>
+        <h2>Category</h2>
+        <form id="category-form">
+            <label for="category-id">Category ID:</label>
+            <input type="text" id="category-id" required>
+
+            <label for="category-name">Category Name:</label>
+            <input type="text" id="category-name" required>
+
+            <button type="button" id="add-category">Add Category</button>
+            <button type="button" id="update-category">Update Category</button>
+            <button type="button" id="delete-category">Delete Category</button>
+            <button type="button" id="view-categories">View Categories</button>
+        </form>
+
+
+        <h2>Available Categories</h2>
+        <div id="categories-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category ID</th>
+                        <th>Category Name</th>
+                    </tr>
+                </thead>
+                <tbody id="categories-Body">
+
+                </tbody>
+            </table>
         </div>
     </div>
 </body>
