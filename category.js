@@ -161,6 +161,8 @@ function deleteCategory() {
         let couseCategories = document.getElementById("course-category");
         couseCategories.remove(ID - 1);
         
+        //TODO
+        // Delete all courses with the deleted category
     
 
         displayCategories(getCategoriesFromLocalStorage());

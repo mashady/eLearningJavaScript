@@ -91,7 +91,7 @@ function displayUsers(users) {
         return;
     }
     //get the table
-    var dataTable = document.querySelector("table>tbody");
+    var dataTable = document.getElementById("students-Body");
 
     // Remove all existing rows
     dataTable.innerHTML = "";

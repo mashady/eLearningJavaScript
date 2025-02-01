@@ -49,33 +49,75 @@
     <div>
         <h2>Courses</h2>
         <form id="course-form">
-            <label for="title">Name of course:</label>
-            <input type="text" id="title" required>
+            <!-- ID
+            Title
+            Image
+            Category
+            Instructor Name
+            Description
+            Price (if applicable) -> ask if it required or not
+            Duration
+            Content (Videos, PDFs, etc.) -->
+            <label for="course-id">Course ID:</label>
+            <input type="text" id="course-id" required>
+
+            <label for="course-name">Course Name:</label>
+            <input type="text" id="course-name" required>
+
+            <label for="course-image">Course Image URL:</label>
+            <!-- <input type="file" id="course-image" required> -->
+            <input type="text" id="course-image" required>
 
             <label for="course-category">Category:</label>
             <select id="course-category" required>
                 <option value="">Select Category</option>
             </select>
 
-            <label for="instructor">Instructor Name:</label>
-            <input type="text" id="instructor" required>
+            <label for="Course-instructor">Instructor Name:</label>
+            <input type="text" id="course-instructor" required>
 
-            <label for="description">Description:</label>
-            <textarea id="description" required></textarea>
+            <label for="course-description">Description:</label>
+            <textarea id="course-description" required></textarea>
 
             <label for="price">Price:</label>
-            <input type="number" id="price" required>
+            <input type="number" id="course-price" required>
 
-            <label for="duration">Duration:</label>
-            <input type="text" id="duration" required>
-            <button type="submit">Add Course</button>
-            <button type="button" id="update-course" style="display:none;">Update Course</button>
-            <button type="button" id="delete-course" style="display:none;">Delete Course</button>
+            <label for="course-duration">Duration:</label>
+            <input type="text" id="course-duration" required>
+
+            <!-- <label for="course-content">Content URL:</label>
+            <input type="text" id="course-content" required> -->
+            <!-- TODO: add videos and pdfs -->
+
+            <button type="button" id="add-course">Add Course</button>
+            <button type="button" id="update-course">Update Course</button>
+            <button type="button" id="delete-course">Delete Course</button>
+            <button type="button" id="view-course">View Course</button>
+            <button type="button" id="view-courses">View Courses</button>
+            
         </form>
 
         <div>
             <h2>Available Courses</h2>
-            <div id="courses-list"></div>
+            <table id="courses-list">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course Name</th>
+                        <th>Image</th>
+                        <th>Category</th>
+                        <th>Instructor</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Duration</th>
+                        <th>Videos</th>
+                        <th>PDFs</th>
+                    </tr>
+                </thead>
+                <tbody id="courses-Body">
+
+                </tbody>
+            </table>
         </div>
     </div>
     <!-- student section -->
@@ -128,7 +170,7 @@
                             <th>Password</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="students-Body">
 
                     </tbody>
                 </table>
