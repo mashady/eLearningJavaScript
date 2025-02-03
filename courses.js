@@ -7,15 +7,26 @@ var dbCourses = [
         Category: "Web Development",
         Instructor_Name: "Sara Salah",
         Description: "HTML5 and CSS3 Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using HTML5 and CSS3.",
-        Price: "15$",
+        Price: 15,
         Duration: "2h 30m",
-        video: [
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        ],
-        pdfs: [
-            "https://www.w3schools.com/html/html_intro.asp",
-            "https://www.w3schools.com/css/css_intro.asp"
+        content: [
+           {
+                lesson_id: 1,
+                lesson_title: "Introduction to HTML5",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/html/html_intro.asp",
+                lesson_quiz: "https://www.w3schools.com/html/html_quiz.asp"
+ 
+            },
+            {
+                lesson_id: 2,
+                lesson_title: "Introduction to CSS3",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/css/css_intro.asp",
+                lesson_quiz: "https://www.w3schools.com/css/css_quiz.asp"
+            }
         ]
     },
     {
@@ -26,19 +37,213 @@ var dbCourses = [
         Instructor_Name: "Sarah Salah",
         Description: "javascript Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using javascript.",
         Price: "30$",
-        Duration: "6h 30m",
-        video: [
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",
-        ],
-        pdfs: [
-            "https://www.w3schools.com/js/js_intro.asp",
-            "https://www.w3schools.com/js/js_intro.asp"
+        Duration: "12h",
+        content: [
+            {
+                lesson_id: 1,
+                lesson_title: "Introduction to javascript",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_intro.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 2,
+                lesson_title: "javascript Variables",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_variables.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 3,
+                lesson_title: "javascript Operators",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_operators.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 4,
+                lesson_title: "javascript Functions",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_functions.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 5,
+                lesson_title: "javascript Objects",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_objects.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 6,
+                lesson_title: "javascript Events",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_events.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 7,
+                lesson_title: "javascript Strings",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_strings.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 8,
+                lesson_title: "javascript Numbers",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_numbers.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 9,
+                lesson_title: "javascript Arrays",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_arrays.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 10,
+                lesson_title: "javascript Booleans",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_booleans.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 11,
+                lesson_title: "javascript Math Object",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_math.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 12,
+                lesson_title: "javascript Dates Object",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_dates.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 13,
+                lesson_title: "javascript Date Formats",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_formats.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 14,
+                lesson_title: "javascript Date Get Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_methods.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 15,
+                lesson_title: "javascript Date Set Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_methods_set.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 16,
+                lesson_title: "javascript Date Parse Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_parse.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 17,
+                lesson_title: "javascript Date UTC Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_utc.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 18,
+                lesson_title: "javascript Date Input Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_input.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 19,
+                lesson_title: "javascript Date Output Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_output.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 20,
+                lesson_title: "javascript Date Get Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_methods.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 21,
+                lesson_title: "javascript Date Set Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_methods_set.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 22,
+                lesson_title: "javascript Date Parse Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_parse.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 23,
+                lesson_title: "javascript Date UTC Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_utc.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 24,
+                lesson_title: "javascript Date Input Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_input.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
+            {
+                lesson_id: 25,
+                lesson_title: "javascript Date Output Methods",
+                lesson_duration: "30m",
+                lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+                lesson_pdf: "https://www.w3schools.com/js/js_date_output.asp",
+                lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+            },
         ]
     }
 ];
 //save Courses to local storage
-localStorage.setItem("Courses", JSON.stringify(dbCourses));
+// localStorage.setItem("Courses", JSON.stringify(dbCourses));
 
 // Function to get Courses from local storage
 function getCoursesFromLocalStorage() {
@@ -49,7 +254,7 @@ function getCoursesFromLocalStorage() {
 }
 
 //get Courses from local storage
-let Courses = getCoursesFromLocalStorage();
+// let Courses = getCoursesFromLocalStorage();
 
 // Function to display a Course
 function showCourse(Course) {
@@ -81,10 +286,13 @@ function showCourse(Course) {
     tdDuration.innerText = Course.Duration;
     // Videos
     var tdVideos = document.createElement("td");
-    tdVideos.innerText = Course.video;
+    tdVideos.innerText = Course.content.map(lesson => lesson.lesson_video).join(", ");
     // PDFs
     var tdPDFs = document.createElement("td");
-    tdPDFs.innerText = Course.pdfs;
+    tdPDFs.innerText = Course.content.map(lesson => lesson.lesson_pdf).join(", ");
+    // Quiz
+    var tdQuiz = document.createElement("td");
+    tdQuiz.innerText = Course.content.map(lesson => lesson.lesson_quiz).join(", ");
 
     var tr = document.createElement("tr");
     tr.appendChild(tdID);
@@ -97,12 +305,39 @@ function showCourse(Course) {
     tr.appendChild(tdDuration);
     tr.appendChild(tdVideos);
     tr.appendChild(tdPDFs);
+    tr.appendChild(tdQuiz);
 
     dataTable.appendChild(tr);
 }
 
+
+let content = [];
+// TODO: Add lesson
+function addLesson() {
+    // let lesson_num = document.getElementById("course-lessons").value;
+    // let lessons = document.getElementById("lessons");
+    // lessons.innerHTML = "";
+    // for (let i = 1; i <= lesson_num; i++) {
+    //     let lesson = document.createElement("div");
+    //     lesson.innerHTML = `
+    //     <h3>Lesson ${i}</h3>
+    //     <label for="lesson-title-${i}">Title:</label>
+    //     <input type="text" id="lesson-title-${i}" name="lesson-title-${i}" required>
+    //     <label for="lesson-duration-${i}">Duration:</label>
+    //     <input type="text" id="lesson-duration-${i}" name="lesson-duration-${i}" required>
+    //     <label for="lesson-video-${i}">Video:</label>
+    //     <input type="text" id="lesson-video-${i}" name="lesson-video-${i}" required>
+    //     <label for="lesson-pdf-${i}">PDF:</label>
+    //     <input type="text" id="lesson-pdf-${i}" name="lesson-pdf-${i}" required>
+    //     <label for="lesson-quiz-${i}">Quiz:</label>
+    //     <input type="text" id="lesson-quiz-${i}" name="lesson-quiz-${i}" required>
+    //     `;
+    //     lessons.appendChild(lesson);
+    // }
+}
 //add Course
 function addCourse() {
+    //TODO: generate course id
     let ID = parseInt(document.getElementById("course-id").value);
     let Title = document.getElementById("course-name").value;
     let Image = document.getElementById("course-image").value;
@@ -111,12 +346,11 @@ function addCourse() {
     let Description = document.getElementById("course-description").value;
     let Price = document.getElementById("course-price").value;
     let Duration = document.getElementById("course-duration").value;
-    //TODO: Add video and pdfs
-    // let video = document.getElementById("video").value;
-    // let pdfs = document.getElementById("pdfs").value;
+    let lesson_num = document.getElementById("course-lessons").value;
+    let course_content = content;
 
     // Add validation
-    if (!ID || !Title || !Image || !Category || !Instructor_Name || !Description || !Price || !Duration) {
+    if (!ID || !Title || !Image || !Category || !Instructor_Name || !Description || !Price || !Duration || !course_content) {
         alert("Please fill all fields!");
         return;
     }
@@ -125,14 +359,8 @@ function addCourse() {
         alert("Course with the same ID already exists!");
         return;
     }
-    //TODO: Add validation for video and pdfs
-    // if (!video || !pdfs) {   
-    //     alert("Please fill all fields!");
-    //     return;
-    // }
 
-    //TODO: add video and pdfs to the new Course
-    let newCourse = { ID, Title, Image, Category, Instructor_Name, Description, Price, Duration };
+    let newCourse = { ID, Title, Image, Category, Instructor_Name, Description, Price, Duration, course_content};
     let Courses = getCoursesFromLocalStorage(); // Get existing Courses from local storage
     Courses.push(newCourse); // Add the new Course
     localStorage.setItem("Courses", JSON.stringify(Courses)); // Save back to local storage
@@ -143,7 +371,7 @@ function addCourse() {
 //view Course by id
 
 function viewCourseById() {
-    let searchID = parseInt(document.getElementById("courese-id").value);
+    let searchID = parseInt(document.getElementById("course-id").value);
     let Courses = getCoursesFromLocalStorage();
     let Course = Courses.find(Course => Course.ID === searchID);
 
@@ -163,50 +391,52 @@ function displayCourses(Courses) {
         return;
     }
     //get the table
+    console.log(Courses);
     var dataTable = document.getElementById('courses-Body');
 
     // Remove all existing rows
     dataTable.innerHTML = "";
 
     //display Courses
-    for (Course of Courses) {
+    for (course of Courses) {
         // ID
         var tdID = document.createElement("td");
-        tdID.innerText = Course.ID;
+        tdID.innerText = course.ID;
         // Title
         var tdTitle = document.createElement("td");
-        tdTitle.innerText = Course.Title;
+        tdTitle.innerText = course.Title;
         // Image
         var tdImage = document.createElement("td");
-        tdImage.innerText = Course.Image;
+        tdImage.innerText = course.Image;
         // Category
         var tdCategory = document.createElement("td");
-        tdCategory.innerText = Course.Category;
+        tdCategory.innerText = course.Category;
         // Instructor Name
         var tdInstructorName = document.createElement("td");
-        tdInstructorName.innerText = Course.Instructor_Name;
+        tdInstructorName.innerText = course.Instructor_Name;
         // Description
         var tdDescription = document.createElement("td");
-        tdDescription.innerText = Course.Description;
+        tdDescription.innerText = course.Description;
         // Price
         var tdPrice = document.createElement("td");
-        tdPrice.innerText = Course.Price;
+        tdPrice.innerText = course.Price;
         // Duration
         var tdDuration = document.createElement("td");
-        tdDuration.innerText = Course.Duration;
+        tdDuration.innerText = course.Duration;
         // Videos
+        
         var tdVideos = document.createElement("td");
-        tdVideos.innerText = Course.video;
+        tdVideos.innerText = course.content.map(lesson => lesson.lesson_video).join(", ");
         // PDFs
         var tdPDFs = document.createElement("td");
-        tdPDFs.innerText = Course.pdfs;
+        tdPDFs.innerText = course.content.map(lesson => lesson.lesson_pdf).join(", ");
 
         var ctr = document.createElement("tr");
         ctr.appendChild(tdID);
         ctr.appendChild(tdTitle);
         ctr.appendChild(tdImage);
         ctr.appendChild(tdCategory);
-        ctr.appendChild(tdInsctructorName);
+        ctr.appendChild(tdInstructorName);
         ctr.appendChild(tdDescription);
         ctr.appendChild(tdPrice);
         ctr.appendChild(tdDuration);
@@ -218,7 +448,7 @@ function displayCourses(Courses) {
 }
 
 
-//update Course
+//update course
 
 function updateCourse() {
     let Courses = getCoursesFromLocalStorage();
@@ -239,7 +469,7 @@ function updateCourse() {
     let Price = document.getElementById("course-price").value || Courses[CourseIndex].Price;
     let Duration = document.getElementById("course-duration").value || Courses[CourseIndex].Duration;
 
-    //TODO: Update video and pdfs
+    //TODO: Update content
 
     Courses[CourseIndex].Title = Title;
     Courses[CourseIndex].Image = Image;
@@ -298,7 +528,7 @@ document.addEventListener("DOMContentLoaded", function () {
         updateCourseButton.addEventListener("click", updateCourse);
     }
 
-    let deleteStudentButton = document.getElementById("delete-course");
+    let deleteCourseButton = document.getElementById("delete-course");
     if (deleteCourseButton) {
         deleteCourseButton.addEventListener("click", deleteCourse);
     }
@@ -308,6 +538,11 @@ document.addEventListener("DOMContentLoaded", function () {
         exportButton.addEventListener("click", function () {
             displayCourses(getCoursesFromLocalStorage());
         });
+    }
+
+    let addLessonButton = document.getElementById("add-lesson");
+    if (addLessonButton) {
+        addLessonButton.addEventListener("click", addLesson);
     }
 
     // Display Courses when page loads

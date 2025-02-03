@@ -49,47 +49,68 @@
     <div>
         <h2>Courses</h2>
         <form id="course-form">
-            <!-- ID
-            Title
-            Image
-            Category
-            Instructor Name
-            Description
-            Price (if applicable) -> ask if it required or not
-            Duration
-            Content (Videos, PDFs, etc.) -->
-            <label for="course-id">Course ID:</label>
-            <input type="text" id="course-id" required>
+            
+            <!-- display: none; 1 -->
+            <div style=" background-color:blueviolet; border-radius: 8px; height: 700px; width: 1310px; padding: 10px; margin-top: 10px;">
+                <!-- TODO: make id generated automatically -->
+                <h2>General Information</h2>
+                <label for="course-id">Course ID:</label>
+                <input type="text" id="course-id" required>
 
-            <label for="course-name">Course Name:</label>
-            <input type="text" id="course-name" required>
+                <label for="course-name">Course Name:</label>
+                <input type="text" id="course-name" required>
 
-            <label for="course-image">Course Image URL:</label>
-            <!-- <input type="file" id="course-image" required> -->
-            <input type="text" id="course-image" required>
+                <label for="course-image">Course Image URL:</label>
+                <input type="text" id="course-image" required>
 
-            <label for="course-category">Category:</label>
-            <select id="course-category" required>
-                <option value="">Select Category</option>
-            </select>
+                <label for="course-category">Category:</label>
+                <select id="course-category" required>
+                    <option value="">Select Category</option>
+                </select>
 
-            <label for="Course-instructor">Instructor Name:</label>
-            <input type="text" id="course-instructor" required>
+                <label for="Course-instructor">Instructor Name:</label>
+                <input type="text" id="course-instructor" required>
 
-            <label for="course-description">Description:</label>
-            <textarea id="course-description" required></textarea>
+                <label for="course-description">Description:</label>
+                <textarea id="course-description" required></textarea>
 
-            <label for="price">Price:</label>
-            <input type="number" id="course-price" required>
+                <label for="price">Price:</label>
+                <input type="number" id="course-price" required>
 
-            <label for="course-duration">Duration:</label>
-            <input type="text" id="course-duration" required>
+                <label for="course-duration">Duration:</label>
+                <input type="text" id="course-duration" required>
 
-            <!-- <label for="course-content">Content URL:</label>
-            <input type="text" id="course-content" required> -->
+                <label for="course-lessons">Number of Lessons:</label>
+                <input type="text" id="course-lessons" required>
+
+                <button type="button" id="next-step" style="">Next Step</button>
+            </div>
+
             <!-- TODO: add videos and pdfs -->
+             <!-- display: none; 1-->
+            <div style=" background-color:blueviolet; border-radius: 8px; height: 420px; width: 1310px; padding: 10px; margin-top: 10px;">
+                <h2 id="lesson">Lesson one</h2>
+                <label for="lesson-title">Lesson Title:</label>
+                <input type="text" id="lesson-title" required>
+                <label for="lesson-duration">Duration:</label>
+                <input type="text" id="lesson-duration" required>
+                <label for="course-videos">Video:</label>
+                <input type="text" id="course-videos" required>
+                <label for="course-pdfs">PDF:</label>
+                <input type="text" id="course-pdfs" required>
+                <label for="course-quiz">Quiz:</label>
+                <input type="text" id="course-quiz" required>
 
-            <button type="button" id="add-course">Add Course</button>
+
+                <button type="button" id="prev-step">Prev Step</button>
+
+                <!-- display: none; 2-->
+                <button type="button" id="add-lesson">Add Lesson</button>
+                <!-- display: none; 2 -->
+                <button type="button" id="add-course" style="display: none;">Add Course</button>
+            </div>
+
+
             <button type="button" id="update-course">Update Course</button>
             <button type="button" id="delete-course">Delete Course</button>
             <button type="button" id="view-course">View Course</button>
