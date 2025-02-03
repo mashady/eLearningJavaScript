@@ -1,17 +1,17 @@
 //prepare the Course database
 var dbCourses = [
     {
-        ID:1,
-        Title:"HTML5 and CSS3 Fundamentals",
-        Image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqSJA6oUEYgsX9jDJknJ4hT8t0IK8WdfsNwA&s", // URL
-        Category:"Web Development",
-        Instructor_Name:"Sara Salah",
-        Description:"HTML5 and CSS3 Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using HTML5 and CSS3.",
-        Price:"15$", 
-        Duration:"2h 30m",
-        video:[
+        ID: 1,
+        Title: "HTML5 and CSS3 Fundamentals",
+        Image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqSJA6oUEYgsX9jDJknJ4hT8t0IK8WdfsNwA&s", // URL
+        Category: "Web Development",
+        Instructor_Name: "Sara Salah",
+        Description: "HTML5 and CSS3 Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using HTML5 and CSS3.",
+        Price: "15$",
+        Duration: "2h 30m",
+        video: [
             "https://www.youtube.com/watch?v=UB1O30fR-EE",
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",  
+            "https://www.youtube.com/watch?v=UB1O30fR-EE",
         ],
         pdfs: [
             "https://www.w3schools.com/html/html_intro.asp",
@@ -19,17 +19,17 @@ var dbCourses = [
         ]
     },
     {
-        ID:2,
-        Title:"javascript Fundamentals",
-        Image:"", // URL
-        Category:"web Development",
-        Instructor_Name:"Sarah Salah",
-        Description:"javascript Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using javascript.",
-        Price:"30$", 
-        Duration:"6h 30m",
-        video:[
+        ID: 2,
+        Title: "javascript Fundamentals",
+        Image: "", // URL
+        Category: "web Development",
+        Instructor_Name: "Sarah Salah",
+        Description: "javascript Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using javascript.",
+        Price: "30$",
+        Duration: "6h 30m",
+        video: [
             "https://www.youtube.com/watch?v=UB1O30fR-EE",
-            "https://www.youtube.com/watch?v=UB1O30fR-EE",  
+            "https://www.youtube.com/watch?v=UB1O30fR-EE",
         ],
         pdfs: [
             "https://www.w3schools.com/js/js_intro.asp",
@@ -114,7 +114,7 @@ function addCourse() {
     //TODO: Add video and pdfs
     // let video = document.getElementById("video").value;
     // let pdfs = document.getElementById("pdfs").value;
-    
+
     // Add validation
     if (!ID || !Title || !Image || !Category || !Instructor_Name || !Description || !Price || !Duration) {
         alert("Please fill all fields!");
@@ -170,50 +170,50 @@ function displayCourses(Courses) {
 
     //display Courses
     for (Course of Courses) {
-    // ID
-    var tdID = document.createElement("td");
-    tdID.innerText = Course.ID;
-    // Title
-    var tdTitle = document.createElement("td");
-    tdTitle.innerText = Course.Title;
-    // Image
-    var tdImage = document.createElement("td");
-    tdImage.innerText = Course.Image;
-    // Category
-    var tdCategory = document.createElement("td");
-    tdCategory.innerText = Course.Category;
-    // Instructor Name
-    var tdInstructorName = document.createElement("td");
-    tdInstructorName.innerText = Course.Instructor_Name;
-    // Description
-    var tdDescription = document.createElement("td");
-    tdDescription.innerText = Course.Description;
-    // Price
-    var tdPrice = document.createElement("td");
-    tdPrice.innerText = Course.Price;
-    // Duration
-    var tdDuration = document.createElement("td");
-    tdDuration.innerText = Course.Duration;
-    // Videos
-    var tdVideos = document.createElement("td");
-    tdVideos.innerText = Course.video;
-    // PDFs
-    var tdPDFs = document.createElement("td");
-    tdPDFs.innerText = Course.pdfs;
+        // ID
+        var tdID = document.createElement("td");
+        tdID.innerText = Course.ID;
+        // Title
+        var tdTitle = document.createElement("td");
+        tdTitle.innerText = Course.Title;
+        // Image
+        var tdImage = document.createElement("td");
+        tdImage.innerText = Course.Image;
+        // Category
+        var tdCategory = document.createElement("td");
+        tdCategory.innerText = Course.Category;
+        // Instructor Name
+        var tdInstructorName = document.createElement("td");
+        tdInstructorName.innerText = Course.Instructor_Name;
+        // Description
+        var tdDescription = document.createElement("td");
+        tdDescription.innerText = Course.Description;
+        // Price
+        var tdPrice = document.createElement("td");
+        tdPrice.innerText = Course.Price;
+        // Duration
+        var tdDuration = document.createElement("td");
+        tdDuration.innerText = Course.Duration;
+        // Videos
+        var tdVideos = document.createElement("td");
+        tdVideos.innerText = Course.video;
+        // PDFs
+        var tdPDFs = document.createElement("td");
+        tdPDFs.innerText = Course.pdfs;
 
-    var ctr = document.createElement("tr");
-    ctr.appendChild(tdID);
-    ctr.appendChild(tdTitle);
-    ctr.appendChild(tdImage);
-    ctr.appendChild(tdCategory);
-    ctr.appendChild(tdInsctructorName);
-    ctr.appendChild(tdDescription);
-    ctr.appendChild(tdPrice);
-    ctr.appendChild(tdDuration);
-    ctr.appendChild(tdVideos);
-    ctr.appendChild(tdPDFs);
+        var ctr = document.createElement("tr");
+        ctr.appendChild(tdID);
+        ctr.appendChild(tdTitle);
+        ctr.appendChild(tdImage);
+        ctr.appendChild(tdCategory);
+        ctr.appendChild(tdInsctructorName);
+        ctr.appendChild(tdDescription);
+        ctr.appendChild(tdPrice);
+        ctr.appendChild(tdDuration);
+        ctr.appendChild(tdVideos);
+        ctr.appendChild(tdPDFs);
 
-    dataTable.appendChild(ctr);
+        dataTable.appendChild(ctr);
     }
 }
 
