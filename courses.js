@@ -313,29 +313,44 @@ function showCourse(Course) {
 
 let course_content = [];
 let count = 1;
-// let lesson_num = document.getElementById("course-lessons").value;
+let update_lesson = 0;
 // TODO: Add lesson
 function addLesson() {
     let lesson_num = document.getElementById("course-lessons").value;
     let span_title = document.getElementById("lesson");
+    span_title.innerHTML = `Lesson ${count + 1}`
+
     //TODO: validation for unique lesson title
+    let lesson_id = count;
     let lesson_title = document.getElementById("lesson-title").value;
+
+    let title_found = course_content.find(lesson => lesson_title === lesson_title);
+    if(title_found){
+        console.log("title has to be unique");
+        return;
+    }
+
     let lesson_duration = document.getElementById("lesson-duration").value;
     let lesson_video = document.getElementById("lesson-video").value;
     let lesson_pdf = document.getElementById("lesson-pdf").value;
     let lesson_quiz = document.getElementById("lesson-quiz").value;
 
-    span_title.innerHTML = `Lesson ${count + 1}`
     
-    // console.log(lesson_num , count , lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz);
-    let lesson = {lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz};
-    //check if we used prev lesson button (the object exists in the array) to update 
-    // otherwise the objet is new so add it to content array 
-    let lessonFound = course_content.find(lesson => lesson.lesson_title === lesson_title);
-    console.log(lessonFound);
+    let lesson = {lesson_id , lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz};
+ 
+    let lessonFound = course_content.find(lesson => lesson.lesson_id === count);
+
     if(lessonFound){
-        //TODO: update
-        console.log("need to update")
+        //update
+        courseIndex = (lessonFound.lesson_id) - 1;
+        //TODO: validation for unique lesson title
+        course_content[courseIndex].lesson_title = lesson_title || course_content[courseIndex].Title;
+        course_content[courseIndex].lesson_duration = lesson_duration || course_content[courseIndex].Duration;
+        course_content[courseIndex].lesson_video = lesson_video || course_content[courseIndex].lesson_video;
+        course_content[courseIndex].lesson_pdf = lesson_pdf || course_content[courseIndex].lesson_pdf;
+        course_content[courseIndex].lesson_quiz = lesson_quiz || course_content[courseIndex].lesson_quiz;
+
+        console.log(course_content);
     }else{
         //add
         course_content.push(lesson);
@@ -343,11 +358,11 @@ function addLesson() {
     }
 
     //TODO: empty the text areas
-    lesson_title = "";
-    lesson_duration = "";
-    lesson_video = "";
-    lesson_pdf = "";
-    lesson_quiz = "";
+    // lesson_title = "";
+    // lesson_duration = "";
+    // lesson_video = "";
+    // lesson_pdf = "";
+    // lesson_quiz = "";
 
     if(count + 1 == lesson_num){
         console.log("last step");
@@ -362,6 +377,9 @@ function addLesson() {
 // previous lesson
 function prevLesson(){
     count--;
+    console.log(count)
+    let span_title = document.getElementById("lesson");
+    span_title.innerHTML = `Lesson ${count}`
     //TODO: empty content form fields
 
 
@@ -376,7 +394,9 @@ function prevStep(){
 //add Course
 function addCourse() {
     //TODO: generate course id
-    let ID = parseInt(document.getElementById("course-id").value);
+    let Courses = getCoursesFromLocalStorage(); // Get existing Courses from local storage
+    let ID = Courses[Courses.length - 1].ID + 1;
+    // let ID = parseInt(document.getElementById("course-id").value);
     let Title = document.getElementById("course-name").value;
     let Image = document.getElementById("course-image").value;
     let Category = document.getElementById("course-category").value;
@@ -400,7 +420,6 @@ function addCourse() {
     }
 
     let newCourse = { ID, Title, Image, Category, Instructor_Name, Description, Price, Duration, content};
-    let Courses = getCoursesFromLocalStorage(); // Get existing Courses from local storage
     Courses.push(newCourse); // Add the new Course
     content = [];
     console.log(newCourse);
@@ -594,6 +613,16 @@ document.addEventListener("DOMContentLoaded", function () {
     let addLessonButton = document.getElementById("add-lesson");
     if (addLessonButton) {
         addLessonButton.addEventListener("click", addLesson);
+    }
+
+    let prevLessonButton = document.getElementById("prev-lesson");
+    if(prevLessonButton) {
+        prevLessonButton.addEventListener("click", prevLesson)
+    }
+
+    let prevStepButton = document.getElementById("prev-step");
+    if(prevStepButton) {
+        prevStepButton.addEventListener("click", prevStep)
     }
 
     // Display Courses when page loads
