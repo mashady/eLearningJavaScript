@@ -311,30 +311,68 @@ function showCourse(Course) {
 }
 
 
-let content = [];
+let course_content = [];
+let count = 1;
+// let lesson_num = document.getElementById("course-lessons").value;
 // TODO: Add lesson
 function addLesson() {
-    // let lesson_num = document.getElementById("course-lessons").value;
-    // let lessons = document.getElementById("lessons");
-    // lessons.innerHTML = "";
-    // for (let i = 1; i <= lesson_num; i++) {
-    //     let lesson = document.createElement("div");
-    //     lesson.innerHTML = `
-    //     <h3>Lesson ${i}</h3>
-    //     <label for="lesson-title-${i}">Title:</label>
-    //     <input type="text" id="lesson-title-${i}" name="lesson-title-${i}" required>
-    //     <label for="lesson-duration-${i}">Duration:</label>
-    //     <input type="text" id="lesson-duration-${i}" name="lesson-duration-${i}" required>
-    //     <label for="lesson-video-${i}">Video:</label>
-    //     <input type="text" id="lesson-video-${i}" name="lesson-video-${i}" required>
-    //     <label for="lesson-pdf-${i}">PDF:</label>
-    //     <input type="text" id="lesson-pdf-${i}" name="lesson-pdf-${i}" required>
-    //     <label for="lesson-quiz-${i}">Quiz:</label>
-    //     <input type="text" id="lesson-quiz-${i}" name="lesson-quiz-${i}" required>
-    //     `;
-    //     lessons.appendChild(lesson);
-    // }
+    let lesson_num = document.getElementById("course-lessons").value;
+    let span_title = document.getElementById("lesson");
+    //TODO: validation for unique lesson title
+    let lesson_title = document.getElementById("lesson-title").value;
+    let lesson_duration = document.getElementById("lesson-duration").value;
+    let lesson_video = document.getElementById("lesson-video").value;
+    let lesson_pdf = document.getElementById("lesson-pdf").value;
+    let lesson_quiz = document.getElementById("lesson-quiz").value;
+
+    span_title.innerHTML = `Lesson ${count + 1}`
+    
+    // console.log(lesson_num , count , lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz);
+    let lesson = {lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz};
+    //check if we used prev lesson button (the object exists in the array) to update 
+    // otherwise the objet is new so add it to content array 
+    let lessonFound = course_content.find(lesson => lesson.lesson_title === lesson_title);
+    console.log(lessonFound);
+    if(lessonFound){
+        //TODO: update
+        console.log("need to update")
+    }else{
+        //add
+        course_content.push(lesson);
+        console.log(course_content);
+    }
+
+    //TODO: empty the text areas
+    lesson_title = "";
+    lesson_duration = "";
+    lesson_video = "";
+    lesson_pdf = "";
+    lesson_quiz = "";
+
+    if(count + 1 == lesson_num){
+        console.log("last step");
+        //TODO: hide add lesson button
+        //TODO: show add course button
+        let add_lesson_button = document.getElementById("add-lesson");
+        let add_Course_button = document.getElementById("add_course");
+    }
+    count++;
 }
+
+// previous lesson
+function prevLesson(){
+    count--;
+    //TODO: empty content form fields
+
+
+}
+
+//previous step
+function prevStep(){
+    //TODO: make content div hiden
+    //TODO: make general info div appear
+}
+
 //add Course
 function addCourse() {
     //TODO: generate course id
@@ -346,23 +384,27 @@ function addCourse() {
     let Description = document.getElementById("course-description").value;
     let Price = document.getElementById("course-price").value;
     let Duration = document.getElementById("course-duration").value;
-    let lesson_num = document.getElementById("course-lessons").value;
-    let course_content = content;
+    let content = course_content;
+    let lesson_title = document.getElementById("lesson-title").value;
+    let lesson_duration = document.getElementById("lesson-duration").value;
+    let lesson_video = document.getElementById("lesson-video").value;
+    let lesson_pdf = document.getElementById("lesson-pdf").value;
+    let lesson_quiz = document.getElementById("lesson-quiz").value;
+    let last_lesson = {lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz};
+    content.push(last_lesson);
 
     // Add validation
-    if (!ID || !Title || !Image || !Category || !Instructor_Name || !Description || !Price || !Duration || !course_content) {
+    if (!ID || !Title || !Image || !Category || !Instructor_Name || !Description || !Price || !Duration || !content) {
         alert("Please fill all fields!");
         return;
     }
-    // Add validation for ID
-    if (Courses.find(Course => Course.ID === ID)) {
-        alert("Course with the same ID already exists!");
-        return;
-    }
 
-    let newCourse = { ID, Title, Image, Category, Instructor_Name, Description, Price, Duration, course_content};
+    let newCourse = { ID, Title, Image, Category, Instructor_Name, Description, Price, Duration, content};
     let Courses = getCoursesFromLocalStorage(); // Get existing Courses from local storage
     Courses.push(newCourse); // Add the new Course
+    content = [];
+    console.log(newCourse);
+    console.log(Courses);
     localStorage.setItem("Courses", JSON.stringify(Courses)); // Save back to local storage
     displayCourses(Courses);
     alert("Course added successfully!");
@@ -391,7 +433,6 @@ function displayCourses(Courses) {
         return;
     }
     //get the table
-    console.log(Courses);
     var dataTable = document.getElementById('courses-Body');
 
     // Remove all existing rows
@@ -468,6 +509,15 @@ function updateCourse() {
     let Description = document.getElementById("course-description").value || Courses[CourseIndex].Description;
     let Price = document.getElementById("course-price").value || Courses[CourseIndex].Price;
     let Duration = document.getElementById("course-duration").value || Courses[CourseIndex].Duration;
+    let Content = course_content;
+    let lesson_title = document.getElementById("lesson-title").value;
+    let lesson_duration = document.getElementById("lesson-duration").value;
+    let lesson_video = document.getElementById("lesson-video").value;
+    let lesson_pdf = document.getElementById("lesson-pdf").value;
+    let lesson_quiz = document.getElementById("lesson-quiz").value;
+    let last_lesson = {lesson_title , lesson_duration , lesson_video , lesson_pdf , lesson_quiz};
+    Content.push(last_lesson);
+
 
     //TODO: Update content
 
@@ -478,6 +528,7 @@ function updateCourse() {
     Courses[CourseIndex].Description = Description;
     Courses[CourseIndex].Price = Price;
     Courses[CourseIndex].Duration = Duration;
+    Courses[CourseIndex].content = Content;
 
     localStorage.setItem("Courses", JSON.stringify(Courses));
 
