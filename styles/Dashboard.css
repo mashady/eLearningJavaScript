@@ -1,0 +1,203 @@
+ @import url(./utils/global.css);
+@import url(./utils/fonts.css);
+
+:root {
+    --lightBg: #101131; 
+    --lightText: #d2eaf8; 
+    --lightGray: #333333; 
+    --lightBorder: #444444; 
+    --lightHover: #d2eaf8; 
+    --lightFooterBg: #222222; 
+  }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui;
+  background-color: var(--lightBg);
+  color: var(--lightText);
+}
+
+a {
+  text-decoration: none;
+  font-size: 18px;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: -40px;
+}
+
+iframe {
+  width: 100%;
+  height: 785px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.user-profile {
+  width: 92%;
+  margin: 8px auto;
+  padding: 8px 0;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.user-profile h4,
+.user-profile p {
+color: var(--lightText);
+}
+
+.user-profile img {
+  width: 150px;
+  height: 150px;
+  background-color: var(--grayBg);
+  border-radius: 50%;
+}
+
+.page-content {
+  display: flex;
+  justify-content: center;
+  background-color: var(--lightBg);
+}
+
+.side-bar {
+  flex: 1;
+}
+
+.page-content .main-bar {
+  flex: 6;
+}
+
+.page-links {
+  text-align: left;
+}
+
+.page-links .links li {
+  border-bottom: 1px solid var(--lightHover);
+
+}
+.page-links .links li:hover 
+{
+  background-color: #1c1e53;
+}
+.page-links .links li > a {
+  font-weight: 600;
+  display: block;
+  font-size: 16px; 
+  color: var(--lightText);
+
+  padding: 20px;
+}
+
+.page-links .links li > a:hover {
+  background: linear-gradient(90deg, #eda7ff, #7100a5);
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  box-shadow:1px -4px 9px 5px #d2eaf89a;
+
+}
+
+.logo-txt {
+  background: linear-gradient(90deg, #fdffee, #3cff00);
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  display: inline-block;
+  padding: 15px 10px;
+  font-size: 1.6rem;
+  margin-top: 0;
+  font-weight: bold;
+}
+
+.dropdown {
+  float: right;
+  overflow: hidden;
+  margin-right: 2em;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0.75em;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropbtn img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  vertical-align: middle;
+}
+
+.chevron {
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-top: 2px solid var(--lightText);
+  border-right: 2px solid var(--lightText);
+}
+
+.chevron-down {
+  transform: rotate(135deg);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--lightGray);
+  border: 1px solid var(--lightBorder);
+  min-width: 160px;
+  right: 2em;
+  top: 60px;
+  z-index: 3;
+}
+
+.divider {
+  border-top: 1px solid var(--lightBorder);
+}
+
+.dropdown-content a {
+  float: none;
+  color: var(--lightText);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--lightHover);
+}
+
+.show {
+  display: block;
+}
+
+.iframe-container {
+  background-color: var(--lightBg);
+}
+
+footer {
+  display: grid;
+  grid-area: footer;
+  border: 1px solid var(--lightBorder);
+  background-color: var(--lightBg);
+  margin-top: 1.5em;
+}
+
+footer > div {
+  text-align: center;
+  padding: 1em 0;
+  
+}
+footer h1
+{
+  background: linear-gradient(90deg, #fdffee, #3cff00);
+  background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  font-size: 1.5rem;
+}

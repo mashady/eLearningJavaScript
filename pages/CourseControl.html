@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        @import url(../styles/utils/global.css);
+        @import url(../styles/utils/fonts.css);
+        .title
+        {
+            background-color: var(--darkblue);
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+        .title h1
+        {
+            background: linear-gradient(90deg, #fdffee, #3cff00);
+            background-clip: text;
+            -webkit-text-fill-color: transparent; 
+            padding: 1px 30px;
+            font-size: 1.5rem;  
+            display:inline-block;
+        }
+
+
+        body {
+            font-family: system-ui;
+            background-color: var(--grayBg);
+            color: var(--darkblue);
+            margin: 0;
+            padding: 20px;
+        }
+
+        #enroll-requests {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            background-color: var(--lightGray);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        #enroll-requests th,
+        #enroll-requests td{
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #b3c4d4;
+        }
+
+        #enroll-requests th {
+            background-color: var(--darkblue);
+            color: var(--gray);
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #enroll-requests tbody tr:hover {
+            background-color: var(--lightBorder);
+            transition: background-color 0.3s ease;
+        }
+
+        #enroll-requests tbody tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .action-button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .approve-button {
+            background-color: #28a745;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 5px 10px;
+            border: none;
+            color: white;
+        }
+        .reject-button {
+            background-color: #f44336;
+            cursor: pointer;
+            border-radius: 10px;
+            padding: 5px 10px;
+            color: white;
+            border: none;      
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="title"><h1>Enroll Requests</h1></div>
+    <div class="container">
+    <table id="enroll-requests">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Course</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Requests will be populated here -->
+        </tbody>
+    </table>
+</div>
+    <!-- <script>
+        // Dynamically load the enroll requests
+        function loadEnrollRequests() {
+            let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests")) || [];
+            let tbody = document.querySelector("#enroll-requests tbody");
+            tbody.innerHTML = "";
+
+            enrollRequests.forEach((request, index) => {
+                let row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${request.username}</td>
+                    <td>${request.course}</td>
+                    <td>${request.status}</td>
+                    <td>
+                        <button class="approve-button" onclick="approveRequest(${index})">Approve</button>
+                        <button class="reject-button" onclick="rejectRequest(${index})">Reject</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function approveRequest(index) {
+            let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests"));
+            enrollRequests[index].status = "approved";
+            localStorage.setItem("enrollRequests", JSON.stringify(enrollRequests));
+            loadEnrollRequests();
+            alert("Request approved!");
+        }
+
+        function rejectRequest(index) {
+            let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests"));
+            enrollRequests.splice(index, 1); // Remove the request
+            localStorage.setItem("enrollRequests", JSON.stringify(enrollRequests));
+            loadEnrollRequests();
+            alert("Request rejected!");
+        }
+
+        // Load enroll requests when the page loads
+        document.addEventListener("DOMContentLoaded", function() {
+            loadEnrollRequests();
+        });
+
+    </script> -->
+
+
+    <script>
+        function loadEnrollRequests() {
+    let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests")) || [];
+    let tbody = document.querySelector("#enroll-requests tbody");
+    tbody.innerHTML = "";
+
+    let selectedCourse = localStorage.getItem("selectedCourse") || "";
+
+    let filteredRequests = selectedCourse
+        ? enrollRequests.filter(request => request.course === selectedCourse)
+        : enrollRequests;
+
+    filteredRequests.forEach((request, index) => {
+        let row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${request.username}</td>
+            <td>${request.course}</td>
+            <td>${request.status}</td>
+            <td>
+                <button class="approve-button" onclick="approveRequest(${index})">Approve</button>
+                <button class="reject-button" onclick="rejectRequest(${index})">Reject</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+
+// دالة لاختيار اسم الكورس وتخزينه في `localStorage`
+function selectCourse(courseName) {
+    localStorage.setItem("selectedCourse", courseName);
+    loadEnrollRequests();
+}
+
+// تحميل الطلبات عند فتح الصفحة
+document.addEventListener("DOMContentLoaded", function() {
+    loadEnrollRequests();
+});
+
+    </script>
+</body>
+</html>

@@ -1,11 +1,13 @@
 :root {
   --yellow: #fcd980;
   --black: #282938;
+  --darkblue2: #101131;
   --darkblue: #1c1e53;
   --lightblue: #2405f2;
   --gray: #f4f6fc;
   --grayBg: #eef4fa;
   --darkGray: #283836;
+  --lightgreen:#37e702a6;
 }
 body {
   font-family: "Poppins", serif;
@@ -15,6 +17,6 @@ body {
   margin: 0;
 }
 .container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto;
 }
