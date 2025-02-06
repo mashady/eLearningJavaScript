@@ -1,3 +1,247 @@
+// var dbCourses = [
+//     {
+//         ID: 1,
+//         Title: "HTML5 and CSS3 Fundamentals",
+//         Image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqSJA6oUEYgsX9jDJknJ4hT8t0IK8WdfsNwA&s", // URL
+//         Category: "Web Development",
+//         Instructor_Name: "Sara Salah",
+//         Description: "HTML5 and CSS3 Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using HTML5 and CSS3.",
+//         Price: 15,
+//         Duration: "2h 30m",
+//         content: [
+//            {
+//                 lesson_id: 1,
+//                 lesson_title: "Introduction to HTML5",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/html/html_intro.asp",
+//                 lesson_quiz: "https://www.w3schools.com/html/html_quiz.asp"
+ 
+//             },
+//             {
+//                 lesson_id: 2,
+//                 lesson_title: "Introduction to CSS3",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/css/css_intro.asp",
+//                 lesson_quiz: "https://www.w3schools.com/css/css_quiz.asp"
+//             }
+//         ]
+//     },
+//     {
+//         ID: 2,
+//         Title: "javascript Fundamentals",
+//         Image: "", // URL
+//         Category: "web Development",
+//         Instructor_Name: "Sarah Salah",
+//         Description: "javascript Fundamentals is a course that introduces you to the basics of web development. You will learn how to create a simple web page using javascript.",
+//         Price: "30$",
+//         Duration: "12h",
+//         content: [
+//             {
+//                 lesson_id: 1,
+//                 lesson_title: "Introduction to javascript",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_intro.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 2,
+//                 lesson_title: "javascript Variables",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_variables.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 3,
+//                 lesson_title: "javascript Operators",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_operators.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 4,
+//                 lesson_title: "javascript Functions",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_functions.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 5,
+//                 lesson_title: "javascript Objects",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_objects.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 6,
+//                 lesson_title: "javascript Events",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_events.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 7,
+//                 lesson_title: "javascript Strings",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_strings.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 8,
+//                 lesson_title: "javascript Numbers",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_numbers.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 9,
+//                 lesson_title: "javascript Arrays",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_arrays.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 10,
+//                 lesson_title: "javascript Booleans",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_booleans.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 11,
+//                 lesson_title: "javascript Math Object",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_math.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 12,
+//                 lesson_title: "javascript Dates Object",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_dates.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 13,
+//                 lesson_title: "javascript Date Formats",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_formats.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 14,
+//                 lesson_title: "javascript Date Get Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_methods.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 15,
+//                 lesson_title: "javascript Date Set Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_methods_set.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 16,
+//                 lesson_title: "javascript Date Parse Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_parse.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 17,
+//                 lesson_title: "javascript Date UTC Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_utc.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 18,
+//                 lesson_title: "javascript Date Input Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_input.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 19,
+//                 lesson_title: "javascript Date Output Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_output.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 20,
+//                 lesson_title: "javascript Date Get Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_methods.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 21,
+//                 lesson_title: "javascript Date Set Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_methods_set.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 22,
+//                 lesson_title: "javascript Date Parse Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_parse.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 23,
+//                 lesson_title: "javascript Date UTC Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_utc.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 24,
+//                 lesson_title: "javascript Date Input Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_input.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//             {
+//                 lesson_id: 25,
+//                 lesson_title: "javascript Date Output Methods",
+//                 lesson_duration: "30m",
+//                 lesson_video: "https://www.youtube.com/watch?v=UB1O30fR-EE",
+//                 lesson_pdf: "https://www.w3schools.com/js/js_date_output.asp",
+//                 lesson_quiz: "https://www.w3schools.com/js/js_quiz.asp"
+//             },
+//         ]
+//     }
+// ];
+
 // let Courses = JSON.parse(localStorage.getItem("courses")) || [];
 
 function getCoursesFromLocalStorage() {
