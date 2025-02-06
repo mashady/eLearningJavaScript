@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Learning</title>
+    <!-- <script type="module" src="./script/firebase-config.js"></script> -->
+    <link rel="stylesheet" href="./styles/Dashboard.css" />
+  </head>
+  <body>
+    <div class="page-content">
+      <div class="side-bar">
+        <div class="logo-txt">Dashboard</div>
+        <div class="page-links">
+          <div class="user-profile">
+            <img
+              src="./assets/header/isolated-young-handsome-man-different-poses-white-background-illustration-b.png"
+              alt="Profile"
+              title="User Avatar"
+            />
+            <h4>Hello, <strong>Alpha</strong></h4>
+          </div>
+          <ul class="links">
+            <li>
+              <a href="./pages/students.html" target="content-frame">Students</a>
+            </li>
+            <li>
+              <a href="./pages/categories.html" target="content-frame">Categories</a>
+            </li>
+            <li>
+              <a href="./pages/courses.html" target="content-frame">Courses</a>
+            </li>
+            <li>
+              <a href="./pages/CourseControl.html" target="content-frame">Controls</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <main class="main-bar">
+        <nav class="main-header">
+          <div class="dropdown">
+            <button class="dropbtn" onclick="dropdown()">
+              <span
+                ><img
+                  src="./assets/header/isolated-young-handsome-man-different-poses-white-background-illustration-b.png"
+                  alt="User avatar"
+                  title="User Avatar"
+              /></span>
+              <span class="chevron chevron-down"></span>
+            </button>
+
+            <div class="dropdown-content" id="userMenu">
+              <a href="#setting">Setting</a>
+              <a href="#logout" class="divider">Logout</a>
+            </div>
+          </div>
+        </nav>
+        <div class="iframe-container">
+          <iframe name="content-frame" src="./pages/students.html"></iframe>
+        </div>
+      </main>
+    </div>
+    <footer>
+      <div><h1>E-Learning Dashboard</h1></div>
+    </footer>
+    <script>
+      function dropdown() {
+        document.getElementById("userMenu").classList.toggle("show");
+      }
+      window.onclick = function (e) {
+        if (!e.target.matches(".dropbtn")) {
+          var userMenu = document.getElementById("userMenu");
+          if (userMenu.classList.contains("show")) {
+            userMenu.classList.remove("show");
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
