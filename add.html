@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Step Course Form</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Modal Overlay */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      /* Modal */
+      .modal {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+        max-width: 90%;
+        position: relative;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      /* Form Steps */
+      .form-step {
+        display: none;
+      }
+
+      .form-step.active {
+        display: block;
+      }
+
+      /* Animations */
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+      }
+
+      .form-step.active {
+        animation: slideIn 0.3s ease-in-out;
+      }
+
+      .form-step {
+        animation: slideOut 0.3s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Button to Open Modal -->
+    <button id="openModal">Add Course</button>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay">
+      <div class="modal">
+        <!-- Close Button -->
+        <button id="closeModal" class="close-modal">&times;</button>
+
+        <!-- Multi-Step Form -->
+        <form id="multiStepForm">
+          <!-- Step 1: General Information -->
+          <div id="step1" class="form-step active">
+            <h2>Step 1: General Information</h2>
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" required /><br /><br />
+
+            <label for="image">Image URL:</label>
+            <input type="url" id="image" name="image" required /><br /><br />
+
+            <label for="category">Category:</label>
+            <input
+              type="text"
+              id="category"
+              name="category"
+              required
+            /><br /><br />
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required></textarea
+            ><br /><br />
+
+            <label for="price">Price:</label>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              step="0.01"
+              required
+            /><br /><br />
+
+            <label for="duration">Duration:</label>
+            <input
+              type="text"
+              id="duration"
+              name="duration"
+              required
+            /><br /><br />
+
+            <button type="button" id="nextStep1">Next</button>
+          </div>
+
+          <!-- Step 2: Number of Lessons -->
+          <div id="step2" class="form-step">
+            <h2>Step 2: Number of Lessons</h2>
+            <label for="lessonCount"
+              >How many lessons do you want to add?</label
+            >
+            <input
+              type="number"
+              id="lessonCount"
+              name="lessonCount"
+              min="1"
+              required
+            /><br /><br />
+
+            <button type="button" id="prevStep2">Previous</button>
+            <button type="button" id="nextStep2">Next</button>
+          </div>
+
+          <!-- Step 3 to N+2: Lesson Forms -->
+          <div id="lessonSteps" class="form-step">
+            <h2>Step <span id="currentLessonNumber"></span>: Add Lesson</h2>
+            <div id="lessonFormContainer">
+              <label for="lessonTitle">Lesson Title:</label>
+              <input
+                type="text"
+                id="lessonTitle"
+                name="lessonTitle"
+                required
+              /><br /><br />
+
+              <label for="lessonDuration">Lesson Duration:</label>
+              <input
+                type="text"
+                id="lessonDuration"
+                name="lessonDuration"
+                required
+              /><br /><br />
+
+              <label for="lessonVideo">Lesson Video URL:</label>
+              <input
+                type="url"
+                id="lessonVideo"
+                name="lessonVideo"
+                required
+              /><br /><br />
+
+              <label for="lessonPdf">Lesson PDF URL:</label>
+              <input
+                type="url"
+                id="lessonPdf"
+                name="lessonPdf"
+                required
+              /><br /><br />
+            </div>
+            <button type="button" id="prevLessonStep">Previous</button>
+            <button type="button" id="nextLessonStep">Next</button>
+          </div>
+
+          <!-- Final Step: Submit -->
+          <div id="finalStep" class="form-step">
+            <h2>Review and Submit</h2>
+            <p>
+              Please review your course details and lessons before submitting.
+            </p>
+            <button type="button" id="prevFinalStep">Previous</button>
+            <button type="submit" id="submitForm">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+      // Load coursesData from localStorage if it exists
+      let coursesData = JSON.parse(localStorage.getItem("coursesData")) || {
+        courses: [],
+      };
+
+      // DOM Elements
+      const openModalButton = document.getElementById("openModal");
+      const closeModalButton = document.getElementById("closeModal");
+      const modalOverlay = document.getElementById("modalOverlay");
+      const multiStepForm = document.getElementById("multiStepForm");
+
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const lessonSteps = document.getElementById("lessonSteps");
+      const finalStep = document.getElementById("finalStep");
+
+      const nextStep1Button = document.getElementById("nextStep1");
+      const prevStep2Button = document.getElementById("prevStep2");
+      const nextStep2Button = document.getElementById("nextStep2");
+      const prevLessonStepButton = document.getElementById("prevLessonStep");
+      const nextLessonStepButton = document.getElementById("nextLessonStep");
+      const prevFinalStepButton = document.getElementById("prevFinalStep");
+
+      const lessonCountInput = document.getElementById("lessonCount");
+      const currentLessonNumber = document.getElementById(
+        "currentLessonNumber"
+      );
+
+      const lessonTitleInput = document.getElementById("lessonTitle");
+      const lessonDurationInput = document.getElementById("lessonDuration");
+      const lessonVideoInput = document.getElementById("lessonVideo");
+      const lessonPdfInput = document.getElementById("lessonPdf");
+
+      let lessonCount = 0;
+      let currentLesson = 1;
+      const lessons = [];
+
+      // Open Modal
+      openModalButton.addEventListener("click", () => {
+        modalOverlay.classList.add("active");
+        showStep(step1);
+      });
+
+      // Close Modal
+      closeModalButton.addEventListener("click", () => {
+        modalOverlay.classList.remove("active");
+        resetForm();
+      });
+
+      // Step Navigation
+      nextStep1Button.addEventListener("click", () => showStep(step2));
+      prevStep2Button.addEventListener("click", () => showStep(step1));
+      nextStep2Button.addEventListener("click", () => {
+        lessonCount = parseInt(lessonCountInput.value);
+        if (lessonCount > 0) {
+          currentLesson = 1;
+          updateLessonStep();
+          showStep(lessonSteps);
+        }
+      });
+      prevLessonStepButton.addEventListener("click", () => {
+        if (currentLesson > 1) {
+          currentLesson--;
+          updateLessonStep();
+        } else {
+          showStep(step2);
+        }
+      });
+      nextLessonStepButton.addEventListener("click", () => {
+        saveCurrentLesson();
+        if (currentLesson < lessonCount) {
+          currentLesson++;
+          updateLessonStep();
+        } else {
+          showStep(finalStep);
+        }
+      });
+      prevFinalStepButton.addEventListener("click", () => {
+        currentLesson = lessonCount;
+        updateLessonStep();
+        showStep(lessonSteps);
+      });
+
+      // Update Lesson Step
+      function updateLessonStep() {
+        currentLessonNumber.textContent = currentLesson;
+        const lesson = lessons[currentLesson - 1] || {};
+        lessonTitleInput.value = lesson.lessonTitle || "";
+        lessonDurationInput.value = lesson.lessonDuration || "";
+        lessonVideoInput.value = lesson.lessonVideo || "";
+        lessonPdfInput.value = lesson.lessonPdf || "";
+      }
+
+      // Save Current Lesson
+      function saveCurrentLesson() {
+        const lesson = {
+          lessonTitle: lessonTitleInput.value,
+          lessonDuration: lessonDurationInput.value,
+          lessonVideo: lessonVideoInput.value,
+          lessonPdf: lessonPdfInput.value,
+        };
+        lessons[currentLesson - 1] = lesson;
+      }
+
+      // Handle Form Submission
+      multiStepForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Get general information
+        const title = document.getElementById("title").value;
+        const image = document.getElementById("image").value;
+        const category = document.getElementById("category").value;
+        const description = document.getElementById("description").value;
+        const price = parseFloat(document.getElementById("price").value);
+        const duration = document.getElementById("duration").value;
+
+        // Generate a unique ID
+        const id = (coursesData.courses.length + 1).toString();
+
+        // Create a new course object
+        const newCourse = {
+          ID: id,
+          Title: title,
+          Image: image,
+          Category: category,
+          Description: description,
+          Price: price,
+          Duration: duration,
+          Content: lessons.map((lesson, index) => ({
+            lesson_id: index + 1,
+            lesson_title: lesson.lessonTitle,
+            lesson_duration: lesson.lessonDuration,
+            lesson_video: lesson.lessonVideo,
+            lesson_pdf: lesson.lessonPdf,
+          })),
+        };
+
+        // Add the new course to the array
+        coursesData.courses.push(newCourse);
+
+        // Save the updated coursesData to localStorage
+        localStorage.setItem("coursesData", JSON.stringify(coursesData));
+
+        // Log the updated array (or update the UI)
+        console.log("Updated Courses Data:", coursesData);
+
+        // Close the modal and reset the form
+        modalOverlay.classList.remove("active");
+        resetForm();
+
+        // Optionally, display a success message
+        alert("Course added successfully!");
+      });
+
+      // Reset Form
+      function resetForm() {
+        multiStepForm.reset();
+        lessonCount = 0;
+        currentLesson = 1;
+        lessons.length = 0;
+        showStep(step1);
+      }
+
+      // Show a specific step
+      function showStep(step) {
+        document
+          .querySelectorAll(".form-step")
+          .forEach((s) => s.classList.remove("active"));
+        step.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

@@ -23,17 +23,26 @@
     <!-- start navbar section -->
     <nav>
       <div class="logo poppins-medium">
-        <a href="/">elmadrasaa</a>
+        <a href="/">El madrasaa</a>
       </div>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
       </ul>
-      <div class="loginBtn">
-        <a href="/login.html">Login</a>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <div id="profile" style="display: none;">
+          <a id="profileLink" href="/profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none;">
+          logout
+        </div>
+        <div class="loginBtn" id="login">
+          <a href="/login.html">Login</a>
+        </div>
       </div>
+      
     </nav>
     <!-- start header section -->
     <header>
@@ -47,7 +56,7 @@
             harum voluptatibus. Veritatis, velit!
           </p>
           <button>
-            <a href="/courses">Explore courses</a>
+            <a href="/courses.html">Explore courses</a>
           </button>
         </div>
         <div class="illustartion">
@@ -106,50 +115,44 @@
       <div class="container">
         <div>
           <img src="./assets/info/1.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
         <div>
           <img src="./assets/info/2.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
         <div>
           <img src="./assets/info/3.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
         <div>
           <img src="./assets/info/4.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
         <div>
           <img src="./assets/info/5.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
         <div>
           <img src="./assets/info/6.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            We provide several free courses to support the availability of education for underprivileged communities.
           </p>
         </div>
       </div>
@@ -158,13 +161,12 @@
     <section class="branding">
       <div class="container">
         <div>
-          <span> Tentang Kami </span>
+          <span> About us </span>
           <h2>
-            EDUFREE Layanan E-Learning Gratis Untuk Membantu Kamu Bertumbuh
+            El madrasaa Free E-Learning Service To Help You Grow
           </h2>
           <p>
-            Edufree diharapkann bisa menjadi layanan yang bermanfaat bagi
-            kedepanya dalam bidang pendidikan
+            El madrasaa is expected to be a useful service for the future in the field of education.
           </p>
         </div>
         <div>
@@ -176,9 +178,9 @@
     <section class="broswe">
       <div class="container">
         <div class="broswe-header">
-          <h2>Rekomendasi Kursus Untuk Kamu</h2>
+          <h2>Recommended Courses For You</h2>
           <button class="headerBtn">
-            <a href="/courses">Explore more</a>
+            <a href="/courses.html">Explore more</a>
           </button>
         </div>
 
@@ -305,15 +307,18 @@
     <footer>
         <div class="footer-top ">
           <div class="container">
-            <div>
+            <div class="" style="display: flex;">
+              <div>
                 <h1>
-                    elmadrasaa
+                    El madrasaa
                 </h1>
                 <p>
-                    Edufree adalah layanan e-learning gratis yang dikembangkan oleh
-                    elmadrasaa. Kami memiliki kursus gratis yang dapat membantu kamu
-                    bertumbuh.
+                  Edufree is a free e-learning service developed by elmadrasaa. We have free courses that can help you grow.
                 </p>
+            </div>
+            <div>
+
+            </div>
             </div>
           </div>
         </div>
@@ -322,14 +327,34 @@
           <div>
             <ul>
               <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="/courses.html">Courses</a></li>
+              <li><a href="/enrolledCourses.html">Enrolled Courses</a></li>
+              <li><a href="/wishes.html">Wishlist</a></li>
             </ul>
           </div>
         </div>
       </div>
     </footer>
-    
+    <script type="module">
+      import { isLogin, logOut } from "./user.js";
+      
+      let user = isLogin()
+      console.log(user.username)
+
+      if(user)
+    {document.getElementById('logout').style.display = "block";
+    document.getElementById('profile').style.display = "block";
+    document.getElementById('profileLink').setAttribute('href', "/profile.html");
+    document.getElementById('login').style.display = "none";
+  
+  }
+     
+      document.getElementById('logout').addEventListener('click', () => {
+        logOut()
+        document.getElementById('logout').style.display = "none";
+        document.getElementById('profile').style.display = "none";
+        document.getElementById('login').style.display = "block";
+      })
+    </script>
   </body>
 </html>

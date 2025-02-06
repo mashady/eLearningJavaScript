@@ -23,55 +23,46 @@
     <!-- start navbar section -->
     <nav>
       <div class="logo poppins-medium">
-        <a href="/">elmadrasaa</a>
+        <a href="/">El madrasaa</a>
       </div>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-      <div class="loginBtn">
-        <a href="/login">Login</a>
-      </div>
+      
+      
     </nav>
     <!-- login section -->
-     <section class="login">
+     <section class="login" style="min-height: 75vh;display: flex;justify-content: center;align-items: center;">
+      
       <div class="container">
-        <div class="login-wrapper">
-          <div>
-            <img src="./assets/login/login.png" width="300px"/>
-          </div>
-          <div class="loginRightSide">
-            <div>
-              <h2>Login</h2>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In magnam ratione assumenda, odio, illum tempore error</p>
-            <form name="loginForm">
-              <input type="email" placeholder="Enter your email"/>
-              <input type="password" placeholder="Enter your password"/>
-              <input type="checkbox"/>
-              <button>login</button>
-            </form>
-            <span>Donot have an account? <a href="/register">register</a></span>
-            </div>
-          </div>
-          
-        </div>
+        <h2>welocme back👋</h2>
+        <form id="loginForm">
+          <input type="email" placeholder="Enter your email" id="email"/>
+          <span id="emailErr" style="display: none;" class="errorMsg"></span>
+
+          <input type="password" placeholder="Enter your password" id="password"/>
+          <span id="passErr" style="display: none;" class="errorMsg"></span>
+
+          <button type="submit">login</button>
+          <span>do not have an account? <a href="/register.html">Register</a></span>
+
+        </form>
       </div>
+      
      </section>
     <!--footer section -->
     <footer>
       <div class="footer-top ">
         <div class="container">
-          <div>
+          <div class="" style="display: flex;">
+            <div>
               <h1>
-                  elmadrasaa
+                  El madrasaa
               </h1>
               <p>
-                  Edufree adalah layanan e-learning gratis yang dikembangkan oleh
-                  elmadrasaa. Kami memiliki kursus gratis yang dapat membantu kamu
-                  bertumbuh.
+                Edufree is a free e-learning service developed by elmadrasaa. We have free courses that can help you grow.
               </p>
+          </div>
+          <div>
+
+          </div>
           </div>
         </div>
       </div>
@@ -80,13 +71,42 @@
         <div>
           <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="/courses.html">Courses</a></li>
+            <li><a href="/enrolledCourses.html">Enrolled Courses</a></li>
+            <li><a href="/wishes.html">Wishlist</a></li>
           </ul>
         </div>
       </div>
     </div>
   </footer>
+ 
+  <script src="./login.js" type="module">
+
+  </script>
   </body>
 </html>
+<!--
+old login
+
+<div class="login-wrapper">
+          <div>
+            <img src="./assets/login/login.png" width="300px"/>
+          </div>
+          <div class="loginRightSide">
+            <div>
+              <h2>Login</h2>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. In magnam ratione assumenda, odio, illum tempore error</p>
+            <form id="loginForm">
+              <input type="text" placeholder="Enter your email" id="email"/>
+              <input type="password" placeholder="Enter your password" id="password"/>
+              <input type="checkbox"/>
+              <button type="submit">login</button>
+            </form>
+            <span>Donot have an account? <a href="/register.html">register</a></span>
+            </div>
+          </div>
+          
+        </div>
+
+
+-->

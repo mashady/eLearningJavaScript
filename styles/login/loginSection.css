@@ -30,15 +30,30 @@
   justify-content: center;
   align-items: center;
 }
-.login .login-wrapper .loginRightSide h2 {
+.login h2 {
   font-size: 28px;
   font-family: "Poppins", serif;
   font-weight: 600;
   font-style: normal;
+  color: var(--black);
 }
 .login .login-wrapper .loginRightSide p {
   font-size: 16px;
   margin-bottom: 2rem;
+}
+.invalid::placeholder {
+  color: #721c24;
+  border: #721c24 solid #ff00005c;
+}
+.errorMsg {
+  color: #721c24;
+  background-color: #f8d7da;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  font-size: 17px;
+  text-transform: capitalize;
+  border: 1px solid #f5c6cb;
 }
 .login .login-wrapper .loginRightSide input[type="email"],
 .login .login-wrapper .loginRightSide input[type="password"],
@@ -54,12 +69,29 @@
   font-size: 18px;
   width: 80%;
 }
+.login .container {
+  max-width: 600px;
+}
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  display: block;
+  margin-bottom: 10px;
+  border: 0.1rem solid gray;
+  color: var(--black);
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 1rem;
+  outline: none;
+  font-size: 18px;
+  width: 94%;
+}
 .login .login-wrapper .loginRightSide input[type="checkbox"] {
   color: red;
   display: block;
   margin-left: 5px;
 }
-.login .login-wrapper .loginRightSide button {
+.login button {
   margin-top: 40px;
   margin-bottom: 30px;
   border: 1px solid #fff;
@@ -69,7 +101,7 @@
   cursor: pointer;
   text-transform: capitalize;
   font-size: 20px;
-  width: 86%;
+  width: 600px;
 }
 .login .login-wrapper .loginRightSide span {
   font-size: 18px;
