@@ -250,6 +250,8 @@ function getCoursesFromLocalStorage() {
     // If Courses exist in local storage, parse them; otherwise, return an empty array
     return storedCourses ? JSON.parse(storedCourses) : [];
 }
+let c = getCoursesFromLocalStorage();
+console.log(c);
 // function saveCoursesToLocalStorage() {
 //     localStorage.setItem("courses", JSON.stringify(courses));
 // }
@@ -652,10 +654,10 @@ document.addEventListener("DOMContentLoaded", function () {
         form.addEventListener("submit" , addCourse);
     }
 
-    let viewCourseButton = document.getElementById("view-course");
-    if (viewCourseButton) {
-        viewCourseButton.addEventListener("click", viewCourseById);
-    }
+    // let viewCourseButton = document.getElementById("view-course");
+    // if (viewCourseButton) {
+    //     viewCourseButton.addEventListener("click", viewCourseById);
+    // }
 
     let updateCourseButton = document.getElementById("update-course");
     if (updateCourseButton) {
