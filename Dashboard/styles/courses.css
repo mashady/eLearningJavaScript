@@ -230,7 +230,7 @@ select option:hover {
     font-size: 14px;
 }
 
-#search-btn {
+.button {
     padding: 10px 20px;
     background-color: var(--darkblue);
     color: white;
@@ -241,7 +241,7 @@ select option:hover {
     transition: background-color 0.3s;
 }
 
-#search-btn:hover {
+.button:hover {
     background-color: #3cff00;
     color: var(--darkblue);
 }

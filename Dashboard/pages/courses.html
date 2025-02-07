@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/courses.css">
+    <link rel="stylesheet" href="../styles/test.css">
     <title>Document</title>
 </head>
 
@@ -22,114 +23,87 @@
                     <option value="Category">Search by Category</option>
                 </select>
                 <input type="text" id="search-input" placeholder="Enter search term">
-                <button type="button" id="search-btn">Search</button>
+                <button type="button" id="search-btn" class="button">Search</button>
+                <button id="openModal" class="button">Add Course</button>
             </div>
         </div>
-        
-        <form id="course-form">
-            <div id="info-div">
-                <label for="course-id" style="display: none;">Course ID:</label>
-                <input type="text" id="course-id" style="display: none;">
 
-                <label for="course-title">Title:</label>
-                <input type="text" id="course-title">
-                <span id="title-error" class="error-message"></span> <!-- Span لرسالة الخطأ -->
+        <!-- <div class="edit-section">
+            <select id="courseSelect"></select>
+            <button id="editCourse">Edit Course</button>
+          </div> -->
 
-                <label for="course-category">Category:</label>
-                <select id="course-category">
-                    <option value="">Select a category</option>
-                    <!-- <option value="Programming">Programming</option>
-                    <option value="Design">Design</option>
-                    <option value="Marketing">Marketing</option> -->
-                </select>
-                <span id="category-error" class="error-message"></span>
+        <!-- <button id="openModal" style="margin-left: 20px">Add Course</button> -->
 
-                <label for="course-instructor">Instructor:</label>
-                <input type="text" id="course-instructor">
-                <span id="instructor-error" class="error-message"></span>
+        <div id="modalOverlay" class="modal-overlay">
+            <div class="modal">
+                <span id="closeModal" class="close-modal">&times;</span>
 
-                <label for="course-image">Image URL:</label>
-                <input type="url" id="course-image" name="image" required />
-                <span id="image-error" class="error-message"></span>
+                <form id="multiStepForm">
+                    <div id="step1" class="form-step active">
+                        <h2>Step 1: General Information</h2>
+                        <input type="text" id="title" name="title" required placeholder="Enter course title" />
 
-                <label for="course-description">Description:</label>
-                <textarea id="course-description"></textarea>
-                <span id="description-error" class="error-message"></span>
+                        <input type="url" id="image" name="image" required placeholder="Put course cover" />
 
-                <label for="course-price">Price:</label>
-                <input type="number" id="course-price" name="price"  required />
-                <span id="price-error" class="error-message"></span>
+                        <input type="text" id="category" name="category" required placeholder="category" />
 
-                <label for="course-duration">Duration:</label>
-                <input type="number" id="course-duration" required />
-                <span id="duration-error" class="error-message"></span>
+                        <textarea id="description" name="description" required
+                            placeholder="Add course description"></textarea>
 
-                <label for="course-lessons">Number of Lessons:</label>
-                <input type="number" id="course-lessons" required>
-                <span id="lesson-num-error" class="error-message"></span>
+                        <input type="number" id="price" name="price" step="0.01"
+                            placeholder="Enter course price if free leave empty" required />
 
-                <button type="button" id="next-step" class="info-buttons">Next Step</button>
+                        <input type="text" id="duration" name="duration" required placeholder="Course duration" />
+
+                        <button type="button" id="nextStep1">Next</button>
+                    </div>
+
+                    <div id="step2" class="form-step">
+                        <h2>Step 2: Number of Lessons</h2>
+                        <label for="lessonCount">How many lessons do you want to add?</label>
+                        <input type="number" id="lessonCount" name="lessonCount" min="1"
+                            placeholder="enter lesson number" required />
+                        <div style="display: flex; justify-content: space-between">
+                            <button type="button" id="prevStep2">Previous</button>
+                            <button type="button" id="nextStep2">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="lessonSteps" class="form-step">
+                        <h2>Step <span id="currentLessonNumber"></span>: Add Lesson</h2>
+                        <div id="lessonFormContainer">
+                            <input type="text" id="lessonTitle" name="lessonTitle" placeholder="enter lesson title"
+                                required />
+
+                            <input type="text" id="lessonDuration" name="lessonDuration"
+                                placeholder="enter lesson duration" required />
+
+                            <input type="url" id="lessonVideo" name="lessonVideo" placeholder="enter lesson video url"
+                                required />
+
+                            <input type="url" id="lessonPdf" name="lessonPdf" placeholder="enter lesson pdf url"
+                                required />
+                        </div>
+                        <div style="display: flex; justify-content: space-between">
+                            <button type="button" id="prevLessonStep">Previous</button>
+                            <button type="button" id="nextLessonStep">Next</button>
+                        </div>
+                    </div>
+
+                    <div id="finalStep" class="form-step">
+                        <h2>Review and Submit</h2>
+                        <p>
+                            Please review your course details and lessons before submitting.
+                        </p>
+                        <div style="display: flex; justify-content: space-between">
+                            <button type="button" id="prevFinalStep">Previous</button>
+                            <button type="submit" id="submitForm">Submit</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-
-            <div id="lesson-div" style=" background-color:var(--darkblue); border-radius: 8px; height: 700px; width: 1050px; padding: 10px; margin-top: 10px;">
-                <h2 id="lesson" style="color: azure;">Lesson 1</h2>
-                <label for="lesson-title" class="lable" style="color: azure;">Lesson Title:</label>
-                <input type="text" id="lesson-title" required>
-                <span id="lesson-title-error" class="error-message"></span>
-
-                <label for="lesson-duration" class="lable" style="color: azure;">Duration:</label>
-                <input type="number" id="lesson-duration" step="0.5" required>
-                <span id="lesson-duration-error" class="error-message"></span>
-
-                <label for="lesson-video" class="lable" style="color: azure;">Video:</label>
-                <input type="text" id="lesson-video" >
-
-                <label for="lesson-pdf" class="lable" style="color: azure;">PDF:</label>
-                <input type="text" id="lesson-pdf" >
-
-                <label for="lesson-quiz" class="lable" style="color: azure;">Quiz:</label>
-                <input type="text" id="lesson-quiz" >
-
-
-                <button type="button" id="prev-step" class="lesson-buttons">Prev Step</button>
-                <button type="button" id="prev-lesson" class="lesson-buttons">Prev Lesson</button>
-
-                <!-- display: none; 2-->
-                <button type="button" id="add-lesson" class="lesson-buttons">Add Lesson</button>
-                <!-- display: none; 2 -->
-                <button type="submit" id="add-course" class="lesson-buttons">Add Course</button>
-                <button type="button" id="update-course" class="lesson-buttons" >Update Course</button>
-            </div>
-
-            <!-- <button type="button" id="delete-course" class="info-buttons" >Delete Course</button> -->
-            <button type="button" id="view-course" class="info-buttons" >View Course</button>
-            <button type="button" id="view-courses" class="info-buttons">View Courses</button>
-
-            <!-- <fieldset>
-        <legend>Course Content</legend>
-        <div id="contentContainer">
-          <div class="contentEntry">
-            <label for="lessonTitle1">Lesson Title:</label>
-            <input type="text" id="lessonTitle1" name="lessonTitle1" required />
-
-            <label for="lessonDuration1">Lesson Duration:</label>
-            <input
-              type="text"
-              id="lessonDuration1"
-              name="lessonDuration1"
-              required
-            />
-
-            <label for="lessonVideo1">Lesson Video URL:</label>
-            <input type="url" id="lessonVideo1" name="lessonVideo1" required />
-
-            <label for="lessonPdf1">Lesson PDF URL:</label>
-            <input type="url" id="lessonPdf1" name="lessonPdf1" required />
-          </div>
         </div>
-        <button type="button" id="addLesson">Add Another Lesson</button>
-      </fieldset> -->
-        </form>
 
         <div class="courses-list">
             <div class="title">
@@ -138,8 +112,9 @@
             <div id="courses-list"></div>
         </div>
     </div>
-    <script type="module" src="../script/fetch-courses.js"></script>
-    <script>
+    <!-- <script type="module" src="../script/fetch-courses.js"></script> -->
+    <script src="../script/course.js"></script>
+    <!-- <script>
         // Load categories from Local Storage
         document.addEventListener("DOMContentLoaded", function () {
             const categories = JSON.parse(localStorage.getItem("categories")) || [];
@@ -152,7 +127,7 @@
                 categorySelect.appendChild(option);
             });
         });
-    </script>
+    </script> -->
 </body>
 
 </html>
