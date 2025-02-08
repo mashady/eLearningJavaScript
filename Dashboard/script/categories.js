@@ -3,7 +3,7 @@ function saveCategory(event) {
     event.preventDefault();
 
     let categories = JSON.parse(localStorage.getItem("categories")) || [];
-    let courses = JSON.parse(localStorage.getItem("Courses")) || [];
+    let courses = JSON.parse(localStorage.getItem("courses")) || [];
     const categoryId = document.getElementById('category-id').value || `cat${new Date().getTime()}`;
     const categoryName = document.getElementById('category-name').value.trim();
 
@@ -21,15 +21,14 @@ function saveCategory(event) {
 
     const existingCategoryIndex = categories.findIndex(cat => cat.id === categoryId);
 
-    let update_courses;
     if (existingCategoryIndex !== -1) {
         const oldCategoryName = categories[existingCategoryIndex].name;
         categories[existingCategoryIndex].name = categoryName;
 
         // Update all courses associated with the old category name
-        update_courses = courses.map(course => {
-            if (course.Category === oldCategoryName) {
-                return { ...course, Category: categoryName };
+        courses = courses.map(course => {
+            if (course.category === oldCategoryName) {
+                return { ...course, category: categoryName };
             }
             return course;
         });
@@ -38,7 +37,7 @@ function saveCategory(event) {
     }
 
     localStorage.setItem("categories", JSON.stringify(categories));
-    localStorage.setItem("Courses", JSON.stringify(update_courses));
+    localStorage.setItem("courses", JSON.stringify(courses));
     fetchCategories();
     alert("Category saved successfully!");
     resetCategoryForm();
@@ -63,7 +62,7 @@ window.editCategory = function (id, name) {
 window.deleteCategory = function (id){
     if (confirm("Are you sure you want to delete this category?")) {
         let categories = JSON.parse(localStorage.getItem("categories")) || [];
-        let courses = JSON.parse(localStorage.getItem("Courses")) || [];
+        let courses = JSON.parse(localStorage.getItem("courses")) || [];
 
         // Find the category name before deleting it
         const categoryToDelete = categories.find(cat => cat.id === id);
@@ -74,12 +73,12 @@ window.deleteCategory = function (id){
 
         // Delete all courses associated with this category
         if (categoryName) {
-            courses = courses.filter(course => course.Category !== categoryName);
+            courses = courses.filter(course => course.category !== categoryName);
         }
 
         // Update Local Storage
         localStorage.setItem("categories", JSON.stringify(categories));
-        localStorage.setItem("Courses", JSON.stringify(courses));
+        localStorage.setItem("courses", JSON.stringify(courses));
 
         // Refresh the categories and courses lists
         fetchCategories();

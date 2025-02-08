@@ -2,28 +2,13 @@
 let isEditing = false;
 let currentCourseId = null;
 
-// document.addEventListener("DOMContentLoaded", populateCourseSelect);
-let coursesData = JSON.parse(localStorage.getItem("Courses")) || {
-    courses: [],
-};
+
 
 // ✅ Ensure coursesData always has the correct structure
-if (!Array.isArray(coursesData)) {
-    coursesData = { courses: [] };
-}
+// if (!Array.isArray(coursesData)) {
+//     coursesData = { courses: [] };
+// }
 
-function populateCourseSelect() {
-    const courseSelect = document.getElementById("courseSelect");
-    courseSelect.innerHTML =
-        '<option value="">Select Course to Edit</option>';
-
-    coursesData.courses.forEach((course) => {
-        const option = document.createElement("option");
-        option.value = course.ID;
-        option.textContent = course.Title;
-        courseSelect.appendChild(option);
-    });
-}
 
 function edit(selectedId) {
     // const selectedId = document.getElementById("courseSelect").value;
@@ -365,11 +350,14 @@ multiStepForm.addEventListener("submit", function (event) {
     const image = document.getElementById("image").value;
     const category = document.getElementById("category").value;
     const description = document.getElementById("description").value;
-    const price = parseFloat(document.getElementById("price").value) || 0;
+    const price = parseFloat(document.getElementById("price").value) || null;
+    if(price) {
+        //TODO check if number
+    }
     const duration = document.getElementById("duration").value;
 
     const newCourse = {
-        ID: isEditing ? currentCourseId : (coursesData.courses.length + 1).toString(),
+        ID: 1 ,
         Title: title,
         Image: image,
         Category: category,
@@ -385,6 +373,7 @@ multiStepForm.addEventListener("submit", function (event) {
         })),
     };
 
+    let course;
     if (isEditing) {
         const courseIndex = coursesData.findIndex(course => course.ID === Number(currentCourseId));
         console.log(courseIndex)
@@ -395,11 +384,12 @@ multiStepForm.addEventListener("submit", function (event) {
             coursesData.push(newCourse);
         }
     } else {
-        coursesData.push(newCourse);
+        // coursesData.push(newCourse);
+        course = newCourse;
     }
 
-    localStorage.setItem("Courses", JSON.stringify(coursesData));
-    console.log("Updated Courses Data:", coursesData);
+    localStorage.setItem("Courses", JSON.stringify(course));
+    // console.log("Updated Courses Data:", coursesData);
 
     modalOverlay.classList.remove("active");
     resetForm();
@@ -475,13 +465,23 @@ function fetchCourses(searchTerm = "", searchBy = "Title") {
             <p><strong>Category:</strong> ${course.Category}</p>
             <p><strong>Instructor:</strong> ${course.Instructor_Name}</p>
             <p><strong>Duration:</strong> ${course.Duration}</p>
-            <p><strong>Lessons:</strong> ${course.LessonNum}</p>
             <button onclick="edit('${course.ID}')">Edit</button>
             <button onclick="deleteCourseById('${course.ID}')">Delete</button>
         `;
         coursesList.appendChild(courseItem);
     });
 }
+
+//TODO validations
+//title -> unique ,regex to special char , limit(50)
+//image , video , pdf -> url
+//duration -> number
+//lesson -> unique
+//instructor -> add it , regex for full name no special chars or numbers
+//description -> limit(300)
+//category -> dropdown
+//price ->  check if it is null or number (price ? price : "free")
+// all required
 
 // Function to handle search
 function handleSearch() {
