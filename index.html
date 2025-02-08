@@ -336,25 +336,12 @@
       </div>
     </footer>
     <script type="module">
-      import { isLogin, logOut } from "./user.js";
-      
-      let user = isLogin()
-      console.log(user.username)
-
-      if(user)
-    {document.getElementById('logout').style.display = "block";
-    document.getElementById('profile').style.display = "block";
-    document.getElementById('profileLink').setAttribute('href', "/profile.html");
-    document.getElementById('login').style.display = "none";
-  
-  }
-     
-      document.getElementById('logout').addEventListener('click', () => {
-        logOut()
-        document.getElementById('logout').style.display = "none";
-        document.getElementById('profile').style.display = "none";
-        document.getElementById('login').style.display = "block";
-      })
+      import { updateUI, logOut } from "./utils/user.js";
+      updateUI();
+      document.getElementById("logout").addEventListener("click", () => {
+          logOut();
+          updateUI(); 
+      });
     </script>
   </body>
 </html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/home/home.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+
+      .sidebar {
+        width: 280px;
+        background: var(--darkblue);
+        color: white;
+        position: fixed;
+        height: 100%;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .logo {
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo a {
+        text-decoration: none;
+        color: #f1c40f;
+      }
+
+      .sidebar a {
+        display: block;
+        color: #ecf0f1;
+        padding: 12px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.3s ease-in-out;
+      }
+
+      .sidebar a:hover {
+        background: #34495e;
+      }
+
+      .content {
+        margin-left: 300px;
+        padding: 40px;
+        text-align: center;
+      }
+
+      .courseTitle {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .lessonTitle {
+        font-size: 22px;
+        color: #34495e;
+        margin-bottom: 20px;
+      }
+
+      .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      iframe {
+        width: 80%;
+        max-width: 900px;
+        height: 500px;
+        border-radius: 10px;
+        border: 5px solid #2c3e50;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      button {
+        width: 140px;
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+
+      #prevBtn {
+        background: var(--yellow);
+        color: var(--black);
+      }
+
+      #nextBtn {
+        background: var(--yellow);
+        color: var(--black);
+      }
+
+      button:disabled {
+        background: #bdc3c7 !important;
+      }
+
+      button:hover:not(:disabled) {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          text-align: center;
+        }
+
+        .content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        iframe {
+          width: 100%;
+        }
+      }
+      .progress-container {
+        width: 100%;
+        height: 20px;
+        background-color: #e0e0e0;
+        border-radius: 25px;
+        margin-top: 20px;
+        position: relative;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .progress-bar {
+        height: 100%;
+        background-color: #4caf50;
+        width: 0%;
+        border-radius: 25px;
+        transition: width 0.3s ease-in-out;
+      }
+
+      #progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo"><a href="/">El Madrasaa</a></div>
+      <div id="lessonLinks"></div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+        <span id="progress-text">0%</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2 id="courseTitle" class="courseTitle">Loading...</h2>
+      <p id="lessonTitle" class="lessonTitle">Lesson</p>
+
+      <div class="video-container">
+        <iframe id="lessonIframe" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <div class="nav-buttons">
+        <button id="prevBtn">Prev</button>
+        <button id="nextBtn">Next</button>
+      </div>
+    </div>
+
+    <script type="module">
+      import {
+        isLogin,
+        getUserDataByUsername,
+        updateUserData,
+      } from "./utils/user.js";
+
+      let user = isLogin();
+      let userData = getUserDataByUsername(user.username);
+
+      let fixedURL = window.location.search.replace(/\?(?=[^?]*$)/, "&");
+      const urlParams = new URLSearchParams(fixedURL);
+      let courseID = urlParams.get("courseID");
+      let lessonID = parseInt(urlParams.get("lessonID"), 10) || 1;
+      console.log(userData);
+      const selectedCourse = userData.courses.find(
+        (course) => course.ID === courseID
+      );
+      if (!selectedCourse) {
+        alert("Course not found!");
+        window.location.href = "/home.html";
+      } else {
+        document.getElementById("courseTitle").textContent =
+          selectedCourse.Title;
+
+        const lessonLinks = document.getElementById("lessonLinks");
+        const lessonIframe = document.getElementById("lessonIframe");
+        const lessonTitle = document.getElementById("lessonTitle");
+        const prevButton = document.getElementById("prevBtn");
+        const nextButton = document.getElementById("nextBtn");
+
+        const totalLessons = selectedCourse.Content.length;
+        const completedLessonsCount = selectedCourse.completedLessons.length;
+        console.log(totalLessons);
+        console.log(completedLessonsCount);
+        if (totalLessons - 1 == completedLessonsCount) {
+          updateCourseProgress(lessonID, selectedCourse.ID);
+        }
+
+        function updateLessonContent() {
+          const currentLesson = selectedCourse.Content.find(
+            (lesson) => lesson.lesson_id === lessonID
+          );
+
+          if (!currentLesson) {
+            alert("Lesson not found!");
+            window.location.href = `/watching.html?courseID=${courseID}&lessonID=1`;
+            return;
+          }
+
+          lessonTitle.textContent = `Lesson ${lessonID}: ${currentLesson.lesson_title}`;
+          lessonIframe.src = currentLesson.lesson_video.replace(
+            "watch?v=",
+            "embed/"
+          );
+
+          prevButton.disabled = lessonID <= 1;
+          nextButton.disabled = lessonID >= selectedCourse.Content.length;
+          updateProgressBar(selectedCourse.progressPercentage);
+
+          if (!selectedCourse.completedLessons.includes(lessonID)) {
+            selectedCourse.completedLessons.push(lessonID);
+            selectedCourse.progressPercentage =
+              (selectedCourse.completedLessons.length /
+                selectedCourse.Content.length) *
+              100;
+
+            updateUserData(userData);
+          }
+        }
+
+        selectedCourse.Content.forEach((lesson) => {
+          let link = document.createElement("a");
+          link.href = `/watching.html?courseID=${courseID}&lessonID=${lesson.lesson_id}`;
+          link.textContent = `Lesson ${lesson.lesson_id}: ${lesson.lesson_title}`;
+
+          if (selectedCourse.completedLessons.includes(lesson.lesson_id)) {
+            link.style.color = "#4CAF50";
+          }
+
+          lessonLinks.appendChild(link);
+        });
+
+        prevButton.addEventListener("click", () => {
+          if (lessonID > 1) {
+            lessonID--;
+            navigateToLesson();
+          }
+        });
+
+        nextButton.addEventListener("click", () => {
+          if (lessonID < selectedCourse.Content.length) {
+            console.log(lessonID);
+            console.log(selectedCourse.ID);
+            updateCourseProgress(lessonID, selectedCourse.ID);
+            updateProgressBar(selectedCourse.progressPercentage);
+
+            lessonID++;
+            navigateToLesson();
+          }
+        });
+
+        function navigateToLesson() {
+          window.location.href = `/watching.html?courseID=${courseID}&lessonID=${lessonID}`;
+        }
+
+        function updateCourseProgress(lessonID, courseID) {
+          if (!selectedCourse.completedLessons.includes(lessonID)) {
+            selectedCourse.completedLessons.push(lessonID);
+          }
+
+          const totalLessons = selectedCourse.Content.length;
+          const completedLessonsCount = selectedCourse.completedLessons.length;
+          const isLastLesson = completedLessonsCount === totalLessons;
+          console.log(isLastLesson);
+          const progressPercentage = isLastLesson
+            ? 100
+            : Math.round((completedLessonsCount / totalLessons) * 100);
+
+          selectedCourse.progressPercentage = progressPercentage;
+          updateProgressBar(progressPercentage);
+
+          userData.courses = userData.courses.map((course) =>
+            course.ID === courseID ? selectedCourse : course
+          );
+          console.log(userData);
+          updateUserData(userData);
+        }
+
+        updateLessonContent();
+      }
+      function updateProgressBar(percentage) {
+        const progressBar = document.getElementById("progress-bar");
+        const progressText = document.getElementById("progress-text");
+
+        percentage = Math.min(Math.max(percentage, 0), 100);
+
+        progressBar.style.width = `${percentage}%`;
+
+        progressText.textContent = `${percentage}%`;
+      }
+    </script>
+  </body>
+</html>

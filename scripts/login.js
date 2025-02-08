@@ -1,5 +1,5 @@
-import { setCookie, getCookie } from "./cookies/cookies.js";
-import { isLogin } from "./user.js";
+import { setCookie, getCookie } from "../cookies/cookies.js";
+import { isLogin } from "../utils/user.js";
 if (isLogin()) window.location.href = "/profile.html";
 
 document.getElementById("loginForm").addEventListener("submit", (e) => {
