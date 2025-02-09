@@ -1,214 +1,212 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles/home/home.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <style>
-      .profile-info{
-        margin-bottom: 40px;
-        margin-top: 50px;
-        color: var(--black);
-      }
-      .courses-section {
-  display: grid;
-  gap: 50px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  text-align: center;
-}
 
-.card {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  box-sizing: border-box;
-  border-radius: 10px;
-  text-align: left;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%; 
-}
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="./styles/home/home.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .profile-info {
+      margin-bottom: 40px;
+      margin-top: 50px;
+      color: var(--black);
+    }
 
-.card img {
-  width: 100%;
-  
-  object-fit: cover;
-  border-radius: 10px;
-  cursor: pointer;
-}
+    .courses-section {
+      display: grid;
+      gap: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      text-align: center;
+    }
 
-.card h1,
-.card h2,
-.card h3 {
-  font-size: 21px;
-  color: var(--black);
-  font-family: "Poppins", serif;
-  font-weight: 500;
-  font-style: normal;
-  margin: 10px 0; 
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
-}
+    .card {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      text-align: left;
+      /* width: 30%; */
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
 
-.card p {
-  font-size: 16px;
-  color: var(--black);
-  opacity: 60%;
-  margin: 10px 0; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+    .card img {
+      width: 100%;
 
-.card span {
-  font-size: 12px;
-  color: var(--black);
-  opacity: 90%;
-  margin-right: 5px;
-}
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+    }
 
-.enrolledHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+    .card h1,
+    .card h2,
+    .card h3 {
+      font-size: 21px;
+      color: var(--black);
+      font-family: "Poppins", serif;
+      font-weight: 500;
+      font-style: normal;
+      margin: 10px 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
-.enrolledHeader button {
-  width: 185px;
-  height: 54px;
-  background-color: var(--yellow);
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  font-family: "Poppins", serif;
-  font-weight: 500;
-  font-style: normal;
-  cursor: pointer;
-}
+    .card p {
+      font-size: 16px;
+      color: var(--black);
+      opacity: 60%;
+      margin: 10px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 
-.enrolledHeader button a {
-  color: var(--black);
-  text-decoration: none;
-}
-    </style>
-  </head>
-  <body>
-    <!-- start navbar section -->
-    <nav>
-      <div class="logo poppins-medium">
-        <a href="/">El madrasaa</a>
+    .card span {
+      font-size: 12px;
+      color: var(--black);
+      opacity: 90%;
+      margin-right: 5px;
+    }
+
+    .enrolledHeader {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .enrolledHeader button {
+      width: 185px;
+      height: 54px;
+      background-color: var(--yellow);
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      font-family: "Poppins", serif;
+      font-weight: 500;
+      font-style: normal;
+      cursor: pointer;
+    }
+
+    .enrolledHeader button a {
+      color: var(--black);
+      text-decoration: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- start navbar section -->
+  <nav>
+    <div class="logo poppins-medium">
+      <a href="/">El madrasaa</a>
+    </div>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/courses.html">Courses</a></li>
+      <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+      <li><a href="/wishes.html">Wishlist</a></li>
+    </ul>
+    <div style="display: flex;justify-content: center;align-items: center;">
+      <div id="profile" style="display: none;">
+        <a id="profileLink" href="/profile.html">profile</a>
       </div>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/courses.html">Courses</a></li>
-        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
-        <li><a href="/wishes.html">Wishlist</a></li>
-      </ul>
-      <div style="display: flex;justify-content: center;align-items: center;">
-        <div id="profile" style="display: none;">
-          <a id="profileLink" href="/profile.html">profile</a>
-        </div>
-        <div class="loginBtn" id="logout" style="display: none;">
-          logout
-        </div>
-        <div class="loginBtn" id="login">
-          <a href="/login.html">Login</a>
-        </div>
+      <div class="loginBtn" id="logout" style="display: none;">
+        logout
       </div>
-      
-    </nav>
-    <section class="">
+      <div class="loginBtn" id="login">
+        <a href="/login.html">Login</a>
+      </div>
+    </div>
+
+  </nav>
+  <section class="">
+    <div class="container">
+      <div id="profileInfo" class="profile-info">
+      </div>
       <div class="container">
-  <div id="profileInfo" class="profile-info">
-  </div>
-  <div class="container">
-    <div >
-      <h2>Learning history</h2>
-       <p>You have no learning history</p>
-        
-      </div>
-      <div >
-        <h2>Certifications</h2>
-         <p>You have no certifications</p>
-          
+        <div>
+          <h2>Learning history</h2>
+          <p>You have no learning history</p>
+
         </div>
-    <div class="enrolledHeader">
-      <h2>Enrolled Courses</h2>
-      <button>
-        <a href="/enrolledCourses.html">View more</a>
-      </button>
-    </div>
-    <p id="noAvailCourses" style="display: none;">No available courses.</p>
+        <div>
+          <h2>Certifications</h2>
+          <p>You have no certifications</p>
 
-    <div id="enrolledCourses" class="courses-section">
-    </div>
-    <div class="enrolledHeader">
-    <h2>Wishlist Courses</h2>
-     
-      <button>
-        <a href="/wishes.html">View more</a>
-      </button>
-    </div>
-    <p id="noAvail" style="display: none;">No available courses.</p>
+        </div>
+        <div class="enrolledHeader">
+          <h2>Enrolled Courses</h2>
+          <button>
+            <a href="/enrolledCourses.html">View more</a>
+          </button>
+        </div>
+        <p id="noAvailCourses" style="display: none;">No available courses.</p>
 
-    <div id="wishlistCourses" class="courses-section">
-    </div>
-    
-  </div>
-  
+        <div id="enrolledCourses" class="courses-section">
+        </div>
+        <div class="enrolledHeader">
+          <h2>Wishlist Courses</h2>
+
+          <button>
+            <a href="/wishes.html">View more</a>
+          </button>
+        </div>
+        <p id="noAvail" style="display: none;">No available courses.</p>
+
+        <div id="wishlistCourses" class="courses-section">
+        </div>
+
       </div>
-    </section>
-    <!--footer section -->
-    <footer>
-      <div class="footer-top ">
-        <div class="container">
-          <div class="" style="display: flex;">
-            <div>
-              <h1>
-                  El madrasaa
-              </h1>
-              <p>
-                Edufree is a free e-learning service developed by elmadrasaa. We have free courses that can help you grow.
-              </p>
+
+    </div>
+  </section>
+  <!--footer section -->
+  <footer>
+    <div class="footer-top ">
+      <div class="container">
+        <div class="" style="display: flex;">
+          <div>
+            <h1>
+              El madrasaa
+            </h1>
+            <p>
+              Edufree is a free e-learning service developed by elmadrasaa. We have free courses that can help you grow.
+            </p>
           </div>
           <div>
 
           </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom container">
-        <div>&copy; 2025 elmadrasaa. All rights reserved.</div>
-        <div>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="/courses.html">Courses</a></li>
-            <li><a href="/enrolledCourses.html">Enrolled Courses</a></li>
-            <li><a href="/wishes.html">Wishlist</a></li>
-          </ul>
         </div>
       </div>
     </div>
+    <div class="footer-bottom container">
+      <div>&copy; 2025 elmadrasaa. All rights reserved.</div>
+      <div>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="/courses.html">Courses</a></li>
+          <li><a href="/enrolledCourses.html">Enrolled Courses</a></li>
+          <li><a href="/wishes.html">Wishlist</a></li>
+        </ul>
+      </div>
+    </div>
+    </div>
   </footer>
-    <script src="./scripts/profile.js" type="module">
-      
-    </script>
-  </body>
-</html>
+  <script src="./scripts/profile.js" type="module">
 
+  </script>
+</body>
+
+</html>

@@ -5,38 +5,40 @@ import {
   validateName,
   generateUsername,
 } from "../utils/user.js";
+import { showError , clearError } from "../utils/errorHandeling.js";
+import { validateField } from "../utils/validation.js";
 
 if (isLogin()) window.location.href = "/profile.html";
 
-function showError(elementId, errorMessage) {
-  const element = document.getElementById(elementId);
-  element.classList.add("invalid");
-  element.nextElementSibling.innerHTML = errorMessage;
-  element.nextElementSibling.style.display = "block";
-}
+// function showError(elementId, errorMessage) {
+//   const element = document.getElementById(elementId);
+//   element.classList.add("invalid");
+//   element.nextElementSibling.innerHTML = errorMessage;
+//   element.nextElementSibling.style.display = "block";
+// }
 
-function clearError(elementId) {
-  const element = document.getElementById(elementId);
-  element.classList.remove("invalid");
-  element.nextElementSibling.innerHTML = "";
-  element.nextElementSibling.style.display = "none";
-}
+// function clearError(elementId) {
+//   const element = document.getElementById(elementId);
+//   element.classList.remove("invalid");
+//   element.nextElementSibling.innerHTML = "";
+//   element.nextElementSibling.style.display = "none";
+// }
 
-function validateField(
-  fieldValue,
-  fieldId,
-  errorId,
-  validationFn,
-  errorMessage
-) {
-  if (!fieldValue || (validationFn && !validationFn(fieldValue))) {
-    showError(fieldId, errorMessage);
-    return false;
-  } else {
-    clearError(fieldId);
-    return true;
-  }
-}
+// function validateField(
+//   fieldValue,
+//   fieldId,
+//   errorId,
+//   validationFn,
+//   errorMessage
+// ) {
+//   if (!fieldValue || (validationFn && !validationFn(fieldValue))) {
+//     showError(fieldId, errorMessage);
+//     return false;
+//   } else {
+//     clearError(fieldId);
+//     return true;
+//   }
+// }
 
 document.getElementById("firstName").addEventListener("blur", () => {
   validateField(
