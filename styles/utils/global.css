@@ -7,7 +7,13 @@
   --gray: #f4f6fc;
   --grayBg: #eef4fa;
   --darkGray: #283836;
-  --lightgreen:#37e702a6;
+  --babyblue:#909abc;
+  --darkBg: #101131; 
+  --darkText: #d2eaf8; 
+  --darkGray: #333333; 
+  --darkBorder: #444444; 
+  --lightblue2:#00ccff;
+  --darkFooterBg: #222222; 
 }
 body {
   font-family: "Poppins", serif;
@@ -17,6 +23,6 @@ body {
   margin: 0;
 }
 .container {
-  max-width: 1500px;
+  max-width: 1200px;
   margin: 0 auto;
 }

@@ -1,28 +1,49 @@
 .branding .container {
   display: flex;
   gap: 50px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 10%;
+  border-radius: 15px;
 }
+
+.branding .container div {
+  max-width: 50%;
+}
+
 .branding .container span {
-  font-size: 18px;
-
-  color: var(--black);
-  opacity: 87%;
-}
-.branding .container p {
-  font-size: 16px;
-
-  color: var(--black);
-  opacity: 60%;
-}
-.branding .container h2 {
-  font-size: 38px;
-  font-family: "Poppins", serif;
+  font-size: 20px;
   font-weight: 600;
-  font-style: normal;
-  color: var(--black);
+  color: var(--darkblue2);
+  display: block;
+  margin-bottom: 10px;
 }
+
+.branding .container p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--darkBorder);
+  opacity: 85%;
+  margin-bottom: 15px;
+}
+
+.branding .container h2 {
+  font-size: 42px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  color: var(--black, #333);
+  margin-bottom: 15px;
+}
+
 .branding .container img {
-  width: 575px;
-  height: 398px;
-  border-radius: 10px;
+  width: 550px;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.branding .container img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }

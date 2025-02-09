@@ -2,25 +2,55 @@ nav {
   display: flex !important;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.4rem 2rem; 
   background-color: var(--darkblue);
   color: #fff;
 }
 nav .logo a {
-  font-size: 26px;
+  font-size: 30px;
   cursor: pointer;
+  margin-left: 0px;
+  margin-top: -20px;
   text-decoration: none;
-  color: #fff;
+  color: var( --darkText);
+  font-weight: 600;
+}
+.letter
+{
+  color: #46b0ca;
+  font-size: 40px;
 }
 nav ul {
   list-style: none;
   display: flex;
 }
 nav ul li a {
-  font-size: 22px;
+  font-size: 20px;
   text-decoration: none;
-  color: #fff;
+  color: var( --darkText);
   margin-right: 30px;
+}
+nav .logo a:hover
+{
+  color:var(--babyblue);
+}
+nav ul li a:hover
+{
+  color:var(--babyblue);
+  border-bottom:#46b0ca 1px solid ;
+}
+#profileLink {
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 20px;
+  color: #fff;
+  margin-right: 20px;
+  font-family: "Poppins", serif;
+  font-style: normal;
+}
+#profileLink:hover {
+  color:var(--babyblue);
+  border-bottom:#46b0ca 1px solid ;
 }
 nav .loginBtn {
   border: 1px solid #fff;

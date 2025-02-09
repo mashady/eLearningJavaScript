@@ -1,84 +1,200 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Learning</title>
-    <!-- <script type="module" src="./script/firebase-config.js"></script> -->
-    <link rel="stylesheet" href="./styles/Dashboard.css" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/home/home.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesaheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <div class="page-content">
-      <div class="side-bar">
-        <div class="logo-txt">Dashboard</div>
-        <div class="page-links">
-          <div class="user-profile">
-            <img
-              src="./assets/header/isolated-young-handsome-man-different-poses-white-background-illustration-b.png"
-              alt="Profile"
-              title="User Avatar"
-            />
-            <h4>Hello, <strong>Alpha</strong></h4>
-          </div>
-          <ul class="links">
-            <li>
-              <a href="./pages/students.html" target="content-frame"
-                >Students</a
-              >
-            </li>
-            <li>
-              <a href="./pages/categories.html" target="content-frame"
-                >Categories</a
-              >
-            </li>
-            <li>
-              <a href="./pages/courses.html" target="content-frame">Courses</a>
-            </li>
-            <li>
-              <a href="./pages/CourseControl.html" target="content-frame">Controls</a>
-            </li>
-          </ul>
+    <!-- start navbar section -->
+    <nav>
+      <div class="logo poppins-medium">
+        <a href="/">El madrasaa</a>
+      </div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
+      </ul>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <div id="profile" style="display: none;">
+          <a id="profileLink" href="./profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none;">
+          logout
+        </div>
+        <div class="loginBtn" id="login">
+          <a href="./login.html">Login</a>
         </div>
       </div>
-      <main class="main-bar">
-        <nav class="main-header">
-          <div class="dropdown">
-            <button class="dropbtn" onclick="dropdown()">
-              <span
-                ><img
-                  src="./assets/header/isolated-young-handsome-man-different-poses-white-background-illustration-b.png"
-                  alt="User avatar"
-                  title="User Avatar"
-              /></span>
-              <span class="chevron chevron-down"></span>
-            </button>
-
-            <div class="dropdown-content" id="userMenu">
-              <a href="#setting">Setting</a>
-              <a href="#logout" class="divider">Logout</a>
+      
+    </nav>
+    <!-- start header section -->
+    <header>
+      <div class="container">
+        <div class="headerTypo">
+          <h1>Welcome to  El madrasaa</h1>
+          <p>
+            Discover a world of knowledge with our expert-led courses. Whether you're looking to enhance your skills or explore new subjects, we have the perfect learning experience for you.
+          </p>
+          <div class="btn">
+            <a href="./courses.html" class="explore-btn">Explore Courses</a>
+          </div>
+        </div>
+        <div class="illustartion">
+          <img src="./assets/header/freepik__adjust__93822-removebg.png"width="500px" alt="header image" />
+        </div>
+      </div>
+    </header>
+    <!-- info section -->
+    <section class="info">
+      <h1>Our Features</h1>
+      <div class="container">
+        <div>
+          <img src="./assets/info/1.png" alt="" />
+          <h2>Free Courses</h2>
+          <p>
+            Empower your journey with free courses designed to provide quality education for everyone.
+          </p>
+        </div>
+        <div>
+          <img src="./assets/info/2.png" alt="" />
+          <h2>Interactive Learning
+          </h2>
+          <p>
+            Engage in interactive sessions and enhance your skills with hands-on projects.
+          </p>
+        </div>
+        <div>
+          <img src="./assets/info/3.png" alt="" />
+          <h2> Certified Programs</h2>
+          <p>
+            Earn certificates that add value to your career and showcase your skills.
+          </p>
+        </div>
+        <div>
+          <img src="./assets/info/4.png" alt="" />
+          <h2>Flexible Schedule</h2>
+          <p>
+            Learn at your own pace with courses that fit into your busy schedule.
+          </p>
+        </div>
+        <div>
+          <img src="./assets/info/5.png" alt="" />
+          <h2> Global Community</h2>
+          <p>
+            Join a vibrant community of learners from around the world.
+          </p>
+        </div>
+        <div>
+          <img src="./assets/info/6.png" alt="" />
+          <h2>Expert Support </h2>
+          <p>
+            Get personalized support and guidance from our experienced instructors.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- branding section -->
+    <section class="branding">
+      <div class="container">
+        <div>
+          <span>🚀 Learn, Grow, and Succeed – All for Free!</span>
+          <p>
+            At EduFree, we believe that education should be accessible to everyone. Our free e-learning platform is designed to help you develop new skills, expand your knowledge, and achieve your goals—anytime, anywhere.
+          </p>
+            <span>
+              Join our community of learners and take the next step in your journey toward success!
+          </span>
+        </div>
+        <div>
+          <img src="./assets/branding/8621573_3953003.jpg" alt="" />
+        </div>
+      </div>
+    </section>
+    <!-- browse section  -->
+    <section class="broswe">
+      <h1>Explore Our Free Courses</h1>
+      <div class="container">
+        <div class="broswe-wrapper">
+          <div class="broswe-card">
+            <img src="./assets/broswe/browse1.png" alt="Web Programming Basics" />
+            <h3>Web Programming Basics</h3>
+            <p>Learn the fundamentals of web development with hands-on practice.</p>
+            <div>
+              <span><i class="fa-regular fa-clock"></i> 4.5 hours</span>
+              <span><i class="fa-solid fa-video"></i> 20 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 1,900 students</span>
             </div>
           </div>
-        </nav>
-        <div class="iframe-container">
-          <iframe name="content-frame" src="./pages/students.html"></iframe>
+    
+          <div class="broswe-card">
+            <img src="./assets/broswe/browse2.png" alt="JavaScript for Beginners" />
+            <h3>JavaScript for Beginners</h3>
+            <p>Start your JavaScript journey and build dynamic web applications.</p>
+            <div>
+              <span><i class="fa-regular fa-clock"></i> 5 hours</span>
+              <span><i class="fa-solid fa-video"></i> 25 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 2,300 students</span>
+            </div>
+          </div>
+    
+          <div class="broswe-card">
+            <img src="./assets/broswe/browse3.png" alt="Python Programming" />
+            <h3>Python Programming</h3>
+            <p>Master Python and start creating real-world applications.</p>
+            <div>
+              <span><i class="fa-regular fa-clock"></i> 6 hours</span>
+              <span><i class="fa-solid fa-video"></i> 30 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 3,500 students</span>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+    
+        <div class="broswe-header">
+            <a href="./courses.html">Explore More</a>
+        </div>
+      </div>
+    </section>
+    
+    <!--footer section -->
     <footer>
-      <div><h1>E-Learning Dashboard</h1></div>
+      <div class="footer-top">
+        <div class="container">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses.html">Courses</a></li>
+            <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+            <li><a href="/wishes.html">Wishlist</a></li>
+          </ul>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 elmadrasaa. All rights reserved.</p>
+      </div>
     </footer>
-    <script>
-      function dropdown() {
-        document.getElementById("userMenu").classList.toggle("show");
-      }
-      window.onclick = function (e) {
-        if (!e.target.matches(".dropbtn")) {
-          var userMenu = document.getElementById("userMenu");
-          if (userMenu.classList.contains("show")) {
-            userMenu.classList.remove("show");
-          }
-        }
-      };
+    <script type="module">
+      import { updateUI, logOut } from "./utils/user.js";
+      updateUI();
+      document.getElementById("logout").addEventListener("click", () => {
+          logOut();
+          updateUI(); 
+      });
     </script>
   </body>
 </html>

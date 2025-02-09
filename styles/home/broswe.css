@@ -1,74 +1,109 @@
 .broswe {
-  padding-top: 200px;
-  padding-bottom: 200px;
+  padding: 150px 10%;
+  text-align: center;
 }
-.broswe .container .broswe-header {
+
+.broswe h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--black, #333);
+  display: inline-block;
+  border-bottom: 3px solid var(--lightblue2);
+  padding-bottom: 10px;
+  margin-bottom: 50px;
+}
+
+.broswe .container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
 }
-.broswe .container .broswe-header h2 {
-  font-family: "Poppins", serif;
-  font-weight: 600;
-  font-style: normal;
-  font-size: 38px;
-  color: var(--black);
-}
-.broswe .container .broswe-header button {
-  width: 185px;
-  height: 54px;
-  background-color: var(--yellow);
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  font-family: "Poppins", serif;
-  font-weight: 500;
-  font-style: normal;
-  cursor: pointer;
-}
-.broswe .container .broswe-header a {
-  text-decoration: none;
-  color: var(--black);
-}
+
 .broswe .container .broswe-wrapper {
   display: grid;
-  gap: 50px;
-  grid-template-columns: 1fr 1fr 1fr;
-  text-align: center;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  padding-top: 50px;
+  width: 100%;
 }
 
 .broswe .container .broswe-wrapper .broswe-card {
-  padding: 40px;
-  box-sizing: border-box;
-  border-radius: 10px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 15px;
   text-align: left;
-  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
 }
+
+.broswe .container .broswe-wrapper .broswe-card:hover {
+  transform: translateY(-5px);
+}
+
 .broswe .container .broswe-wrapper .broswe-card img {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
   border-radius: 10px;
-  cursor: pointer;
 }
 
 .broswe .container .broswe-wrapper .broswe-card h3 {
-  font-size: 21px;
-  color: var(--black);
-  font-family: "Poppins", serif;
-  font-weight: 500;
-  font-style: normal;
+  font-size: 22px;
+  color: var(--black, #333);
+  margin-top: 15px;
+  font-weight: 600;
 }
+
 .broswe .container .broswe-wrapper .broswe-card p {
   font-size: 16px;
-  color: var(--black);
-  opacity: 60%;
+  color: var(--black, #555);
+  opacity: 85%;
+  margin-bottom: 10px;
 }
+
 .broswe .container .broswe-wrapper .broswe-card span {
-  font-size: 12px;
-  color: var(--black);
+  font-size: 14px;
+  color: var(--black, #666);
   opacity: 90%;
-  margin-right: 5px;
+  margin-right: 8px;
+}
+
+.broswe .broswe-header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.broswe .broswe-header a {
+  color: white;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #46b0ca;
+  border-radius: 8px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.broswe .broswe-header a:hover {
+  transform: scale(1.05);
+  background-color: #3a98b2;
+}
+
+.broswe .broswe-header a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease-in-out;
+}
+
+.broswe .broswe-header a:hover::before {
+  left: 0;
 }

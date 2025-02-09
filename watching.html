@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/home/home.css" />
+    <link rel="stylesheet" href="./Dashboard/styles/Dashboard.css" />
+    <link rel="stylesheet" href="./styles/utils/footer.css">
+    <link rel="stylesheet" href="./styles/utils/notifi.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    .side-bar {
+      height: 86vh; 
+      background-color:var(--darkblue);
+      color: white;
+      position: sticky; 
+      margin-top: 10px;
+      margin-bottom: 30px;
+      top: 0; 
+      flex: 0.05;
+      transition: flex 0.3s ease-in-out; 
+      overflow: hidden; 
+      border-radius:0 10px 10px 0;
+    }
+    #lessonLinks {
+      display: flex;
+      flex-direction: column; 
+      position: absolute; top: 50px; left: 10px;
+      gap: 10px; 
+      margin-top: 15px;
+      padding: 10px;
+    }
+    #lessonLinks {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+      pointer-events: none;
+    }
+
+    .side-bar:hover #lessonLinks {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #lessonLinks a {
+      display: block;
+      color: var(--darkText);
+      border-bottom: #00ccff77 1px solid;
+      padding: 10px;
+      text-decoration: none;
+      margin-top: 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease-in-out;
+    }
+
+    #lessonLinks a:hover {
+      background-color: #5080af70;
+    }
+
+    .side-bar:hover {
+      flex: 1.1;
+    }
+
+    .logo-txt {
+      width: 100%;
+      padding: 15px 10px;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      transition: opacity 0.3s ease-in-out;
+      opacity: 0;
+    }
+
+    .side-bar:hover .logo-txt {
+      opacity: 1;
+    }
+
+
+    .side-bar:hover .progress-container
+    {
+      display: block;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 20px;
+      background-color: #e0e0e0;
+      border-radius: 25px;
+      margin-top: 20px;
+      position: relative;
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+
+      .progress-bar {
+        height: 100%;
+        background-color: #4caf50;
+        width: 0%;
+        border-radius: 25px;
+        transition: width 0.3s ease-in-out;
+      }
+
+      #progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .content {
+        padding: 25px 20px;
+        flex: 4;
+        text-align: center;
+        height: 43rem;
+      }
+
+      .courseTitle {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      .page-content
+      {
+        background-color: var(--gray);
+        margin-bottom: 50px;
+      }
+      .lessonTitle {
+        font-size: 22px;
+        color: #34495e;
+        margin-bottom: 20px;
+      }
+      .completed-lesson i
+      {
+        margin-left: 5px;
+      }
+      .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      iframe {
+        width: 80%;
+        max-width: 900px;
+        height: 500px;
+        border-radius: 10px;
+        border: 5px solid #2c3e50;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      button {
+        width: 140px;
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+
+      #prevBtn {
+        background-color: var(--lightblue2);    
+        color: var(--black);
+      }
+
+      #nextBtn {
+        background-color: var(--lightblue2);
+        color: var(--black);
+      }
+
+      button:disabled {
+        background: #bdc3c7 !important;
+      }
+
+      button:hover:not(:disabled) {
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          text-align: center;
+        }
+
+        .content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        iframe {
+          width: 100%;
+        }
+      }
+      .sidebar-toggle {
+        position: absolute;
+        top: 3%;
+        right: 0px;
+        transform: translateY(-50%);
+        background-color: var(--darkblue);
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .side-bar:hover .sidebar-toggle {
+        opacity: 0;
+      }
+
+      .arrow-icon {
+        font-size: 25px;
+        display: block;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .side-bar:hover .arrow-icon {
+        transform: rotate(180deg);
+      }
+
+  </style>
+</head>
+  <body>
+    <nav>
+      <div class="logo poppins-medium">
+        <a href="/">El madrasaa</a>
+      </div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
+      </ul>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <div id="profile" style="display: none;">
+          <a id="profileLink" href="./profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none;">
+          <a href="">logout</a>
+        </div>
+        <div class="loginBtn" id="login">
+          <a href="./login.html">Login</a>
+        </div>
+      </div>
+      
+    </nav>
+    <div class="page-content">
+      <div class="side-bar">
+        <div class="logo-txt">Course Lessons</div>
+        <div class="sidebar-toggle">
+          <i class="arrow-icon fa-solid fa-bars"></i>
+        </div>
+        <div class="page-links">
+          <ul class="links" id="lessonLinks"></ul>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+          <span id="progress-text">0%</span>
+        </div>
+      </div>
+
+      <div class="content">
+        <h2 id="courseTitle" class="courseTitle">Loading...</h2>
+        <p id="lessonTitle" class="lessonTitle">Lesson</p>
+
+        <div class="video-container">
+          <iframe id="lessonIframe" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn">Prev</button>
+          <button id="nextBtn">Next</button>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-top">
+        <div class="container">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul> 
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 elmadrasaa. All rights reserved.</p>
+      </div>
+    </footer>
+  <script type="module">
+    import {
+      isLogin,
+      getUserDataByUsername,
+      updateUserData,
+    } from "./utils/user.js";
+
+    let user = isLogin();
+if (user) {
+  document.getElementById("login").style.display = "none";
+  document.getElementById("logout").style.display = "block";
+  document.getElementById("profile").style.display = "block";
+} else {
+  document.getElementById("login").style.display = "block";
+  document.getElementById("logout").style.display = "none";
+  document.getElementById("profile").style.display = "none";
+}
+
+    let userData = getUserDataByUsername(user.username);
+
+    let fixedURL = window.location.search.replace(/\?(?=[^?]*$)/, "&");
+    const urlParams = new URLSearchParams(fixedURL);
+    let courseID = urlParams.get("courseID");
+    let lessonID = parseInt(urlParams.get("lessonID"), 10) || 1;
+    console.log(userData);
+    const selectedCourse = userData.courses.find(
+      (course) => course.ID === courseID
+    );
+    if (!selectedCourse) {
+      alert("Course not found!");
+      window.location.href = "/home.html";
+    } else {
+      document.getElementById("courseTitle").textContent =
+        selectedCourse.Title;
+
+      const lessonLinks = document.getElementById("lessonLinks");
+      const lessonIframe = document.getElementById("lessonIframe");
+      const lessonTitle = document.getElementById("lessonTitle");
+      const prevButton = document.getElementById("prevBtn");
+      const nextButton = document.getElementById("nextBtn");
+
+      const totalLessons = selectedCourse.Content.length;
+      const completedLessonsCount = selectedCourse.completedLessons.length;
+      console.log(totalLessons);
+      console.log(completedLessonsCount);
+      if (totalLessons - 1 == completedLessonsCount) {
+        updateCourseProgress(lessonID, selectedCourse.ID);
+      }
+
+      function updateLessonContent() {
+        const currentLesson = selectedCourse.Content.find(
+          (lesson) => lesson.lesson_id === lessonID
+        );
+
+        if (!currentLesson) {
+          alert("Lesson not found!");
+          window.location.href = `/watching.html?courseID=${courseID}&lessonID=1`;
+          return;
+        }
+
+        lessonTitle.textContent = `Lesson ${lessonID}: ${currentLesson.lesson_title}`;
+        lessonIframe.src = currentLesson.lesson_video.replace(
+          "watch?v=",
+          "embed/"
+        );
+
+        prevButton.disabled = lessonID <= 1;
+        nextButton.disabled = lessonID >= selectedCourse.Content.length;
+        updateProgressBar(selectedCourse.progressPercentage);
+
+        if (!selectedCourse.completedLessons.includes(lessonID)) {
+          selectedCourse.completedLessons.push(lessonID);
+          selectedCourse.progressPercentage =
+            (selectedCourse.completedLessons.length /
+              selectedCourse.Content.length) *
+            100;
+
+          updateUserData(userData);
+        }
+      }
+
+      // selectedCourse.Content.forEach((lesson) => {
+      //   let link = document.createElement("a");
+      //   link.href = `/watching.html?courseID=${courseID}&lessonID=${lesson.lesson_id}`;
+      //   link.textContent = `Lesson ${lesson.lesson_id}: ${lesson.lesson_title}`;
+
+      //   if (selectedCourse.completedLessons.includes(lesson.lesson_id)) {
+      //     link.style.color = "#4CAF50";
+      //   }
+
+      //   lessonLinks.appendChild(link);
+      // });
+  selectedCourse.Content.forEach((lesson) => {
+  let link = document.createElement("a");
+  link.href = `/watching.html?courseID=${courseID}&lessonID=${lesson.lesson_id}`;
+  link.textContent = `Lesson ${lesson.lesson_id}: ${lesson.lesson_title}`;
+
+  if (selectedCourse.completedLessons.includes(lesson.lesson_id)) {
+    link.classList.add("completed-lesson");
+    link.innerHTML += ' <i class="fas fa-check-circle"></i>';
+  }
+
+  lessonLinks.appendChild(link);
+});
+
+      prevButton.addEventListener("click", () => {
+        if (lessonID > 1) {
+          lessonID--;
+          navigateToLesson();
+        }
+      });
+
+      nextButton.addEventListener("click", () => {
+        if (lessonID < selectedCourse.Content.length) {
+          console.log(lessonID);
+          console.log(selectedCourse.ID);
+          updateCourseProgress(lessonID, selectedCourse.ID);
+          updateProgressBar(selectedCourse.progressPercentage);
+
+          lessonID++;
+          navigateToLesson();
+        }
+      });
+
+      function navigateToLesson() {
+        window.location.href = `/watching.html?courseID=${courseID}&lessonID=${lessonID}`;
+      }
+
+      function updateCourseProgress(lessonID, courseID) {
+        if (!selectedCourse.completedLessons.includes(lessonID)) {
+          selectedCourse.completedLessons.push(lessonID);
+        }
+
+        const totalLessons = selectedCourse.Content.length;
+        const completedLessonsCount = selectedCourse.completedLessons.length;
+        const isLastLesson = completedLessonsCount === totalLessons;
+        console.log(isLastLesson);
+        const progressPercentage = isLastLesson
+          ? 100
+          : Math.round((completedLessonsCount / totalLessons) * 100);
+
+        selectedCourse.progressPercentage = progressPercentage;
+        updateProgressBar(progressPercentage);
+
+        userData.courses = userData.courses.map((course) =>
+          course.ID === courseID ? selectedCourse : course
+        );
+        console.log(userData);
+        updateUserData(userData);
+      }
+
+      updateLessonContent();
+    }
+    function updateProgressBar(percentage) {
+      const progressBar = document.getElementById("progress-bar");
+      const progressText = document.getElementById("progress-text");
+
+      percentage = Math.min(Math.max(percentage, 0), 100);
+
+      progressBar.style.width = `${percentage}%`;
+
+      progressText.textContent = `${percentage}%`;
+    }
+  </script>
+  </body>
+</html>
+
