@@ -7,7 +7,21 @@ import {
 } from "../utils/user.js";
 
 if (!isLogin()) window.location.href = "/login.html";
+if (isLogin()) {
+  var username = isLogin().username;
+  console.log(username);
 
+  var users = JSON.parse(localStorage.getItem("users"));
+  console.log(users);
+
+  var cureentUserFullData = Object.values(users).find(
+    (user) => user.username == username
+  );
+  console.log(cureentUserFullData);
+  var userCourses = cureentUserFullData.courses;
+  var userWishes = cureentUserFullData.wishlist;
+  console.log(userCourses);
+}
 updateUI();
 document.getElementById("logout").addEventListener("click", () => {
   logOut();
@@ -67,7 +81,99 @@ function displayUserProfile(username) {
     }
   });
 }
+document.getElementById("close-popup").addEventListener("click", function () {
+  document.getElementById("paypal-popup-overlay").style.display = "none";
+});
+function enroll(courseID) {
+  if (!isLogin()) {
+    showNotification("Please log in to enroll in courses.", 2000);
+    return;
+  }
 
+  const user = getUserDataByUsername(isLogin().username);
+
+  const course = user.wishlist.find((c) => c.ID === courseID);
+  console.log(course);
+
+  if (course.Price === null) {
+    let pendingCourses =
+      JSON.parse(localStorage.getItem("pendingCourses")) || [];
+
+    // Check if the course is already in the pending list for the same user
+    const isAlreadyPending = pendingCourses.some(
+      (entry) => entry.username === username && entry.course.ID === courseID
+    );
+
+    if (isAlreadyPending) {
+      showNotification(
+        "Your enrollment request is already pending approval.",
+        2000
+      );
+      return;
+    }
+
+    // Add course to pending list if not already there
+    pendingCourses.push({ username, course });
+    localStorage.setItem("pendingCourses", JSON.stringify(pendingCourses));
+    showNotification("Your enrollment request is pending approval.", 2000);
+    return;
+  }
+
+  const overlay = document.getElementById("paypal-popup-overlay");
+  overlay.style.display = "flex";
+
+  document.getElementById("paypal-button-container").innerHTML = "";
+
+  paypal
+    .Buttons({
+      style: {
+        layout: "vertical",
+        color: "blue",
+        shape: "rect",
+        label: "checkout",
+        height: 50,
+      },
+      fundingSource: paypal.FUNDING.PAYPAL,
+      funding: {
+        allowed: [paypal.FUNDING.CARD, paypal.FUNDING.PAYPAL],
+      },
+      createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [
+            {
+              amount: { value: course.Price.toString() },
+              description: course.Title,
+            },
+          ],
+        });
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          console.log("Payment Successful:", details);
+          //showNotification("Payment successful! You are now enrolled.", 2000);
+
+          userCourses.push(course);
+          console.log(userCourses);
+          removeFromWishlist(course.ID);
+          console.log(users);
+          const updatedUsers = users.map((u) =>
+            u.username === username ? { ...u, courses: userCourses } : u
+          );
+          localStorage.setItem("users", JSON.stringify(updatedUsers));
+          console.log(updatedUsers);
+          document.getElementById("paypal-popup-overlay").style.display =
+            "none";
+          courses(coursesData.courses); // render ui
+        });
+      },
+      onError: function (err) {
+        console.log("Payment Failed:", err);
+        //showNotification("Payment failed. Please try again.", 1000);
+      },
+    })
+    .render("#paypal-button-container");
+}
+/*
 function enroll(courseID) {
   const user = getUserDataByUsername(isLogin().username);
   const course = user.wishlist.find((c) => c.ID === courseID);
@@ -96,7 +202,7 @@ function enroll(courseID) {
   displayUserProfile(isLogin().username);
   showNotification("Course enrolled successfully and removed from wishlist!");
 }
-
+*/
 function removeFromWishlist(courseID) {
   const user = getUserDataByUsername(isLogin().username);
 

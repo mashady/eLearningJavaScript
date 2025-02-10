@@ -95,8 +95,8 @@
         font-size: 16px;
         width: 140px;
         height: 54px;
-        background-color: var(--yellow);
-        color: var(--black);
+        background-color: #3a98b2;
+        color: #FFF;
         border-radius: 10px;
         border: none;
         cursor: pointer;
@@ -144,6 +144,64 @@
         color: var(--black);
         text-decoration: none;
       }
+      .popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: none; 
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+  overflow-y: auto; 
+  animation: fadeIn 0.5s ease-in-out; 
+}
+
+/* Popup container styling */
+.popup-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  max-height: 80vh; /* Makes sure the popup doesn't exceed screen height */
+  position: relative;
+}
+
+/* Close button for the popup */
+.close-popup-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 600px) {
+  .popup-container {
+    width: 90%;
+    max-width: 100%;
+    padding: 15px;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -190,6 +248,14 @@
          </div>
   
       </div>
+      <div id="paypal-popup-overlay" class="popup-overlay">
+        <div class="popup-container">
+          <button id="close-popup" class="close-popup-btn">X</button>
+          <h3>Complete Your Payment</h3>
+          <div id="paypal-button-container"></div>
+
+        </div>
+    </div>
     </section>
     <!--footer section -->
     <footer>
@@ -207,6 +273,8 @@
         <p>© 2025 elmadrasaa. All rights reserved.</p>
       </div>
     </footer>
+<script src="https://www.paypal.com/sdk/js?client-id=AUw3FbVV3_PeQraL0OOp1mmuui5cS9pR5QzUwVJ6gwBlmHmgLqcY33McyZfvxQu4VhpGBKS8VndZd7ji&currency=USD&components=buttons" ></script>
+    
     <script src="/scripts/wishes.js" type="module">
       
     </script>

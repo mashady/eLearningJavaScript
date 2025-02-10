@@ -1,0 +1,140 @@
+@import url(./utils/global.css);
+@import url(./utils/fonts.css);
+/* General Styles */
+body {
+    background-color: var(--grayBg);
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    color: #333;
+}
+
+/* Form Styles */
+#student-form {
+    margin-top: 30px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#student-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#student-form input,
+#student-form textarea{
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+#student-form select 
+{
+    width: 98.5%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+#student-form button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--darkblue);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#student-form button:hover {
+    background-color: var(--lightblue);
+}
+
+.title
+{
+    background-color:var(--darkblue);
+    display: inline-block;
+    margin: 30px;
+}
+.title h1
+{
+    background: linear-gradient(90deg, #a3eaff, #00ccff);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 1px 30px;
+    font-size: 1.6rem;
+    display:inline-block;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: var(--darkblue);
+    color: white;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styles */
+#export-students {
+    padding: 10px 20px;
+    background-color: var(--lightgreen);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#export-students:hover {
+    background-color: var(--lightgreen);
+}
+.Available-student h2
+{
+    background-color: var(--darkblue);
+    color: rgb(255, 255, 255);
+    display:inline-block;
+    padding: 10px 20px;
+    font-size: 2rem;
+    margin: 25px -66px;
+}
+.progress-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    overflow: hidden;
+    height: 20px;
+}
+.progress-bar {
+    height: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    background-color: #009dc4;
+    width: 0;
+    transition: width 0.5s;
+}

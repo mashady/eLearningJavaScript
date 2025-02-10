@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../styles/categories.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: center !important;
+      }
+
+      .student-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        box-sizing: border-box;
+      }
+
+      .student-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.5em;
+      }
+
+      .course-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .course-list li {
+        margin-bottom: 10px;
+      }
+
+      .progress-bar {
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 10px;
+        margin-top: 5px;
+      }
+
+      .progress {
+        background-color: #76c7c0;
+        height: 100%;
+      }
+      .search-container {
+        text-align: center;
+        margin: 20px 0;
+        background-color: transparent;
+        width: 800px;
+        background-color: #fff;
+      }
+      .search-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      #search-bar {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+      }
+
+      #search-bar:focus {
+        border-color: #76c7c0;
+        box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .student-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h1 class="">Students</h1>
+    </div>
+
+    <div class="search-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search by student name..."
+        />
+      </div>
+    </div>
+    <div class="dashboard-container"></div>
+
+    <script src="../script//student.js"></script>
+  </body>
+</html>

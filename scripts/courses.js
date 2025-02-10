@@ -1,6 +1,20 @@
 import coursesData from "../utils/fakeCourses.js";
+
 import { isLogin, showNotification, updateUI, logOut } from "../utils/user.js";
 
+/*
+if (localStorage.getItem("Courses") == "undefined") {
+  console.log("courses exist but undifined so we cannot use json parse ");
+  console.log(localStorage.getItem("Courses"));
+} else {
+  console.log(localStorage.getItem("Courses"));
+  var localCourses = JSON.parse(localStorage.getItem("Courses")) || [];
+  console.log(localCourses);
+  console.log("courses not exist");
+}*/
+
+var localcourses = JSON.parse(localStorage.getItem("Courses")) || [];
+console.log(localcourses);
 updateUI();
 document.getElementById("logout").addEventListener("click", () => {
   logOut();
@@ -22,9 +36,9 @@ function filterCoursesByCategory(category) {
   let filteredCourses;
 
   if (category === "all") {
-    filteredCourses = coursesData.courses;
+    filteredCourses = localcourses;
   } else {
-    filteredCourses = coursesData.courses.filter(
+    filteredCourses = localcourses.filter(
       (course) => course.Category === category
     );
   }
@@ -32,7 +46,7 @@ function filterCoursesByCategory(category) {
 }
 
 function searchCourses(searchQuery) {
-  const filteredCourses = coursesData.courses.filter((course) =>
+  const filteredCourses = localcourses.filter((course) =>
     course.Title.toLowerCase().includes(searchQuery.toLowerCase())
   );
   console.log(filteredCourses);
@@ -77,7 +91,7 @@ function courses(courses) {
           <img src="${course.Image}" alt="${course.Title}">
 
         <h3>${course.Title}</h3>
-        <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+        <p><strong>Instructor:</strong> ${course.Instructor}</p>
         <p>${course.Description}</p>
         <p><strong>Price:</strong> ${
           course.Price === null ? "Free" : `$${course.Price}`
@@ -103,7 +117,7 @@ function courses(courses) {
   });
 }
 
-courses(coursesData.courses);
+courses(localcourses);
 
 /*function enroll(courseID) {
   console.log(isLogin());
@@ -112,7 +126,7 @@ courses(coursesData.courses);
     return;
   }
 
-  const course = coursesData.courses.find((c) => c.ID == courseID);
+  const course = localcourses.find((c) => c.ID == courseID);
   console.log(course);
 
   if (userCourses.some((c) => c.ID == courseID)) {
@@ -139,7 +153,7 @@ courses(coursesData.courses);
   console.log(updatedUsers);
   localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-  courses(coursesData.courses);
+  courses(localcourses);
 }
 */
 /*function enroll(courseID) {
@@ -149,7 +163,7 @@ courses(coursesData.courses);
     return;
   }
 
-  const course = coursesData.courses.find((c) => c.ID == courseID);
+  const course = localcourses.find((c) => c.ID == courseID);
   console.log(course);
 
   if (userCourses.some((c) => c.ID == courseID)) {
@@ -196,7 +210,7 @@ courses(coursesData.courses);
       });
   }
 
-  courses(coursesData.courses);
+  courses(localcourses);
 }*/
 function enroll(courseID) {
   if (!isLogin()) {
@@ -204,7 +218,7 @@ function enroll(courseID) {
     return;
   }
 
-  const course = coursesData.courses.find((c) => c.ID == courseID);
+  const course = localcourses.find((c) => c.ID == courseID);
   console.log(course);
 
   if (course.Price === null) {
@@ -272,7 +286,7 @@ function enroll(courseID) {
 
           document.getElementById("paypal-popup-overlay").style.display =
             "none";
-          courses(coursesData.courses);
+          courses(localcourses);
         });
       },
       onError: function (err) {
@@ -302,7 +316,7 @@ function addToWish(courseID) {
     return;
   }
 
-  const course = coursesData.courses.find((c) => c.ID == courseID);
+  const course = localcourses.find((c) => c.ID == courseID);
   console.log(course);
 
   if (userWishes.some((c) => c.ID == courseID)) {
@@ -327,5 +341,5 @@ function addToWish(courseID) {
   console.log(updatedUsers);
   localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-  courses(coursesData.courses);
+  courses(localcourses);
 }
