@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Learning</title>
+    <link rel="stylesheet" href="./styles/Dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="page-content">
+      <div class="side-bar">
+        <div class="logo-txt">Dashboard</div>
+        <div class="page-links">
+          <ul class="links">
+            <li>
+              <a href="./pages/students.html" target="content-frame"
+                >Students</a
+              >
+            </li>
+            <li>
+              <a href="./pages/categories.html" target="content-frame"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a href="./pages/courses.html" target="content-frame">Courses</a>
+            </li>
+            <li>
+              <a href="./pages/CourseControl.html" target="content-frame"
+                >Controls</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="user-menu">
+          <div class="dropdown">
+            <ul class="dropdown-content">
+              <li>
+                <a href=""
+                  >Log Out <i class="fa-solid fa-right-from-bracket"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <main class="main-bar">
+        <div class="iframe-container">
+          <iframe name="content-frame" src="./pages/students.html"></iframe>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

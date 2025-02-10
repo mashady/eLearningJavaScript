@@ -26,10 +26,10 @@
         color: var(--black);
       }
       .courses-section {
-  display: grid;
-  gap: 50px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-  text-align: center;
+        display: grid;
+        gap: 50px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+        text-align: center;
 }
 
 .card {
@@ -106,6 +106,224 @@
   color: var(--black);
   text-decoration: none;
 }
+
+
+.learning-history {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+ h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.courses-grid {
+  display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.course-title {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.progress-badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--black);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.certifications {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.certifications {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.certifications-grid {
+  display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 20px;
+}
+
+.certification-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certification-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.certification-title {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.certification-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.view-certification-btn {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.view-certification-btn:hover {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+
+.certifications {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.certifications h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+
+
+.certification-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.certification-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.certification-title {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.certification-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+
+
+.certification-popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.certification-popup {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 90%;
+}
+
+.certification-popup h2 {
+  font-size: 1.75rem;
+  color: #4caf50;
+  margin-bottom: 15px;
+}
+
+.certification-popup p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.download-certification-btn,
+.close-popup-btn {
+  background: linear-gradient(135deg, #2575fc, #6a11cb);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px;
+  transition: background 0.3s ease;
+}
+
+.download-certification-btn:hover,
+.close-popup-btn:hover {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
     </style>
   </head>
   <body>
@@ -138,15 +356,46 @@
   <div id="profileInfo" class="profile-info">
   </div>
   <div class="container">
-    <div >
+    <!--
+    <div id="history">
       <h2>Learning history</h2>
        <p>You have no learning history</p>
         
       </div>
-      <div >
+    -->
+    
+      <div class="learning-history">
+        <h2>Learning History</h2>
+        <p id="noHistoryAvail"></p>
+        <div class="courses-grid">
+          
+        </div>
+      </div>
+      <div class="certifications">
+        <h2>Certifications</h2>
+
+        <div class="certifications-grid">
+        
+        </div>
+      </div>
+      <!--
+      <div id="certifications">
         <h2>Certifications</h2>
          <p>You have no certifications</p>
           
+        </div>-->
+        
+        
+       
+        <div class="certification-popup-overlay">
+          <div class="certification-popup">
+            <h2>🎉 Congratulations!</h2>
+            <p><strong>User:</strong> John Doe</p>
+            <p><strong>Course:</strong> JavaScript Fundamentals</p>
+            <p>You have successfully completed the course and earned this certification.</p>
+            <button class="download-certification-btn">Download as PDF</button>
+            <button class="close-popup-btn">Close</button>
+          </div>
         </div>
     <div class="enrolledHeader">
       <h2>Enrolled Courses</h2>
@@ -206,6 +455,7 @@
       </div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <script src="./scripts/profile.js" type="module">
       
     </script>
