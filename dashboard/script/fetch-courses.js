@@ -117,8 +117,13 @@ multiStepForm.addEventListener("submit", function (event) {
   const course = JSON.parse(localStorage.getItem('Courses'));
   let courslen = course.length;
   console.log(courslen)
+  
+
 
   const title = document.getElementById("title").value;
+  if(!title){
+
+  }
   const image = document.getElementById("image").value;
   const category = document.getElementById("category").value;
   const instructor = document.getElementById("instructor").value;
@@ -131,7 +136,7 @@ multiStepForm.addEventListener("submit", function (event) {
   let score = 0;
 
   const updatedCourse = {
-    ID: isEditing ? currentCourseId : Date.now(),
+    ID: isEditing ? currentCourseId : Date.now(), //courslen + 1
     Title: title,
     Image: image,
     Category: category,
