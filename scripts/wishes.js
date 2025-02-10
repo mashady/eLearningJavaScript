@@ -14,7 +14,7 @@ document.getElementById("logout").addEventListener("click", () => {
   updateUI();
 });
 
-function displayUserProfile(username) {
+function displayUserProfile(username, coursesPerPage, paginationContainer) {
   const user = getUserDataByUsername(username);
 
   if (!user) {
@@ -27,18 +27,26 @@ function displayUserProfile(username) {
           <h1>hello, @${user.username}</h1>
         `;
 
-  const wishlistCoursesContainer = document.getElementById("wishlistCourses");
-  let slicedWishes = user.wishlist.slice();
-  wishlistCoursesContainer.innerHTML = "";
+  let wishCourses = user.wishlist;
+  let currentPage = 1;
+  const totalPages = Math.ceil(wishCourses.length / coursesPerPage);
+  function showCourses(page) {
+    const startIndex = (page - 1) * coursesPerPage;
+    const endIndex = startIndex + coursesPerPage;
 
-  if (slicedWishes.length == 0)
-    document.getElementById("noAvail").style.display = "inline";
+    let slicedWishes = wishCourses.slice(startIndex, endIndex);
 
-  slicedWishes.forEach((course) => {
-    if (course) {
-      const courseDiv = document.createElement("div");
-      courseDiv.className = "course";
-      courseDiv.innerHTML = `
+    const wishlistCoursesContainer = document.getElementById("wishlistCourses");
+    wishlistCoursesContainer.innerHTML = "";
+
+    if (slicedWishes.length == 0)
+      document.getElementById("noAvail").style.display = "inline";
+
+    slicedWishes.forEach((course) => {
+      if (course) {
+        const courseDiv = document.createElement("div");
+        courseDiv.className = "course";
+        courseDiv.innerHTML = `
               <div class="card">
                 <img src="${course.Image}" alt="${course.Title}">
                 <h3>${course.Title}</h3>
@@ -53,17 +61,53 @@ function displayUserProfile(username) {
               </div>
             `;
 
-      const enrollButton = courseDiv.querySelector(".enrollBtn");
-      const removeButton = courseDiv.querySelector(".wishBtn");
+        const enrollButton = courseDiv.querySelector(".enrollBtn");
+        const removeButton = courseDiv.querySelector(".wishBtn");
 
-      enrollButton.addEventListener("click", () => enroll(course.ID));
-      removeButton.addEventListener("click", () =>
-        removeFromWishlist(course.ID)
-      );
+        enrollButton.addEventListener("click", () => enroll(course.ID));
+        removeButton.addEventListener("click", () =>
+          removeFromWishlist(course.ID)
+        );
 
-      wishlistCoursesContainer.appendChild(courseDiv);
+        wishlistCoursesContainer.appendChild(courseDiv);
+      }
+    });
+  }
+
+  function setupPagination() {
+    const pagination = document.querySelector(paginationContainer);
+    pagination.innerHTML = "";
+    console.log(pagination)
+
+
+    for (let i = 1; i <= totalPages; i++) {
+      const link = document.createElement("a");
+      link.href = "#";
+      link.innerText = i;
+
+      if (i === currentPage) {
+        link.classList.add("active");
+      }
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        currentPage = i;
+        // showItems(currentPage);
+        showCourses(currentPage);
+
+        const currentActive = pagination.querySelector(".active");
+        currentActive.classList.remove("active");
+        link.classList.add("active");
+      });
+
+      pagination.appendChild(link);
     }
-  });
+
+  }
+
+  showCourses(currentPage);
+  setupPagination();
+
 }
 
 function enroll(courseID) {
@@ -91,7 +135,7 @@ function enroll(courseID) {
   );
   localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-  displayUserProfile(isLogin().username);
+  displayUserProfile(isLogin().username, 6, "#pagination");
   showNotification("Course enrolled successfully and removed from wishlist!");
 }
 
@@ -106,8 +150,8 @@ function removeFromWishlist(courseID) {
   );
   localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-  displayUserProfile(isLogin().username);
+  displayUserProfile(isLogin().username, 6, "#pagination");
   showNotification("Course removed from wishlist!", 1000);
 }
 
-displayUserProfile(isLogin().username);
+displayUserProfile(isLogin().username, 6, "#pagination");

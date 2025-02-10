@@ -28,7 +28,8 @@ function filterCoursesByCategory(category) {
       (course) => course.Category === category
     );
   }
-  courses(filteredCourses);
+  // courses(filteredCourses);
+  paginate(filteredCourses, 6, "#pagination");
 }
 
 function searchCourses(searchQuery) {
@@ -36,7 +37,8 @@ function searchCourses(searchQuery) {
     course.Title.toLowerCase().includes(searchQuery.toLowerCase())
   );
   console.log(filteredCourses);
-  courses(filteredCourses);
+  // courses(filteredCourses);
+  paginate(filteredCourses, 6, "#pagination");
 }
 
 if (isLogin()) {
@@ -55,55 +57,151 @@ if (isLogin()) {
   console.log(userCourses);
 }
 
-function courses(courses) {
-  const coursesContainer = document.getElementById("courses");
-  coursesContainer.innerHTML = "";
+// function courses(courses) {
+//   const coursesContainer = document.getElementById("courses");
+//   coursesContainer.innerHTML = "";
 
-  const filteredCourses = isLogin()
-    ? courses.filter(
-        (course) =>
-          !userCourses.some((userCourse) => userCourse.ID === course.ID)
-      )
-    : courses;
-  if (filteredCourses.length == 0)
-    document.getElementById("noAvail").style.display = "inline";
+//   const filteredCourses = isLogin()
+//     ? courses.filter(
+//         (course) =>
+//           !userCourses.some((userCourse) => userCourse.ID === course.ID)
+//       )
+//     : courses;
+//   if (filteredCourses.length == 0)
+//     document.getElementById("noAvail").style.display = "inline";
 
-  filteredCourses.forEach((course) => {
-    const courseDiv = document.createElement("div");
-    courseDiv.className = "course";
+//   filteredCourses.forEach((course) => {
+//     const courseDiv = document.createElement("div");
+//     courseDiv.className = "course";
 
-    courseDiv.innerHTML = `
-      <div class="card">
-          <img src="${course.Image}" alt="${course.Title}">
+//     courseDiv.innerHTML = `
+//       <div class="card">
+//           <img src="${course.Image}" alt="${course.Title}">
 
-        <h3>${course.Title}</h3>
-        <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
-        <p>${course.Description}</p>
-        <p><strong>Price:</strong> ${
-          course.Price === null ? "Free" : `$${course.Price}`
-        }</p>
-        <p><strong>Duration:</strong> ${course.Duration}</p>
-        <div class="card-options">
-          <button class="enrollBtn">Enroll</button>
-          <button class="wishBtn">
-            <i class="fa-solid fa-heart"></i>
-          </button>
-        </div>
-      </div>
-    `;
+//         <h3>${course.Title}</h3>
+//         <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+//         <p>${course.Description}</p>
+//         <p><strong>Price:</strong> ${
+//           course.Price === null ? "Free" : `$${course.Price}`
+//         }</p>
+//         <p><strong>Duration:</strong> ${course.Duration}</p>
+//         <div class="card-options">
+//           <button class="enrollBtn">Enroll</button>
+//           <button class="wishBtn">
+//             <i class="fa-solid fa-heart"></i>
+//           </button>
+//         </div>
+//       </div>
+//     `;
 
-    const enrollButton = courseDiv.querySelector(".enrollBtn");
-    const wishButton = courseDiv.querySelector(".wishBtn");
+//     const enrollButton = courseDiv.querySelector(".enrollBtn");
+//     const wishButton = courseDiv.querySelector(".wishBtn");
 
-    enrollButton.addEventListener("click", () => enroll(course.ID));
-    wishButton.addEventListener("click", () => addToWish(course.ID));
-    console.log(isLogin());
+//     enrollButton.addEventListener("click", () => enroll(course.ID));
+//     wishButton.addEventListener("click", () => addToWish(course.ID));
+//     console.log(isLogin());
 
-    coursesContainer.appendChild(courseDiv);
-  });
+//     coursesContainer.appendChild(courseDiv);
+//   });
+// }
+
+// courses(coursesData.courses);
+
+function paginate(courses, coursesPerPage, paginationContainer) {
+    let currentPage = 1;
+    const totalPages = Math.ceil(courses.length / coursesPerPage);
+    function showCourses(page) {
+        const startIndex = (page - 1) * coursesPerPage;
+        // console.log("page" + page);
+        // console.log("start " + startIndex);
+        const endIndex = startIndex + coursesPerPage;
+        // console.log("end " + endIndex)
+        const filteredCourses = isLogin()
+            ? courses.filter(
+                (course) =>
+                    !userCourses.some((userCourse) => userCourse.ID === course.ID)
+            )
+            : courses;
+        if (filteredCourses.length == 0)
+            document.getElementById("noAvail").style.display = "inline";
+
+        const pageCourses = filteredCourses.slice(startIndex, endIndex);
+        // console.log("page courses " + pageCourses);
+
+
+        const coursesContainer = document.getElementById("courses");
+        coursesContainer.innerHTML = "";
+
+        pageCourses.forEach((course) => {
+            const courseDiv = document.createElement("div");
+            courseDiv.className = "course";
+            
+            courseDiv.innerHTML = `
+                    <div class="card">
+                        <img src="${course.Image}" alt="${course.Title}">
+
+                        <h3>${course.Title}</h3>
+                        <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+                        <p>${course.Description}</p>
+                        <p><strong>Price:</strong> ${course.Price === null ? "Free" : `$${course.Price}`}</p>
+                        <p><strong>Duration:</strong> ${course.Duration}</p>
+                        <div class="card-options">
+                        <button class="enrollBtn">Enroll</button>
+                        <button class="wishBtn">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                        </div>
+                    </div>
+                    `;
+
+            const enrollButton = courseDiv.querySelector(".enrollBtn");
+            const wishButton = courseDiv.querySelector(".wishBtn");
+
+            enrollButton.addEventListener("click", () => enroll(course.ID));
+            wishButton.addEventListener("click", () => addToWish(course.ID));
+
+            coursesContainer.appendChild(courseDiv);
+        });
+    };
+
+
+    function setupPagination() {
+        const pagination = document.querySelector(paginationContainer);
+        pagination.innerHTML = "";
+        console.log(pagination)
+
+
+        for (let i = 1; i <= totalPages; i++) {
+            const link = document.createElement("a");
+            link.href = "#";
+            link.innerText = i;
+
+            if (i === currentPage) {
+                link.classList.add("active");
+            }
+
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                currentPage = i;
+                // showItems(currentPage);
+                showCourses(currentPage);
+
+                const currentActive = pagination.querySelector(".active");
+                currentActive.classList.remove("active");
+                link.classList.add("active");
+            });
+
+            pagination.appendChild(link);
+        }
+
+    }
+
+    // showitems(currentPage);
+    showCourses(currentPage);
+    setupPagination();
+
 }
-
-courses(coursesData.courses);
+paginate(coursesData.courses, 6, "#pagination");
 
 /*function enroll(courseID) {
   console.log(isLogin());
@@ -272,7 +370,8 @@ function enroll(courseID) {
 
           document.getElementById("paypal-popup-overlay").style.display =
             "none";
-          courses(coursesData.courses);
+          // courses(coursesData.courses);
+          paginate(coursesData.courses);
         });
       },
       onError: function (err) {
@@ -327,5 +426,6 @@ function addToWish(courseID) {
   console.log(updatedUsers);
   localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-  courses(coursesData.courses);
+  // courses(coursesData.courses);
+  paginate(coursesData.courses, 6, "#pagination");
 }

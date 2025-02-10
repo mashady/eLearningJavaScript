@@ -6,7 +6,7 @@ const coursesPerPage = 3;
 const paginationContainer = "#pagination";
 
 // function paginate(items, itemsPerPage, paginationContainer) { //(courses , coursesPerPage , "#pagination")
-function paginate(courses, coursesPerPage, paginationContainer) {
+function paginate(courses, coursesPerPage, paginationContainer , isCourse) {
     let currentPage = 1;
     // const totalPages = Math.ceil(items.length / itemsPerPage); //(courses.length / coursesPerPage)
     const totalPages = Math.ceil(courses.length / coursesPerPage);
@@ -22,7 +22,16 @@ function paginate(courses, coursesPerPage, paginationContainer) {
         // const pageItems = items.slice(startIndex, endIndex);
 
         //TODO filter here
-        const pageCourses = courses.slice(startIndex, endIndex);
+        const filteredCourses = isLogin()
+            ? courses.filter(
+                (course) =>
+                    !userCourses.some((userCourse) => userCourse.ID === course.ID)
+            )
+            : courses;
+        if (filteredCourses.length == 0)
+            document.getElementById("noAvail").style.display = "inline";
+
+        const pageCourses = filteredCourses.slice(startIndex, endIndex);
         // console.log("page items " + pageItems);
         console.log("page courses " + pageCourses);
 
@@ -42,6 +51,7 @@ function paginate(courses, coursesPerPage, paginationContainer) {
             const courseDiv = document.createElement("div");
             courseDiv.className = "course";
 
+            if(isCourse){
             courseDiv.innerHTML = `
                     <div class="card">
                         <img src="${course.Image}" alt="${course.Title}">
@@ -59,6 +69,9 @@ function paginate(courses, coursesPerPage, paginationContainer) {
                         </div>
                     </div>
                     `;
+            }else{
+                
+            }
 
             const enrollButton = courseDiv.querySelector(".enrollBtn");
             const wishButton = courseDiv.querySelector(".wishBtn");
