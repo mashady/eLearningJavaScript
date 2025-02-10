@@ -5,6 +5,9 @@
 } from "../validation.js";*/
 let isEditing = false;
 let currentCourseId = null;
+let currentCourseScore = 0;
+let currentCourseFeedback = [];
+let currentCourseCompletedLessons = [];
 let lessonCount = 0;
 let currentLesson = 1;
 const lessons = [];
@@ -111,14 +114,21 @@ function saveCurrentLesson() {
 multiStepForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
+  const course = JSON.parse(localStorage.getItem('Courses'));
+  let courslen = course.length;
+  console.log(courslen)
+
   const title = document.getElementById("title").value;
   const image = document.getElementById("image").value;
   const category = document.getElementById("category").value;
   const instructor = document.getElementById("instructor").value;
-
   const description = document.getElementById("description").value;
   const price = parseFloat(document.getElementById("price").value) || null;
   const duration = document.getElementById("duration").value;
+  let completedLessons = [];
+  let progressPercentage = 0;
+  let feedback = [];
+  let score = 0;
 
   const updatedCourse = {
     ID: isEditing ? currentCourseId : Date.now(),
@@ -136,7 +146,12 @@ multiStepForm.addEventListener("submit", function (event) {
       lesson_video: lesson.lessonVideo,
       lesson_pdf: lesson.lessonPdf,
     })),
+    completedLessons: 0,
+    progressPercentage: 0,
+    feedback: isEditing ? currentCourseFeedback : [],
+    score: isEditing ? currentCourseScore : 0,
   };
+  console.log(updatedCourse)
 
   if (localStorage.getItem("Courses") == "undefined") {
     console.log("courses exist but undifined so we cannot use json parse ");
@@ -145,7 +160,7 @@ multiStepForm.addEventListener("submit", function (event) {
     console.log(localStorage.getItem("Courses"));
     var courses = JSON.parse(localStorage.getItem("Courses")) || [];
 
-    console.log("courses not exist");
+    // console.log("courses not exist");
   }
   if (isEditing) {
     const courseIndex = courses.findIndex(
@@ -211,9 +226,8 @@ function fetchCourses() {
     const courseElement = document.createElement("div");
     courseElement.classList.add("course-card");
     courseElement.innerHTML = `
-              <img src="${course.Image}" alt="${
-      course.Title
-    }" class="course-image">
+              <img src="${course.Image}" alt="${course.Title
+      }" class="course-image">
               <h3>${course.Title}</h3>
               <p>${course.Description}</p>
               <p><strong>Category:</strong> ${course.Category}</p>
@@ -251,6 +265,8 @@ function editCourse(courseId) {
 
   isEditing = true;
   currentCourseId = course.ID;
+  currentCourseScore = course.score;
+  currentCourseFeedback = course.feedback;
 
   document.getElementById("title").value = course.Title;
   document.getElementById("image").value = course.Image;

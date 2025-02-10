@@ -246,6 +246,42 @@
       .side-bar:hover .arrow-icon {
         transform: rotate(180deg);
       }
+      #feedbackForm {
+        width: 90%;
+        margin: 10% auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+#feedbackForm textarea {
+    width: 95%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    resize: none;
+    border: 1px solid #ccc;
+}
+
+#feedbackForm button {
+  background-color: #46b0ca;
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    width: 200px;
+    font-weight: 600;
+}
+
+#feedbackForm button:hover {
+  transform: scale(1.05);
+  background-color: #3a98b2;
+}
+
 
   </style>
 </head>
@@ -288,7 +324,7 @@
         </div>
       </div>
 
-      <div class="content">
+      <div class="content" id="content">
         <h2 id="courseTitle" class="courseTitle">Loading...</h2>
         <p id="lessonTitle" class="lessonTitle">Lesson</p>
 
@@ -302,6 +338,14 @@
         </div>
       </div>
     </div>
+    <div id="feedbackForm" style="display: none;">
+      <h3>Feedback</h3>
+      <form id="feedbackFormContent">
+          <label for="feedback">Please share your feedback:</label><br>
+          <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea><br>
+          <button type="submit">Submit Feedback</button>
+      </form>
+  </div>
     <footer>
       <div class="footer-top">
         <div class="container">
@@ -341,10 +385,17 @@ if (user) {
     const urlParams = new URLSearchParams(fixedURL);
     let courseID = urlParams.get("courseID");
     let lessonID = parseInt(urlParams.get("lessonID"), 10) || 1;
-    console.log(userData);
-    const selectedCourse = userData.courses.find(
-      (course) => course.ID === courseID
+    console.log(userData.courses);
+    let selectedCourse = userData.courses.find(
+      (course) => {
+        if(course.ID === Number(courseID)){
+          // console.log(course.ID === Number(courseID))
+          // console.log(course);
+          return course;
+        }
+      }
     );
+    console.log(selectedCourse);
     if (!selectedCourse) {
       alert("Course not found!");
       window.location.href = "/home.html";
@@ -359,7 +410,7 @@ if (user) {
       const nextButton = document.getElementById("nextBtn");
 
       const totalLessons = selectedCourse.Content.length;
-      const completedLessonsCount = selectedCourse.completedLessons.length;
+      const completedLessonsCount = selectedCourse.completedLessons;
       console.log(totalLessons);
       console.log(completedLessonsCount);
       if (totalLessons - 1 == completedLessonsCount) {
@@ -470,16 +521,77 @@ if (user) {
 
       updateLessonContent();
     }
-    function updateProgressBar(percentage) {
-      const progressBar = document.getElementById("progress-bar");
-      const progressText = document.getElementById("progress-text");
+    // function updateProgressBar(percentage) {
+    //   const progressBar = document.getElementById("progress-bar");
+    //   const progressText = document.getElementById("progress-text");
 
-      percentage = Math.min(Math.max(percentage, 0), 100);
+    //   percentage = Math.min(Math.max(percentage, 0), 100);
 
-      progressBar.style.width = `${percentage}%`;
+    //   progressBar.style.width = `${percentage}%`;
 
-      progressText.textContent = `${percentage}%`;
+    //   progressText.textContent = `${percentage}%`;
+    // }
+//     function updateProgressBar(progress) {
+//   const progressBar = document.getElementById("progress-bar");
+//   const progressText = document.getElementById("progress-text");
+//   const feedbackForm = document.getElementById("feedbackForm");
+
+//   progressBar.style.width = progress + "%";
+//   progressText.textContent = Math.round(progress) + "%";
+
+//   if (progress >= 100) {
+//     feedbackForm.style.display = "block";
+//   }
+// }
+function updateProgressBar(progress) {
+    const progressBar = document.getElementById("progress-bar");
+    const progressText = document.getElementById("progress-text");
+    const content = document.getElementById("content");
+    const feedbackForm = document.getElementById("feedbackForm");
+
+    progressBar.style.width = progress + "%";
+    progressText.textContent = Math.round(progress) + "%";
+
+    if (progress >= 100) {
+        content.innerHTML = ""; // حذف الفيديو
+        content.appendChild(feedbackForm); // عرض الفورم مكانه
+        feedbackForm.style.display = "block"; // تأكيد إظهاره
     }
+}
+
+
+    function updateCourseProgress(lessonID, courseID) {
+    if (!selectedCourse.completedLessons.includes(lessonID)) {
+        selectedCourse.completedLessons.push(lessonID);
+    }
+
+    const totalLessons = selectedCourse.Content.length;
+    const completedLessonsCount = selectedCourse.completedLessons.length;
+    const isLastLesson = completedLessonsCount === totalLessons;
+    const progressPercentage = isLastLesson
+        ? 100
+        : Math.round((completedLessonsCount / totalLessons) * 100);
+
+    selectedCourse.progressPercentage = progressPercentage;
+    updateProgressBar(progressPercentage);
+
+    if (isLastLesson) {
+        document.getElementById('feedbackForm').style.display = 'block';
+    }
+
+    userData.courses = userData.courses.map((course) =>
+        course.ID === courseID ? selectedCourse : course
+    );
+    updateUserData(userData);
+}
+document.getElementById('feedbackFormContent').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const feedback = document.getElementById('feedback').value;
+
+    console.log('Feedback submitted:', feedback);
+    alert('Thank you for your feedback!');
+    document.getElementById('feedbackForm').style.display = 'none';
+});
   </script>
   </body>
 </html>

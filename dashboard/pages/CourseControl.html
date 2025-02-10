@@ -8,70 +8,39 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../styles/utils/global.css" />
-    <link rel="stylesheet" href="../styles/utils/fonts.css" />
     <style>
-      /* General Styles */
       body {
         font-family: "Poppins", sans-serif;
         background-color: #f8f9fa;
-        margin: 0;
         padding: 20px;
         color: #2c3e50;
       }
-
       .title {
         text-align: center;
         margin: 20px 0;
       }
-
-      .title h1 {
-        font-size: 2.5rem;
-        color: #2c3e50;
-        font-weight: 600;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-      /* Table Styles */
-      #enroll-requests {
+      table {
         width: 100%;
         border-collapse: collapse;
-        margin: 0 auto;
         background-color: #fff;
         border-radius: 8px;
-        overflow: hidden;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
       }
-
-      #enroll-requests th,
-      #enroll-requests td {
+      th,
+      td {
         padding: 15px;
         text-align: center;
         border-bottom: 1px solid #e0e0e0;
       }
-
-      #enroll-requests th {
+      th {
         background-color: #3498db;
         color: #fff;
-        font-size: 1.1rem;
         font-weight: 600;
       }
-
-      #enroll-requests tbody tr:hover {
+      tr:hover {
         background-color: #f1f1f1;
-        transition: background-color 0.3s ease;
       }
-
-      #enroll-requests tbody tr:nth-child(even) {
-        background-color: #f8f9fa;
-      }
-
-      /* Action Buttons */
       .action-button {
         padding: 8px 16px;
         border: none;
@@ -81,41 +50,19 @@
         font-weight: 600;
         transition: background-color 0.3s ease;
       }
-
       .approve-button {
         background-color: #2ecc71;
         color: #fff;
       }
-
       .approve-button:hover {
         background-color: #27ae60;
       }
-
       .reject-button {
         background-color: #e74c3c;
         color: #fff;
       }
-
       .reject-button:hover {
         background-color: #c0392b;
-      }
-
-      /* Responsive Design */
-      @media (max-width: 768px) {
-        .title h1 {
-          font-size: 2rem;
-        }
-
-        #enroll-requests th,
-        #enroll-requests td {
-          padding: 10px;
-          font-size: 0.9rem;
-        }
-
-        .action-button {
-          padding: 6px 12px;
-          font-size: 0.8rem;
-        }
       }
     </style>
   </head>
@@ -128,30 +75,29 @@
         <thead>
           <tr>
             <th>Username</th>
-            <th>Course</th>
-            <th>Status</th>
+            <th>Course Title</th>
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Requests will be populated here -->
-        </tbody>
+        <tbody></tbody>
       </table>
     </div>
+
     <script>
-      // Dynamically load the enroll requests
       function loadEnrollRequests() {
         let enrollRequests =
-          JSON.parse(localStorage.getItem("enrollRequests")) || [];
+          JSON.parse(localStorage.getItem("pendingCourses")) || [];
         let tbody = document.querySelector("#enroll-requests tbody");
         tbody.innerHTML = "";
 
+        console.log("nooin")
         enrollRequests.forEach((request, index) => {
           let row = document.createElement("tr");
+          console.log(request)
+          console.log(index)
           row.innerHTML = `
                     <td>${request.username}</td>
-                    <td>${request.course}</td>
-                    <td>${request.status}</td>
+                    <td>${request.course.Title}</td>
                     <td>
                         <button class="action-button approve-button" onclick="approveRequest(${index})">Approve</button>
                         <button class="action-button reject-button" onclick="rejectRequest(${index})">Reject</button>
@@ -162,22 +108,56 @@
       }
 
       function approveRequest(index) {
-        let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests"));
-        enrollRequests[index].status = "approved";
-        localStorage.setItem("enrollRequests", JSON.stringify(enrollRequests));
-        loadEnrollRequests();
-        alert("Request approved!");
+        let enrollRequests =
+          JSON.parse(localStorage.getItem("pendingCourses")) || [];
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
+        let request = enrollRequests[index];
+
+        let user = users.find((user) => user.username === request.username);
+
+        if (user) {
+          if (!user.courses) {
+            user.courses = [];
+          }
+
+          let courseExists = user.courses.some(
+            (course) => course.ID === request.course.ID
+          );
+          if (!courseExists) {
+            user.courses.push(request.course);
+          } else {
+            alert("Course already added to the user's account.");
+          }
+
+          localStorage.setItem("users", JSON.stringify(users));
+
+          enrollRequests.splice(index, 1);
+          localStorage.setItem(
+            "pendingCourses",
+            JSON.stringify(enrollRequests)
+          );
+
+          loadEnrollRequests();
+          alert("Course approved and added to the user's account.");
+        } else {
+          console.error("User not found.");
+          alert("User not found!");
+        }
       }
 
       function rejectRequest(index) {
-        let enrollRequests = JSON.parse(localStorage.getItem("enrollRequests"));
-        enrollRequests.splice(index, 1); // Remove the request
-        localStorage.setItem("enrollRequests", JSON.stringify(enrollRequests));
+        let enrollRequests =
+          JSON.parse(localStorage.getItem("pendingCourses")) || [];
+
+        enrollRequests.splice(index, 1);
+        localStorage.setItem("pendingCourses", JSON.stringify(enrollRequests));
+
         loadEnrollRequests();
-        alert("Request rejected!");
+        alert("Request rejected.");
       }
 
-      // Load enroll requests when the page loads
+      console.log("out")
       document.addEventListener("DOMContentLoaded", function () {
         loadEnrollRequests();
       });
