@@ -59,7 +59,11 @@ closeModalButton.addEventListener("click", () => {
   resetForm();
 });
 
-nextStep1Button.addEventListener("click", () => showStep(step2));
+nextStep1Button.addEventListener("click", () => {
+  // add the validations here
+  document.getElementById("title");
+  showStep(step2);
+});
 prevStep2Button.addEventListener("click", () => showStep(step1));
 nextStep2Button.addEventListener("click", () => {
   lessonCount = parseInt(lessonCountInput.value);
@@ -111,19 +115,173 @@ function saveCurrentLesson() {
   lessons[currentLesson - 1] = lesson;
 }
 
+document.getElementById("title").addEventListener("blur", () => {
+  const titleInput = document.getElementById("title"); // Get the input element
+  if (titleInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("title-error").innerHTML =
+      "title must not be empty";
+    //title-error
+
+    titleInput.focus();
+  } else {
+    document.getElementById("title-error").innerHTML = "";
+  }
+});
+
+document.getElementById("image").addEventListener("blur", () => {
+  const imageInput = document.getElementById("image"); // Get the input element
+  if (imageInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("image-error").innerHTML =
+      "image must not be empty";
+    //image-error
+
+    imageInput.focus();
+  } else {
+    document.getElementById("image-error").innerHTML = "";
+  }
+});
+
+document.getElementById("description").addEventListener("blur", () => {
+  const descriptionInput = document.getElementById("description");
+  if (descriptionInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("description-error").innerHTML =
+      "description must not be empty";
+    //description-error
+
+    descriptionInput.focus();
+  } else {
+    document.getElementById("description-error").innerHTML = "";
+  }
+});
+
+document.getElementById("price").addEventListener("blur", () => {
+  const priceInput = document.getElementById("price");
+  if (priceInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("price-error").innerHTML =
+      "price must not be empty";
+    //price-error
+
+    priceInput.focus();
+  } else {
+    document.getElementById("price-error").innerHTML = "";
+  }
+});
+
+document.getElementById("instructor").addEventListener("blur", () => {
+  const instructorInput = document.getElementById("instructor");
+  if (instructorInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("instructor-error").innerHTML =
+      "instructor must not be empty";
+    //instructor-error
+
+    instructorInput.focus();
+  } else {
+    document.getElementById("instructor-error").innerHTML = "";
+  }
+});
+
+document.getElementById("duration").addEventListener("blur", () => {
+  const durationInput = document.getElementById("duration");
+  if (durationInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("duration-error").innerHTML =
+      "duration must not be empty";
+    //duration-error
+
+    durationInput.focus();
+  } else {
+    document.getElementById("duration-error").innerHTML = "";
+  }
+});
+
+document.getElementById("lessonCount").addEventListener("blur", () => {
+  const lessonCountInput = document.getElementById("lessonCount");
+  if (lessonCountInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonCount-error").innerHTML =
+      "lessonCount must not be empty";
+    //lessonCount-error
+
+    lessonCountInput.focus();
+  } else {
+    document.getElementById("lessonCount-error").innerHTML = "";
+  }
+});
+
+document.getElementById("lessonTitle").addEventListener("blur", () => {
+  const lessonTitleInput = document.getElementById("lessonTitle");
+  if (lessonTitleInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonTitle-error").innerHTML =
+      "lessonTitle must not be empty";
+    //lessonTitle-error
+
+    lessonTitleInput.focus();
+  } else {
+    document.getElementById("lessonTitle-error").innerHTML = "";
+  }
+});
+
+document.getElementById("lessonDuration").addEventListener("blur", () => {
+  const lessonDurationInput = document.getElementById("lessonDuration");
+  if (lessonDurationInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonDuration-error").innerHTML =
+      "lessonDuration must not be empty";
+    //lessonDuration-error
+
+    lessonDurationInput.focus();
+  } else {
+    document.getElementById("lessonDuration-error").innerHTML = "";
+  }
+});
+
+document.getElementById("lessonVideo").addEventListener("blur", () => {
+  const lessonVideoInput = document.getElementById("lessonVideo");
+  if (lessonVideoInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonVideo-error").innerHTML =
+      "lessonVideo must not be empty";
+    //lessonVideo-error
+
+    lessonVideoInput.focus();
+  } else {
+    document.getElementById("lessonVideo-error").innerHTML = "";
+  }
+});
+
+document.getElementById("lessonPdf").addEventListener("blur", () => {
+  const lessonPdfInput = document.getElementById("lessonPdf");
+  if (lessonPdfInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonPdf-error").innerHTML =
+      "lessonPdf must not be empty";
+    //lessonPdf-error
+
+    lessonPdfInput.focus();
+  } else {
+    document.getElementById("lessonPdf-error").innerHTML = "";
+  }
+});
+
 multiStepForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
-  const course = JSON.parse(localStorage.getItem('Courses'));
-  let courslen = course.length;
-  console.log(courslen)
-  
+  const course = JSON.parse(localStorage.getItem("Courses"));
+  let courslen = course?.length || 0;
+  console.log(courslen);
 
+  const cat = document.getElementById("category").value;
+  if (cat == "") {
+    document.getElementById("category-span").value = "";
+  }
 
   const title = document.getElementById("title").value;
-  if(!title){
-
-  }
   const image = document.getElementById("image").value;
   const category = document.getElementById("category").value;
   const instructor = document.getElementById("instructor").value;
@@ -156,7 +314,7 @@ multiStepForm.addEventListener("submit", function (event) {
     feedback: isEditing ? currentCourseFeedback : [],
     score: isEditing ? currentCourseScore : 0,
   };
-  console.log(updatedCourse)
+  console.log(updatedCourse);
 
   if (localStorage.getItem("Courses") == "undefined") {
     console.log("courses exist but undifined so we cannot use json parse ");
@@ -231,8 +389,9 @@ function fetchCourses() {
     const courseElement = document.createElement("div");
     courseElement.classList.add("course-card");
     courseElement.innerHTML = `
-              <img src="${course.Image}" alt="${course.Title
-      }" class="course-image">
+              <img src="${course.Image}" alt="${
+      course.Title
+    }" class="course-image">
               <h3>${course.Title}</h3>
               <p>${course.Description}</p>
               <p><strong>Category:</strong> ${course.Category}</p>
