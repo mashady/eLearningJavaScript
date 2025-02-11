@@ -198,8 +198,55 @@
         background: #bdc3c7 !important;
       }
 
+      .btn {
+        position: fixed;
+        right: 20px;
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .btn:hover {
+        transform: scale(1.1);
+      }
+
+      .quiz-btn {
+        bottom: 80px;
+        background: linear-gradient(45deg, #28a745, #218838);
+      }
+
       button:hover:not(:disabled) {
         transform: scale(1.05);
+      }
+      .feedback-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: 0.3s ease-in-out;
+      }
+
+      .feedback-btn:hover {
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        transform: scale(1.1);
+      }
+
+      .feedback-btn:active {
+        transform: scale(0.95);
       }
 
       @media (max-width: 768px) {
@@ -304,7 +351,7 @@
         </div>
       </div>
     </nav>
-    <div class="page-content">
+    <div class="page-content" id="pgContent">
       <div class="side-bar">
         <div class="logo-txt">Course Lessons</div>
         <div class="sidebar-toggle">
@@ -333,13 +380,21 @@
         </div>
       </div>
     </div>
+    <p style="margin-top: 50px; margin-bottom: 50px; text-align: center">
+      📄
+      <a id="lePDF" href="" target="_blank">Download Video Material (PDF)</a>
+    </p>
+    <button class="btn quiz-btn" id="quiz" style="margin-bottom: 10px">
+      📝 Take a Quiz
+    </button>
+    <button class="feedback-btn" id="feedBtn">💬 Give Feedback</button>
     <div id="feedbackForm" style="display: none">
       <h3>Feedback</h3>
       <form id="feedbackFormContent">
         <label for="feedback">Please share your feedback:</label><br />
         <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea
         ><br />
-        <button type="submit">Submit Feedback</button>
+        <button onclick="submitFeedback()">Submit Feedback</button>
       </form>
     </div>
     <footer>
@@ -362,11 +417,32 @@
         isLogin,
         getUserDataByUsername,
         updateUserData,
+        logOut,
+        updateUI,
       } from "./utils/user.js";
+      updateUI();
 
+      document.getElementById("logout").addEventListener("click", () => {
+        logOut();
+        updateUI();
+      });
+
+      document.getElementById("feedBtn").addEventListener("click", openFeed);
+      function openFeed() {
+        document.getElementById("feedbackForm").style.display = "block";
+        document.getElementById("pgContent").style.display = "none";
+        document.getElementById("lePDF").style.display = "none";
+        console.log("feed");
+      }
       let user = isLogin();
       let userData = getUserDataByUsername(user.username);
-
+      document.getElementById("quiz").addEventListener("click", () => {
+        startQuiz();
+      });
+      function startQuiz() {
+        console.log("quiz");
+        window.location.href = "/quiz.html";
+      }
       let fixedURL = window.location.search.replace(/\?(?=[^?]*$)/, "&");
       const urlParams = new URLSearchParams(fixedURL);
       let courseID = urlParams.get("courseID");
@@ -377,14 +453,12 @@
       let ccoursex = allCourses.find((c) => String(c.ID) === String(courseID));
       console.log(ccoursex);
       console.log(allCourses.find((c) => String(c.ID) === String(courseID)));
-      // Ensure userData.courses is an array
 
       if (!Array.isArray(userData.courses)) {
         console.error("userData.courses is not an array");
-        userData.courses = []; // Fallback to an empty array
+        userData.courses = [];
       }
       console.log(userData.courses);
-      // Find the selected course
       const selectedCourse = userData.courses.find(
         (course) => course.ID === courseID
       );
@@ -401,8 +475,8 @@
 
       if (!ccoursex) {
         console.log("Course not found!");
-        // Redirect or show a message
       } else {
+        console.log(ccoursex);
         console.log(selectedCourse);
         document.getElementById("courseTitle").textContent = ccoursex.Title;
 
@@ -414,12 +488,10 @@
 
         const totalLessons = ccoursex.Content.length;
 
-        // Initialize lastWatchedLesson if it doesn't exist
         if (!ccoursex.completedLessons) {
           ccoursex.completedLessons = 0;
         }
 
-        // Update progress based on completedLessons
         function updateProgress() {
           const progressPercentage = Math.round(
             (ccoursex.completedLessons / totalLessons) * 100
@@ -428,7 +500,6 @@
           updateProgressBar(progressPercentage);
         }
 
-        // Update lesson content and progress
         function updateLessonContent() {
           const currentLesson = ccoursex.Content.find(
             (lesson) => lesson.lesson_id === lessonID
@@ -436,10 +507,10 @@
 
           if (!currentLesson) {
             console.log("Lesson not found!");
-            // Redirect to the first lesson
             window.location.href = `/watching.html?courseID=${courseID}&lessonID=1`;
             return;
           }
+          document.getElementById("lePDF").href = currentLesson.lesson_pdf;
 
           lessonTitle.textContent = `Lesson ${lessonID}: ${currentLesson.lesson_title}`;
           lessonIframe.src = currentLesson.lesson_video.replace(
@@ -450,22 +521,19 @@
           prevButton.disabled = lessonID <= 1;
           nextButton.disabled = lessonID >= totalLessons;
 
-          // Update completedLessons and progress if the current lesson is ahead
           if (lessonID > ccoursex.completedLessons) {
             ccoursex.completedLessons = lessonID;
             console.log(ccoursex);
             updateProgress();
-            updateUserData(userData); // Save updated data
+            updateUserData(userData);
           }
         }
 
-        // Populate lesson links
         ccoursex.Content.forEach((lesson) => {
           let link = document.createElement("a");
           link.href = `/watching.html?courseID=${courseID}&lessonID=${lesson.lesson_id}`;
           link.textContent = `Lesson ${lesson.lesson_id}: ${lesson.lesson_title}`;
 
-          // Highlight completed lessons (lessons <= completedLessons)
           if (lesson.lesson_id <= ccoursex.completedLessons) {
             link.style.color = "#4CAF50";
           }
@@ -473,7 +541,6 @@
           lessonLinks.appendChild(link);
         });
 
-        // Handle previous button click
         prevButton.addEventListener("click", () => {
           if (lessonID > 1) {
             lessonID--;
@@ -481,7 +548,6 @@
           }
         });
 
-        // Handle next button click
         nextButton.addEventListener("click", () => {
           if (lessonID < totalLessons) {
             lessonID++;
@@ -489,12 +555,10 @@
           }
         });
 
-        // Navigate to a specific lesson
         function navigateToLesson() {
           window.location.href = `/watching.html?courseID=${courseID}&lessonID=${lessonID}`;
         }
 
-        // Update progress bar UI
         function updateProgressBar(percentage) {
           const progressBar = document.getElementById("progress-bar");
           const progressText = document.getElementById("progress-text");
@@ -503,7 +567,6 @@
 
           progressBar.style.width = `${percentage}%`;
           progressText.textContent = `${percentage}%`;
-          // update user progress course in the local storage
           const users = JSON.parse(localStorage.getItem("users"));
           console.log(user);
           console.log(userData.courses);
@@ -515,7 +578,6 @@
           console.log(percentage);
 
           console.log(oldUserCourse);
-          // now get the user from the local storage and update this course in his courses array to replace with the new course
           users.forEach((user) => {
             if (user.username === user.username) {
               user.courses = user.courses.map((c) =>
@@ -532,8 +594,8 @@
           // after find old user course data update progress to the updated course into the local storage
 
           /*if (updatedCourse) {
-            updatedCourse.progressPercentage = percentage;
-          }*/
+              updatedCourse.progressPercentage = percentage;
+            }*/
           // localStorage.setItem("Courses", JSON.stringify(updatedCourses)); // Save updated data to local storage
 
           // Display feedback form if the user has completed at least 5 lessons
@@ -541,8 +603,8 @@
           // after find old user course data update progress to the updated course into the local storage
 
           /*if (updatedCourse) {
-            updatedCourse.progressPercentage = percentage;
-          }*/
+              updatedCourse.progressPercentage = percentage;
+            }*/
           // localStorage.setItem("Courses", JSON.stringify(updatedCourses)); // Save updated data to local storage
 
           // Display feedback form if the user has completed at least 5 lessons
@@ -553,25 +615,115 @@
         updateProgress();
       }
 
-      // Loop through all courses and display them (example)
       function displayAllCourses(courses) {
-        const coursesContainer = document.getElementById("coursesContainer"); // Add this element to your HTML
+        const coursesContainer = document.getElementById("coursesContainer");
         if (!coursesContainer) return;
 
         courses.forEach((course) => {
           const courseElement = document.createElement("div");
           courseElement.className = "course";
           courseElement.innerHTML = `
-      <h3>${course.Title}</h3>
-      <p>Progress: ${course.progressPercentage || 0}%</p>
-      <a href="/watching.html?courseID=${course.ID}&lessonID=1">Start Course</a>
-    `;
+        <h3>${course.Title}</h3>
+        <p>Progress: ${course.progressPercentage || 0}%</p>
+        <a href="/watching.html?courseID=${
+          course.ID
+        }&lessonID=1">Start Course</a>
+      `;
           coursesContainer.appendChild(courseElement);
         });
       }
 
-      // Call the function to display all courses
       displayAllCourses(userData.courses);
+
+      window.submitFeedback = function () {
+        let message = document.getElementById("feedback").value.trim();
+        if (!message) {
+          alert("Feedback message cannot be empty.");
+          return;
+        }
+
+        let feedback = {
+          username: user.username,
+          message: message,
+          courseID: courseID,
+          timestamp: new Date().toISOString(),
+        };
+        var feedbackList = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+        feedbackList.push(feedback);
+
+        localStorage.setItem("feedbacks", JSON.stringify(feedbackList));
+
+        window.location.href = "/";
+      };
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+        });
     </script>
   </body>
 </html>
+<!--
+  function displayFeedback() {
+    let feedbackContainer = document.getElementById("feedbackContainer");
+    feedbackContainer.innerHTML = ""; // Clear previous content
+
+    let feedbackList = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    if (feedbackList.length === 0) {
+        feedbackContainer.innerHTML = "<p>No feedback available yet.</p>";
+        return;
+    }
+
+    feedbackList.forEach((feedback, index) => {
+        let feedbackCard = document.createElement("div");
+        feedbackCard.classList.add("feedback-card");
+
+        feedbackCard.innerHTML = `
+            <div class="feedback-content">
+                <p class="feedback-message">"${feedback.message}"</p>
+                <span class="feedback-timestamp">${new Date(feedback.timestamp).toLocaleString()}</span>
+            </div>
+        `;
+
+        feedbackContainer.appendChild(feedbackCard);
+    });
+}
+
+// Call this function to load feedback on page load
+window.onload = displayFeedback;
+
+.feedback-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.feedback-card:hover {
+    transform: scale(1.05);
+}
+
+.feedback-content {
+    text-align: center;
+}
+
+.feedback-message {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feedback-timestamp {
+    font-size: 12px;
+    color: #777;
+}
+
+
+<div id="feedbackContainer"></div>
+
+-->

@@ -3,6 +3,24 @@
   validateOnlyCharacters,
   validateOnBlur,
 } from "../validation.js";*/
+
+import { showNotification } from "../../utils/user.js";
+/*
+function showNotification(message, duration = 3000) {
+  const notification = document.getElementById("notification");
+  const notificationMessage = document.getElementById("notification-message");
+  const overlay = document.getElementById("overlay");
+
+  notificationMessage.textContent = message;
+
+  notification.classList.add("show");
+  overlay.classList.add("show");
+
+  setTimeout(() => {
+    notification.classList.remove("show");
+    overlay.classList.remove("show");
+  }, duration);
+}*/
 let isEditing = false;
 let currentCourseId = null;
 let currentCourseScore = 0;
@@ -61,11 +79,53 @@ closeModalButton.addEventListener("click", () => {
 
 nextStep1Button.addEventListener("click", () => {
   // add the validations here
-  document.getElementById("title");
+  let title = document.getElementById("title");
+  let image = document.getElementById("image");
+  let description = document.getElementById("description");
+  let price = document.getElementById("price");
+  let duration = document.getElementById("duration");
+  let category = document.getElementById("category");
+  if (
+    !title.value ||
+    !description.value ||
+    !duration.value ||
+    !category.value ||
+    !image.value
+  ) {
+    showNotification("All fields are required!", 2000);
+
+    return;
+  }
+  /**
+  if (!isValidURL(image.value)) {
+    alert("Invalid URL!");
+    return;
+  }
+  */
+
+  /*if (
+    price.value <= 0 ||
+    price.value.includes(".") ||
+    price.value.includes(",")
+  ) {
+    alert("Invalid price!");
+    return;
+  }*/
+  if (
+    duration.value <= 0 ||
+    isNaN(duration.value) ||
+    duration.value.includes(".")
+  ) {
+    showNotification("Invalid duration!", 2000);
+
+    return;
+  }
+  console.log("step 1");
   showStep(step2);
 });
 prevStep2Button.addEventListener("click", () => showStep(step1));
 nextStep2Button.addEventListener("click", () => {
+  console.log("next step");
   lessonCount = parseInt(lessonCountInput.value);
   if (lessonCount > 0) {
     currentLesson = 1;
@@ -81,13 +141,75 @@ prevLessonStepButton.addEventListener("click", () => {
     showStep(step2);
   }
 });
+function isValidURL(url) {
+  const regex =
+    /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+  return regex.test(url);
+}
+function checkLink(obj) {
+  const regex = /^(https?:\/\/[^\s]+)$/;
+  return !regex.test(obj.value);
+}
+console.log(
+  "chk",
+  checkLink(
+    "https://github.com/Mohamedmaged01/JsProject/blob/master/pages/content.html"
+  )
+);
+console.log(checkNum("11111"));
+
+function checkNum(obj) {
+  const regex = /^\d+(\.\d+)?$/;
+  return !regex.test(obj.value);
+}
 nextLessonStepButton.addEventListener("click", () => {
+  // add the validations here
+  let lessonTitle = document.getElementById("lessonTitle");
+  let lessonDuration = document.getElementById("lessonDuration");
+  let lessonVideo = document.getElementById("lessonVideo");
+  let lessonPdf = document.getElementById("lessonPdf");
+  if (
+    !lessonTitle.value ||
+    !lessonDuration.value ||
+    !duration.value ||
+    !lessonVideo.value ||
+    !lessonPdf.value
+  ) {
+    //showNotification("All fields are required!");
+    showNotification("All fields are required!", 2000);
+
+    return;
+  }
+  /**
+  if (!isValidURL(lessonVideo.value) || !isValidURL(lessonPdf.value)) {
+    alert("Invalid URL");
+    return;
+  }
+  */
+
+  console.log("validate");
   saveCurrentLesson();
   if (currentLesson < lessonCount) {
     currentLesson++;
     updateLessonStep();
   } else {
     showStep(finalStep);
+  }
+});
+lessonTitle.addEventListener("blur", () => {
+  const titleInput = document.getElementById("lessonTitle");
+  if (titleInput.value.trim() === "") {
+    console.log("Should not be empty");
+    document.getElementById("lessonTitle-error").style.display = "block";
+    document.getElementById("lessonTitle-error").innerHTML =
+      "lesson title must not be empty";
+    //title-error
+
+    titleInput.focus();
+  } else {
+    document.getElementById("lessonTitle-error").style.display = "none";
+
+    document.getElementById("lessonTitle-error").innerHTML = "";
   }
 });
 prevFinalStepButton.addEventListener("click", () => {
@@ -119,6 +241,7 @@ document.getElementById("title").addEventListener("blur", () => {
   const titleInput = document.getElementById("title"); // Get the input element
   if (titleInput.value.trim() === "") {
     console.log("Should not be empty");
+    document.getElementById("title-error").style.display = "block";
     document.getElementById("title-error").innerHTML =
       "title must not be empty";
     //title-error
@@ -156,7 +279,7 @@ document.getElementById("description").addEventListener("blur", () => {
     document.getElementById("description-error").innerHTML = "";
   }
 });
-
+/*
 document.getElementById("price").addEventListener("blur", () => {
   const priceInput = document.getElementById("price");
   if (priceInput.value.trim() === "") {
@@ -170,6 +293,7 @@ document.getElementById("price").addEventListener("blur", () => {
     document.getElementById("price-error").innerHTML = "";
   }
 });
+*/
 
 document.getElementById("instructor").addEventListener("blur", () => {
   const instructorInput = document.getElementById("instructor");
@@ -198,7 +322,7 @@ document.getElementById("duration").addEventListener("blur", () => {
     document.getElementById("duration-error").innerHTML = "";
   }
 });
-
+/*
 document.getElementById("lessonCount").addEventListener("blur", () => {
   const lessonCountInput = document.getElementById("lessonCount");
   if (lessonCountInput.value.trim() === "") {
@@ -268,7 +392,7 @@ document.getElementById("lessonPdf").addEventListener("blur", () => {
     document.getElementById("lessonPdf-error").innerHTML = "";
   }
 });
-
+*/
 multiStepForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -288,10 +412,10 @@ multiStepForm.addEventListener("submit", function (event) {
   const description = document.getElementById("description").value;
   const price = parseFloat(document.getElementById("price").value) || null;
   const duration = document.getElementById("duration").value;
-  let completedLessons = [];
+  /*let completedLessons = [];
   let progressPercentage = 0;
   let feedback = [];
-  let score = 0;
+  let score = 0;*/
 
   const updatedCourse = {
     ID: isEditing ? currentCourseId : Date.now(), //courslen + 1
@@ -332,7 +456,9 @@ multiStepForm.addEventListener("submit", function (event) {
     if (courseIndex !== -1) {
       courses[courseIndex] = updatedCourse;
     } else {
-      alert("Course not found, adding as new");
+      //showNotification("Course not found, adding as new");
+      showNotification("All fields are required!", 2000);
+
       courses.push(updatedCourse);
     }
   } else {
@@ -343,9 +469,16 @@ multiStepForm.addEventListener("submit", function (event) {
   modalOverlay.classList.remove("active");
   resetForm();
   fetchCourses();
-  alert(
-    isEditing ? "Course updated successfully!" : "Course added successfully!"
+  showNotification(
+    isEditing ? "Course updated successfully!" : "Course added successfully!",
+    2000
   );
+
+  /*
+  showNotification(
+    isEditing ? "Course updated successfully!" : "Course added successfully!"
+  );*/
+
   isEditing = false;
   currentCourseId = null;
 });
@@ -383,27 +516,33 @@ function fetchCourses() {
     return;
   }
 
-  courseListContainer.innerHTML = ""; // Clear previous courses
+  courseListContainer.innerHTML = "";
 
   courses?.forEach((course) => {
     const courseElement = document.createElement("div");
     courseElement.classList.add("course-card");
+
     courseElement.innerHTML = `
-              <img src="${course.Image}" alt="${
-      course.Title
-    }" class="course-image">
-              <h3>${course.Title}</h3>
-              <p>${course.Description}</p>
-              <p><strong>Category:</strong> ${course.Category}</p>
-              <p><strong>Category:</strong> ${course.Instructor}</p>
+        <img src="${course.Image}" alt="${course.Title}" class="course-image">
+        <h3>${course.Title}</h3>
+        <p>${course.Description}</p>
+        <p><strong>Category:</strong> ${course.Category}</p>
+        <p><strong>Instructor:</strong> ${course.Instructor}</p>
+        <p><strong>Price:</strong> ${course.Price || "Free"}</p>
+        <p><strong>Duration:</strong> ${course.Duration}</p>
+    `;
 
+    const editButton = document.createElement("button");
+    editButton.textContent = "Edit";
+    editButton.addEventListener("click", () => editCourse(course.ID));
 
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.addEventListener("click", () => deleteCourse(course.ID));
 
-              <p><strong>Price:</strong> ${course.Price || "Free"}</p>
-              <p><strong>Duration:</strong> ${course.Duration}</p>
-              <button onclick="editCourse(${course.ID})">Edit</button>
-              <button onclick="deleteCourse(${course.ID})">Delete</button>
-          `;
+    courseElement.appendChild(editButton);
+    courseElement.appendChild(deleteButton);
+
     courseListContainer.appendChild(courseElement);
   });
 }
@@ -423,7 +562,7 @@ function editCourse(courseId) {
   const course = courses.find((course) => course.ID === courseId);
 
   if (!course) {
-    alert("Course not found!");
+    showNotification("Course not found!", 2000);
     return;
   }
 

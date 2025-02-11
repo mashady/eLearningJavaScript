@@ -57,9 +57,9 @@ function displayUserProfile(username) {
                 <img src="${course.Image}" alt="${course.Title}">
                 <div class="card-content">
                 <h3>${course.Title}</h3>
-                <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+                <p><strong>Instructor:</strong> ${course.Instructor}</p>
                 <p>${course.Description}</p>
-                <p><strong>Price:</strong> $${course.Price}</p>
+                <p><strong>Price:</strong> ${course.Price || "Free"}</p>
                 <p><strong>Duration:</strong> ${course.Duration}</p>
                 <div class="card-options">
                   <button class="enrollBtn">Enroll</button>
@@ -99,7 +99,6 @@ function enroll(courseID) {
     let pendingCourses =
       JSON.parse(localStorage.getItem("pendingCourses")) || [];
 
-    // Check if the course is already in the pending list for the same user
     const isAlreadyPending = pendingCourses.some(
       (entry) => entry.username === username && entry.course.ID === courseID
     );
@@ -112,7 +111,6 @@ function enroll(courseID) {
       return;
     }
 
-    // Add course to pending list if not already there
     pendingCourses.push({ username, course });
     localStorage.setItem("pendingCourses", JSON.stringify(pendingCourses));
     showNotification("Your enrollment request is pending approval.", 2000);
@@ -150,7 +148,6 @@ function enroll(courseID) {
       onApprove: function (data, actions) {
         return actions.order.capture().then(function (details) {
           console.log("Payment Successful:", details);
-          //showNotification("Payment successful! You are now enrolled.", 2000);
 
           userCourses.push(course);
           console.log(userCourses);
@@ -163,46 +160,16 @@ function enroll(courseID) {
           console.log(updatedUsers);
           document.getElementById("paypal-popup-overlay").style.display =
             "none";
-          courses(coursesData.courses); // render ui
+          courses(coursesData.courses);
         });
       },
       onError: function (err) {
         console.log("Payment Failed:", err);
-        //showNotification("Payment failed. Please try again.", 1000);
       },
     })
     .render("#paypal-button-container");
 }
-/*
-function enroll(courseID) {
-  const user = getUserDataByUsername(isLogin().username);
-  const course = user.wishlist.find((c) => c.ID === courseID);
 
-  if (!course) {
-    showNotification("Course not found in wishlist!", 1000);
-    return;
-  }
-
-  if (user.courses.some((c) => c.ID === courseID)) {
-    showNotification("You are already enrolled in this course!", 1000);
-
-    return;
-  }
-
-  user.courses.push(course);
-
-  user.wishlist = user.wishlist.filter((c) => c.ID !== courseID);
-
-  const users = JSON.parse(localStorage.getItem("users"));
-  const updatedUsers = users.map((u) =>
-    u.username === user.username ? user : u
-  );
-  localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-  displayUserProfile(isLogin().username);
-  showNotification("Course enrolled successfully and removed from wishlist!");
-}
-*/
 function removeFromWishlist(courseID) {
   const user = getUserDataByUsername(isLogin().username);
 

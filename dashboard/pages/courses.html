@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="../styles/courses.css" />
+
     <title>Document</title>
     <style>
       @import url(./utils/global.css);
@@ -84,7 +85,6 @@
         border-color: var(--darkblue);
         outline: none;
       }
-      /* #course-form button */
       .info-buttons {
         display: block;
         width: 98.5%;
@@ -99,7 +99,6 @@
         transition: background-color 0.3s ease;
       }
 
-      /* #course-form button:hover */
       .info-buttons:hover {
         background-color: #909abc;
         color: var(--darkblue);
@@ -133,7 +132,7 @@
         display: inline-block;
       }
       select {
-        width: 98.5%;
+        width: 85.5%;
         padding: 10px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -142,6 +141,7 @@
         background-color: #f9f9f9;
         transition: border-color 0.3s ease;
         resize: none;
+        margin-bottom: 17px;
       }
       select option {
         background-color: var(--grayBg);
@@ -153,7 +153,6 @@
         background-color: var(--yellow);
       }
 
-      /* Cards */
       #courses-list {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -191,7 +190,6 @@
         background-color: var(--lightgreen);
         color: var(--darkblue);
         border: none;
-        /*padding: 10px 15px;*/
         margin-right: 5px;
         border-radius: 5px;
         cursor: pointer;
@@ -207,7 +205,6 @@
         opacity: 0.8;
       }
 
-      /* Search Section */
       .search-section {
         margin: 20px 0;
         padding: 20px;
@@ -298,7 +295,18 @@
         justify-content: center;
         align-items: center;
       }
-
+      .errorMsg {
+        width: 82%;
+        color: #721c24 !important;
+        background-color: #f8d7da;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid #f5c6cb;
+        display: none;
+      }
       @keyframes slideIn {
         from {
           opacity: 0;
@@ -386,12 +394,7 @@
       <h1>Courses</h1>
     </div>
     <div class="container">
-      <!-- Search Section -->
-      <!--
-      
-      
-       -->
-      <div class="search-section">
+      <div class="search-section" style="display: none">
         <h2>Search Courses</h2>
         <div class="search-controls">
           <select id="search-by">
@@ -403,12 +406,14 @@
             id="search-input"
             placeholder="Enter search term"
           />
-          <!--
-          <button type="button" id="search-btn">Search</button>
-          -->
-          <button id="openModal" class="button">Add Course</button>
         </div>
       </div>
+      <div id="overlay" class="overlay"></div>
+
+      <div id="notification" class="notification">
+        <span id="notification-message"></span>
+      </div>
+      <button id="openModal" class="button">Add Course</button>
 
       <div id="modalOverlay" class="modal-overlay">
         <div class="modal">
@@ -423,7 +428,7 @@
                 name="title"
                 placeholder="Enter course title"
               />
-              <span id="title-error" style="color: red"></span>
+              <span id="title-error" class="errorMsg"></span>
 
               <input
                 type=""
@@ -431,19 +436,19 @@
                 name="image"
                 placeholder="Put course cover"
               />
-              <span id="image-error" style="color: red"></span>
+              <span id="image-error" class="errorMsg"></span>
 
               <select id="category" name="category">
                 <option value="" disabled selected>Select a category</option>
               </select>
-              <span id="category-span" style="color: red"></span>
+              <span id="category-span" class="errorMsg"></span>
 
               <textarea
                 id="description"
                 name="description"
                 placeholder="Add course description"
               ></textarea>
-              <span id="description-error" style="color: red"></span>
+              <span id="description-error" class="errorMsg"></span>
 
               <input
                 type="text"
@@ -452,7 +457,7 @@
                 step="0.01"
                 placeholder="Enter course price if free leave empty"
               />
-              <span id="price-error" style="color: red"></span>
+              <span id="price-error" class="errorMsg"></span>
 
               <input
                 type="text"
@@ -461,7 +466,7 @@
                 step="0.01"
                 placeholder="enter instructor name"
               />
-              <span id="instructor-error" style="color: red"></span>
+              <span id="instructor-error" class="errorMsg"></span>
 
               <input
                 type="text"
@@ -469,9 +474,19 @@
                 name="duration"
                 placeholder="Course duration"
               />
-              <span id="duration-error" style="color: red"></span>
+              <span id="duration-error" class="errorMsg"></span>
 
-              <button type="button" id="nextStep1">Next</button>
+              <button
+                type="button"
+                id="nextStep1"
+                style="
+                  background-color: var(--darkblue);
+                  color: #fff;
+                  border-radius: 8px;
+                "
+              >
+                Next
+              </button>
             </div>
 
             <div id="step2" class="form-step">
@@ -486,7 +501,7 @@
                 min="1"
                 placeholder="enter lesson number"
               />
-              <span id="lessonCount-error" style="color: red"></span>
+              <span id="lessonCount-error" class="errorMsg"></span>
 
               <div style="display: flex; justify-content: space-between">
                 <button type="button" id="prevStep2">Previous</button>
@@ -503,7 +518,7 @@
                   name="lessonTitle"
                   placeholder="enter lesson title"
                 />
-                <span id="lessonTitle-error" style="color: red"></span>
+                <span id="lessonTitle-error" class="errorMsg"></span>
 
                 <input
                   type="text"
@@ -511,7 +526,7 @@
                   name="lessonDuration"
                   placeholder="enter lesson duration"
                 />
-                <span id="lessonDuration-error" style="color: red"></span>
+                <span id="lessonDuration-error" class="errorMsg"></span>
 
                 <input
                   type=""
@@ -519,7 +534,7 @@
                   name="lessonVideo"
                   placeholder="enter lesson video "
                 />
-                <span id="lessonVideo-error" style="color: red"></span>
+                <span id="lessonVideo-error" class="errorMsg"></span>
 
                 <input
                   type=""
@@ -527,7 +542,7 @@
                   name="lessonPdf"
                   placeholder="enter lesson pdf url"
                 />
-                <span id="lessonPdf-error" style="color: red"></span>
+                <span id="lessonPdf-error" class="errorMsg"></span>
               </div>
               <div style="display: flex; justify-content: space-between">
                 <button type="button" id="prevLessonStep">Previous</button>
@@ -555,324 +570,7 @@
         <div id="courseList"></div>
       </div>
     </div>
-    <script src="../script/fetch-courses.js"></script>
-    <!-- <script>
-      document.getElementById("search-input").addEventListener("blur", () => {
-        console.log("fethced");
-        fetchCourses(document.getElementById("search-input").value.trim());
-      });
-      /*import {
-  validateURL,
-  validateOnlyCharacters,
-  validateOnBlur,
-} from "../validation.js";*/
-      let isEditing = false;
-      let currentCourseId = null;
-      let lessonCount = 0;
-      let currentLesson = 1;
-      const lessons = [];
 
-      const openModalButton = document.getElementById("openModal");
-      const closeModalButton = document.getElementById("closeModal");
-      const modalOverlay = document.getElementById("modalOverlay");
-      const multiStepForm = document.getElementById("multiStepForm");
-
-      const step1 = document.getElementById("step1");
-      const step2 = document.getElementById("step2");
-      const lessonSteps = document.getElementById("lessonSteps");
-      const finalStep = document.getElementById("finalStep");
-
-      const nextStep1Button = document.getElementById("nextStep1");
-      const prevStep2Button = document.getElementById("prevStep2");
-      const nextStep2Button = document.getElementById("nextStep2");
-      const prevLessonStepButton = document.getElementById("prevLessonStep");
-      const nextLessonStepButton = document.getElementById("nextLessonStep");
-      const prevFinalStepButton = document.getElementById("prevFinalStep");
-
-      const lessonCountInput = document.getElementById("lessonCount");
-      const currentLessonNumber = document.getElementById(
-        "currentLessonNumber"
-      );
-      const lessonTitleInput = document.getElementById("lessonTitle");
-      const lessonDurationInput = document.getElementById("lessonDuration");
-      const lessonVideoInput = document.getElementById("lessonVideo");
-      const lessonPdfInput = document.getElementById("lessonPdf");
-
-      document.addEventListener("DOMContentLoaded", fetchCourses);
-      document.addEventListener("DOMContentLoaded", () => {
-        /**
-    validateOnBlur(lessonPdfInput, "lessonPdf", {
-    required: true,
-    validURL: true,
-  });
-     */
-      });
-
-      openModalButton.addEventListener("click", () => {
-        modalOverlay.classList.add("active");
-        showStep(step1);
-      });
-
-      closeModalButton.addEventListener("click", () => {
-        modalOverlay.classList.remove("active");
-        resetForm();
-      });
-
-      nextStep1Button.addEventListener("click", () => showStep(step2));
-      prevStep2Button.addEventListener("click", () => showStep(step1));
-      nextStep2Button.addEventListener("click", () => {
-        lessonCount = parseInt(lessonCountInput.value);
-        if (lessonCount > 0) {
-          currentLesson = 1;
-          updateLessonStep();
-          showStep(lessonSteps);
-        }
-      });
-      prevLessonStepButton.addEventListener("click", () => {
-        if (currentLesson > 1) {
-          currentLesson--;
-          updateLessonStep();
-        } else {
-          showStep(step2);
-        }
-      });
-      nextLessonStepButton.addEventListener("click", () => {
-        saveCurrentLesson();
-        if (currentLesson < lessonCount) {
-          currentLesson++;
-          updateLessonStep();
-        } else {
-          showStep(finalStep);
-        }
-      });
-      prevFinalStepButton.addEventListener("click", () => {
-        currentLesson = lessonCount;
-        updateLessonStep();
-        showStep(lessonSteps);
-      });
-
-      function updateLessonStep() {
-        currentLessonNumber.textContent = currentLesson;
-        const lesson = lessons[currentLesson - 1] || {};
-        lessonTitleInput.value = lesson.lessonTitle || "";
-        lessonDurationInput.value = lesson.lessonDuration || "";
-        lessonVideoInput.value = lesson.lessonVideo || "";
-        lessonPdfInput.value = lesson.lessonPdf || "";
-      }
-
-      function saveCurrentLesson() {
-        const lesson = {
-          lessonTitle: lessonTitleInput.value,
-          lessonDuration: lessonDurationInput.value,
-          lessonVideo: lessonVideoInput.value,
-          lessonPdf: lessonPdfInput.value,
-        };
-        lessons[currentLesson - 1] = lesson;
-      }
-
-      multiStepForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const title = document.getElementById("title").value;
-        const image = document.getElementById("image").value;
-        const category = document.getElementById("category").value;
-        const description = document.getElementById("description").value;
-        const price =
-          parseFloat(document.getElementById("price").value) || null;
-        const duration = document.getElementById("duration").value;
-
-        const updatedCourse = {
-          ID: isEditing ? currentCourseId : Date.now(),
-          Title: title,
-          Image: image,
-          Category: category,
-          Description: description,
-          Price: price,
-          Duration: duration,
-          Content: lessons.map((lesson, index) => ({
-            lesson_id: index + 1,
-            lesson_title: lesson.lessonTitle,
-            lesson_duration: lesson.lessonDuration,
-            lesson_video: lesson.lessonVideo,
-            lesson_pdf: lesson.lessonPdf,
-          })),
-        };
-
-        if (localStorage.getItem("Courses") == "undefined") {
-          console.log(
-            "courses exist but undifined so we cannot use json parse "
-          );
-          console.log(localStorage.getItem("Courses"));
-        } else {
-          console.log(localStorage.getItem("Courses"));
-          var courses = JSON.parse(localStorage.getItem("Courses")) || [];
-
-          console.log("courses not exist");
-        }
-        if (isEditing) {
-          const courseIndex = courses.findIndex(
-            (course) => course.ID === Number(currentCourseId)
-          );
-          if (courseIndex !== -1) {
-            courses[courseIndex] = updatedCourse;
-          } else {
-            alert("Course not found, adding as new");
-            courses.push(updatedCourse);
-          }
-        } else {
-          courses.push(updatedCourse);
-        }
-
-        localStorage.setItem("Courses", JSON.stringify(courses));
-        modalOverlay.classList.remove("active");
-        resetForm();
-        fetchCourses();
-        alert(
-          isEditing
-            ? "Course updated successfully!"
-            : "Course added successfully!"
-        );
-        isEditing = false;
-        currentCourseId = null;
-      });
-
-      function resetForm() {
-        multiStepForm.reset();
-        lessonCount = 0;
-        currentLesson = 1;
-        lessons.length = 0;
-        showStep(step1);
-      }
-
-      function showStep(step) {
-        document
-          .querySelectorAll(".form-step")
-          .forEach((s) => s.classList.remove("active"));
-        step.classList.add("active");
-      }
-
-      function fetchCourses() {
-        if (localStorage.getItem("Courses") == "undefined") {
-          console.log(
-            "courses exist but undifined so we cannot use json parse "
-          );
-          console.log(localStorage.getItem("Courses"));
-        } else {
-          console.log(localStorage.getItem("Courses"));
-          var courses = JSON.parse(localStorage.getItem("Courses")) || [];
-
-          console.log("courses not exist");
-        }
-
-        const courseListContainer = document.getElementById("courseList");
-
-        if (!courseListContainer) {
-          console.error("courseList element not found!");
-          return;
-        }
-
-        courseListContainer.innerHTML = ""; // Clear previous courses
-
-        courses?.forEach((course) => {
-          const courseElement = document.createElement("div");
-          courseElement.classList.add("course-card");
-          courseElement.innerHTML = `
-              <img src="${course.Image}" alt="${
-            course.Title
-          }" class="course-image">
-              <h3>${course.Title}</h3>
-              <p>${course.Description}</p>
-              <p><strong>Category:</strong> ${course.Category}</p>
-              <p><strong>Price:</strong> ${course.Price || "Free"}</p>
-              <p><strong>Duration:</strong> ${course.Duration}</p>
-              <button onclick="editCourse(${course.ID})">Edit</button>
-              <button onclick="deleteCourse(${course.ID})">Delete</button>
-          `;
-          courseListContainer.appendChild(courseElement);
-        });
-      }
-
-      function editCourse(courseId) {
-        let courses = JSON.parse(localStorage.getItem("Courses")) || [];
-        if (courses && typeof courses === "string") {
-          try {
-            const parsedcourses = JSON.parse(courses);
-            console.log(parsedcourses);
-          } catch (error) {
-            console.error("Failed to parse JSON:", error);
-          }
-        } else {
-          console.error("Invalid or undefined JSON courses");
-        }
-        const course = courses.find((course) => course.ID === courseId);
-
-        if (!course) {
-          alert("Course not found!");
-          return;
-        }
-
-        isEditing = true;
-        currentCourseId = course.ID;
-
-        document.getElementById("title").value = course.Title;
-        document.getElementById("image").value = course.Image;
-        document.getElementById("category").value = course.Category;
-        document.getElementById("description").value = course.Description;
-        document.getElementById("price").value = course.Price;
-        document.getElementById("duration").value = course.Duration;
-        lessons.length = 0;
-        course.Content.forEach((lesson, index) => {
-          lessons[index] = {
-            lessonTitle: lesson.lesson_title,
-            lessonDuration: lesson.lesson_duration,
-            lessonVideo: lesson.lesson_video,
-            lessonPdf: lesson.lesson_pdf,
-          };
-        });
-
-        lessonCountInput.value = course.Content.length;
-        lessonCount = course.Content.length;
-        currentLesson = 1;
-        updateLessonStep();
-
-        modalOverlay.classList.add("active");
-        showStep(step1);
-      }
-
-      function deleteCourse(courseId) {
-        if (confirm("Are you sure you want to delete this course?")) {
-          let courses = JSON.parse(localStorage.getItem("Courses")) || [];
-          if (courses && typeof courses === "string") {
-            try {
-              const parsedcourses = JSON.parse(courses);
-              console.log(parsedcourses);
-            } catch (error) {
-              console.error("Failed to parse JSON:", error);
-            }
-          } else {
-            console.error("Invalid or undefined JSON courses");
-          }
-          courses = courses.filter((course) => course.ID !== courseId);
-          localStorage.setItem("Courses", JSON.stringify(courses));
-          fetchCourses();
-        }
-      }
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const categories = JSON.parse(localStorage.getItem("categories")) || [];
-
-        const categoryDropdown = document.getElementById("category");
-
-        categoryDropdown.innerHTML =
-          '<option value="" disabled selected>Select a category</option>';
-
-        categories.forEach((category) => {
-          const option = document.createElement("option");
-          option.value = category.name;
-          option.textContent = category.name;
-          categoryDropdown.appendChild(option);
-        });
-      });
-    </script> -->
+    <script type="module" src="../script/fetch-courses.js"></script>
   </body>
 </html>

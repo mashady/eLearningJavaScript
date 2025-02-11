@@ -10,6 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     />
   </head>
+
   <body>
     <div class="page-content">
       <div class="side-bar">
@@ -39,10 +40,8 @@
         <div class="user-menu">
           <div class="dropdown">
             <ul class="dropdown-content">
-              <li>
-                <a href=""
-                  >Log Out <i class="fa-solid fa-right-from-bracket"></i
-                ></a>
+              <li id="logout">
+                Log Out <i class="fa-solid fa-right-from-bracket"></i>
               </li>
             </ul>
           </div>
@@ -54,6 +53,22 @@
           <iframe name="content-frame" src="./pages/students.html"></iframe>
         </div>
       </main>
+      <div id="notification" class="notification">
+        <span id="notification-message"></span>
+      </div>
     </div>
+    <script type="module">
+      import { showNotification, logOut, isLogin } from "../utils/user.js";
+      if (!isLogin()) {
+        window.location.href = "/";
+      }
+      document.getElementById("logout").addEventListener("click", handleLOgout);
+      function handleLOgout() {
+        console.log("u r logged out");
+        logOut();
+        window.location.href = "/";
+      }
+    </script>
+    <script></script>
   </body>
 </html>

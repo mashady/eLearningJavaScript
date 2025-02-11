@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Categories Table</title>
-    <link rel="stylesheet" href="../styles/categories.css">
-    <script type="module" src="../script/firebase-config.js"></script>
-</head>
-<body class=".poppins-thin">
+    <link rel="stylesheet" href="../styles/categories.css" />
+  </head>
+  <body class=".poppins-thin">
     <div class="title"><h1>Categories</h1></div>
-    <div class="container">    
-        <!-- Category Form -->
-        <div class="form-container">
-            <h2>Add New Category</h2>
-            <form id="category-form">
-                <input type="text" id="category-name" placeholder="Enter category name" required>
-                <input type="hidden" id="category-id"> <!-- Hidden input for category ID -->
-                <div class="form-buttons">
-                    <button type="submit">Save Category</button>
-                    <button type="button" id="update-category" style="display:none;">Update Category</button>
-                </div>
-            </form>
-        </div>
+    <div class="container">
+      <div class="form-container">
+        <h2>Add New Category</h2>
+        <form id="category-form">
+          <input
+            type="text"
+            id="category-name"
+            placeholder="Enter category name"
+            required
+          />
+          <input type="hidden" id="category-id" />
+          <div class="form-buttons">
+            <button type="submit">Save Category</button>
+            <button type="button" id="update-category" style="display: none">
+              Update Category
+            </button>
+          </div>
+        </form>
+      </div>
 
-        <!-- Search and Show All Section -->
-        <div class="search-container">
-            <h2>Search Categories</h2>
-            <div class="search-controls">
-                <input type="text" id="search-category" placeholder="Search category by name">
-            </div>
+      <div class="search-container">
+        <h2>Search Categories</h2>
+        <div class="search-controls">
+          <input
+            type="text"
+            id="search-category"
+            placeholder="Search category by name"
+          />
         </div>
+      </div>
 
-        <!-- Categories Table -->
-        <div class="table-container">
-            <h2>Categories List</h2>
-            <table id="categories-table">
-                <thead>
-                    <tr>
-                        <th>Category Name</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="categories-list">
-                </tbody>
-            </table>
-        </div>
+      <div class="table-container">
+        <h2>Categories List</h2>
+        <table id="categories-table">
+          <thead>
+            <tr>
+              <th>Category Name</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="categories-list"></tbody>
+        </table>
+      </div>
     </div>
     <script type="module" src="../script/categories.js"></script>
-</body>
+  </body>
 </html>

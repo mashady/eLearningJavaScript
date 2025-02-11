@@ -244,3 +244,45 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Notification Bar */
+.notification {
+  position: fixed;
+  bottom: -100px; /* Start off-screen */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  opacity: 0;
+  transition: bottom 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  width: 300px;
+  text-align: center;
+}
+
+.notification.show {
+  bottom: 20px; /* Move into view */
+  opacity: 1;
+}
+
+/* Overlay Background */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}

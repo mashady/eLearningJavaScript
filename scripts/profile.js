@@ -38,10 +38,18 @@ function displayUserProfile(username) {
               <img src="${course.Image}" alt="${course.Title}">
               <div class="card-content">
               <h3>${course.Title}</h3>
-              <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+              <p><strong>Instructor:</strong> ${course.Instructor}</p>
               <p>${course.Description}</p>
-              <p><strong>Price:</strong> $${course.Price}</p>
+              <p><strong>Price:</strong> $${course.Price || 0}</p>
               <p><strong>Duration:</strong> ${course.Duration}</p>
+              <p><strong>Your progress:</strong> ${
+                course.progressPercentage
+              }</p>
+              <p><strong>Completed:</strong> ${
+                course.progressPercentage == 100
+                  ? "Completed"
+                  : "Not completed yet"
+              }</p>
             </div>
             </div>
           `;
@@ -62,9 +70,9 @@ function displayUserProfile(username) {
               <img src="${course.Image}" alt="${course.Title}">
               <div class="card-content">
               <h3>${course.Title}</h3>
-              <p><strong>Instructor:</strong> ${course["Instructor Name"]}</p>
+              <p><strong>Instructor:</strong> ${course.Instructor}</p>
               <p>${course.Description}</p>
-              <p><strong>Price:</strong> $${course.Price}</p>
+              <p><strong>Price:</strong> $${course.Price || 0}</p>
               <p><strong>Duration:</strong> ${course.Duration}</p>
             </div>
             </div>

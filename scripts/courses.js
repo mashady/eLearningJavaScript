@@ -2,17 +2,6 @@ import coursesData from "../utils/fakeCourses.js";
 
 import { isLogin, showNotification, updateUI, logOut } from "../utils/user.js";
 
-/*
-if (localStorage.getItem("Courses") == "undefined") {
-  console.log("courses exist but undifined so we cannot use json parse ");
-  console.log(localStorage.getItem("Courses"));
-} else {
-  console.log(localStorage.getItem("Courses"));
-  var localCourses = JSON.parse(localStorage.getItem("Courses")) || [];
-  console.log(localCourses);
-  console.log("courses not exist");
-}*/
-
 var localcourses = JSON.parse(localStorage.getItem("Courses")) || [];
 console.log(localcourses);
 updateUI();
@@ -79,8 +68,11 @@ function courses(courses) {
           !userCourses.some((userCourse) => userCourse.ID === course.ID)
       )
     : courses;
-  if (filteredCourses.length == 0)
+  if (filteredCourses.length == 0) {
     document.getElementById("noAvail").style.display = "inline";
+  } else {
+    document.getElementById("noAvail").style.display = "none";
+  }
 
   filteredCourses.forEach((course) => {
     const courseDiv = document.createElement("div");
@@ -88,7 +80,10 @@ function courses(courses) {
 
     courseDiv.innerHTML = `
       <div class="card">
-          <img src="${course.Image}" alt="${course.Title}">
+      <a href="/courseDetails.html?id=${course.ID}">
+      <img src="${course.Image}" alt="${course.Title}">
+      </a>
+          
 
         <h3>${course.Title}</h3>
         <p><strong>Instructor:</strong> ${course.Instructor}</p>
@@ -225,7 +220,6 @@ function enroll(courseID) {
     let pendingCourses =
       JSON.parse(localStorage.getItem("pendingCourses")) || [];
 
-    // Check if the course is already in the pending list for the same user
     const isAlreadyPending = pendingCourses.some(
       (entry) => entry.username === username && entry.course.ID === courseID
     );
@@ -238,7 +232,6 @@ function enroll(courseID) {
       return;
     }
 
-    // Add course to pending list if not already there
     pendingCourses.push({ username, course });
     localStorage.setItem("pendingCourses", JSON.stringify(pendingCourses));
     showNotification("Your enrollment request is pending approval.", 2000);
@@ -343,3 +336,23 @@ function addToWish(courseID) {
 
   courses(localcourses);
 }
+
+function renderCategories() {
+  const selectElement = document.getElementById("coursesSelection");
+
+  let categories = JSON.parse(localStorage.getItem("categories")) || [];
+
+  selectElement.innerHTML = `
+      <option selected disabled>Choose a category</option>
+      <option value="all">All</option>
+  `;
+
+  categories.forEach((category) => {
+    let option = document.createElement("option");
+    option.value = category.name;
+    option.textContent = category.name;
+    selectElement.appendChild(option);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", renderCategories);
