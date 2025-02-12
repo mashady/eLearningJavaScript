@@ -30,6 +30,101 @@ let lessonCount = 0;
 let currentLesson = 1;
 const lessons = [];
 
+function validateForm() {
+  let title = document.getElementById("title").value.trim();
+  let image = document.getElementById("image").value.trim();
+  let category = document.getElementById("category").value.trim();
+  let instructor = document.getElementById("instructor").value.trim();
+  let price = document.getElementById("price").value.trim();
+  let duration = document.getElementById("duration").value.trim();
+  let description = document.getElementById("description").value.trim();
+
+  let nameRegex = /^[a-zA-Z\s]+$/;
+  let urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/;
+  let numberRegex = /^[0-9]+$/;
+
+  /*document
+    .querySelectorAll(".error-message")
+    .forEach((el) => (el.textContent = ""));*/
+
+  let isValid = true;
+
+  if (title === "") {
+    document.getElementById("title-error").style.display = "block";
+
+    document.getElementById("title-error").textContent = "Title is required";
+    isValid = false;
+  } else {
+    document.getElementById("title-error").style.display = "none";
+  }
+
+  if (image === "" || !urlRegex.test(image)) {
+    document.getElementById("image-error").style.display = "block";
+
+    document.getElementById("image-error").textContent =
+      "Valid image URL is required";
+    isValid = false;
+  } else {
+    document.getElementById("image-error").style.display = "none";
+  }
+
+  if (category === "") {
+    document.getElementById("category-error").style.display = "block";
+
+    document.getElementById("category-error").textContent =
+      "Category is required";
+    isValid = false;
+  } else {
+    document.getElementById("category-error").style.display = "none";
+  }
+
+  if (instructor === "" || !nameRegex.test(instructor)) {
+    document.getElementById("instructor-error").style.display = "block";
+
+    document.getElementById("instructor-error").textContent =
+      "Instructor must contain only letters";
+    isValid = false;
+  } else {
+    document.getElementById("instructor-error").style.display = "none";
+  }
+
+  if (price !== "" && !numberRegex.test(price)) {
+    document.getElementById("price-error").style.display = "block";
+
+    document.getElementById("price-error").textContent =
+      "Price must be a number";
+    isValid = false;
+  } else {
+    document.getElementById("price-error").style.display = "none";
+  }
+
+  if (duration === "" || !numberRegex.test(duration)) {
+    document.getElementById("duration-error").style.display = "block";
+
+    document.getElementById("duration-error").textContent =
+      "Duration must be a number";
+    showNotification("Duration must be a number", 1000);
+    isValid = false;
+  } else {
+    document.getElementById("duration-error").style.display = "none";
+  }
+
+  if (description === "") {
+    document.getElementById("description-error").style.display = "block";
+    document.getElementById("description-error").textContent =
+      "Description is required";
+    isValid = false;
+  } else {
+    document.getElementById("description-error").style.display = "none";
+  }
+
+  if (!isValid) {
+    showNotification("all field is required or you have invalid values", 1000);
+    return false;
+  }
+  return true;
+}
+
 const openModalButton = document.getElementById("openModal");
 const closeModalButton = document.getElementById("closeModal");
 const modalOverlay = document.getElementById("modalOverlay");
@@ -63,6 +158,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
      */
 });
+/**
+
+
+
+*/
 document.getElementById("search-input").addEventListener("blur", () => {
   console.log("fethced");
   fetchCourses(document.getElementById("search-input").value.trim());
@@ -78,14 +178,9 @@ closeModalButton.addEventListener("click", () => {
 });
 
 nextStep1Button.addEventListener("click", () => {
-  // add the validations here
-  let title = document.getElementById("title");
-  let image = document.getElementById("image");
-  let description = document.getElementById("description");
-  let price = document.getElementById("price");
-  let duration = document.getElementById("duration");
-  let category = document.getElementById("category");
-  if (
+  /**
+   * 
+if (
     !title.value ||
     !description.value ||
     !duration.value ||
@@ -96,6 +191,15 @@ nextStep1Button.addEventListener("click", () => {
 
     return;
   }
+
+  let title = document.getElementById("title");
+  let image = document.getElementById("image");
+  let description = document.getElementById("description");
+  let price = document.getElementById("price");
+  let duration = document.getElementById("duration");
+  let category = document.getElementById("category");
+   */
+
   /**
   if (!isValidURL(image.value)) {
     alert("Invalid URL!");
@@ -111,17 +215,23 @@ nextStep1Button.addEventListener("click", () => {
     alert("Invalid price!");
     return;
   }*/
-  if (
+
+  /**
+    if (
     duration.value <= 0 ||
     isNaN(duration.value) ||
     duration.value.includes(".")
   ) {
-    showNotification("Invalid duration!", 2000);
+    showNotification("Invalid duration!", 1000);
 
     return;
   }
+    
+    */
+  let valid = validateForm();
+
+  if (valid) showStep(step2);
   console.log("step 1");
-  showStep(step2);
 });
 prevStep2Button.addEventListener("click", () => showStep(step1));
 nextStep2Button.addEventListener("click", () => {
@@ -131,6 +241,8 @@ nextStep2Button.addEventListener("click", () => {
     currentLesson = 1;
     updateLessonStep();
     showStep(lessonSteps);
+  } else {
+    showNotification("Please enter a valid number of lessons", 1000);
   }
 });
 prevLessonStepButton.addEventListener("click", () => {
@@ -162,32 +274,75 @@ function checkNum(obj) {
   const regex = /^\d+(\.\d+)?$/;
   return !regex.test(obj.value);
 }
+
 nextLessonStepButton.addEventListener("click", () => {
-  // add the validations here
   let lessonTitle = document.getElementById("lessonTitle");
   let lessonDuration = document.getElementById("lessonDuration");
   let lessonVideo = document.getElementById("lessonVideo");
   let lessonPdf = document.getElementById("lessonPdf");
+
+  document.querySelectorAll(".error-message").forEach((el) => {
+    el.style.display = "none";
+    el.textContent = "";
+  });
+
   if (
     !lessonTitle.value ||
     !lessonDuration.value ||
-    !duration.value ||
     !lessonVideo.value ||
     !lessonPdf.value
   ) {
-    //showNotification("All fields are required!");
     showNotification("All fields are required!", 2000);
-
     return;
   }
-  /**
-  if (!isValidURL(lessonVideo.value) || !isValidURL(lessonPdf.value)) {
-    alert("Invalid URL");
+
+  let isValid = true;
+
+  let lessonTitleError = document.getElementById("lessonTitle-error");
+  if (!lessonTitle.value.trim()) {
+    lessonTitleError.style.display = "block";
+    lessonTitleError.textContent = "Lesson title is required";
+    isValid = false;
+  } else {
+    lessonTitleError.style.display = "none";
+  }
+
+  let lessonDurationError = document.getElementById("lessonDuration-error");
+  if (!lessonDuration.value.trim() || isNaN(lessonDuration.value.trim())) {
+    lessonDurationError.style.display = "block";
+    lessonDurationError.textContent = "Duration must be a number";
+    isValid = false;
+  } else {
+    lessonDurationError.style.display = "none";
+  }
+
+  // Validate Video URL
+  let lessonVideoError = document.getElementById("lessonVideo-error");
+  let urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/;
+  //if (image === "" || !urlRegex.test(image)) {
+  //
+  if (!lessonVideo.value.trim() || !urlRegex.test(lessonVideo.value.trim())) {
+    lessonVideoError.style.display = "block";
+    lessonVideoError.textContent = "Valid video URL is required";
+    isValid = false;
+  } else {
+    lessonVideoError.style.display = "none";
+  }
+
+  let lessonPdfError = document.getElementById("lessonPdf-error");
+  if (!lessonPdf.value.trim() || !urlRegex.test(lessonPdf.value.trim())) {
+    lessonPdfError.style.display = "block";
+    lessonPdfError.textContent = "Valid PDF URL is required";
+    isValid = false;
+  } else {
+    lessonPdfError.style.display = "none";
+  }
+
+  if (!isValid) {
     return;
   }
-  */
 
-  console.log("validate");
+  console.log("Validated successfully!");
   saveCurrentLesson();
   if (currentLesson < lessonCount) {
     currentLesson++;
@@ -196,6 +351,8 @@ nextLessonStepButton.addEventListener("click", () => {
     showStep(finalStep);
   }
 });
+
+/**
 lessonTitle.addEventListener("blur", () => {
   const titleInput = document.getElementById("lessonTitle");
   if (titleInput.value.trim() === "") {
@@ -212,6 +369,9 @@ lessonTitle.addEventListener("blur", () => {
     document.getElementById("lessonTitle-error").innerHTML = "";
   }
 });
+
+*/
+
 prevFinalStepButton.addEventListener("click", () => {
   currentLesson = lessonCount;
   updateLessonStep();
@@ -236,7 +396,7 @@ function saveCurrentLesson() {
   };
   lessons[currentLesson - 1] = lesson;
 }
-
+/**
 document.getElementById("title").addEventListener("blur", () => {
   const titleInput = document.getElementById("title"); // Get the input element
   if (titleInput.value.trim() === "") {
@@ -279,6 +439,9 @@ document.getElementById("description").addEventListener("blur", () => {
     document.getElementById("description-error").innerHTML = "";
   }
 });
+
+*/
+
 /*
 document.getElementById("price").addEventListener("blur", () => {
   const priceInput = document.getElementById("price");
@@ -294,7 +457,7 @@ document.getElementById("price").addEventListener("blur", () => {
   }
 });
 */
-
+/**
 document.getElementById("instructor").addEventListener("blur", () => {
   const instructorInput = document.getElementById("instructor");
   if (instructorInput.value.trim() === "") {
@@ -322,6 +485,9 @@ document.getElementById("duration").addEventListener("blur", () => {
     document.getElementById("duration-error").innerHTML = "";
   }
 });
+
+*/
+
 /*
 document.getElementById("lessonCount").addEventListener("blur", () => {
   const lessonCountInput = document.getElementById("lessonCount");
@@ -405,13 +571,13 @@ multiStepForm.addEventListener("submit", function (event) {
     document.getElementById("category-span").value = "";
   }
 
-  const title = document.getElementById("title").value;
-  const image = document.getElementById("image").value;
-  const category = document.getElementById("category").value;
-  const instructor = document.getElementById("instructor").value;
-  const description = document.getElementById("description").value;
+  const title = document.getElementById("title").value.trim();
+  const image = document.getElementById("image").value.trim();
+  const category = document.getElementById("category").value.trim();
+  const instructor = document.getElementById("instructor").value.trim();
+  const description = document.getElementById("description").value.trim();
   const price = parseFloat(document.getElementById("price").value) || null;
-  const duration = document.getElementById("duration").value;
+  const duration = document.getElementById("duration").value.trim();
   /*let completedLessons = [];
   let progressPercentage = 0;
   let feedback = [];
@@ -597,6 +763,54 @@ function editCourse(courseId) {
 }
 
 function deleteCourse(courseId) {
+  if (!confirm("Are you sure you want to delete this course?")) return;
+
+  let courses = JSON.parse(localStorage.getItem("Courses")) || [];
+
+  let courseToDelete = courses.find((course) => course.ID === courseId);
+  if (!courseToDelete) {
+    showNotification("Course not found!");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  let isPaidCourse = false;
+
+  users = users.map((user) => {
+    let userHasCourse = user.courses.some((course) => course.ID === courseId);
+
+    if (userHasCourse) {
+      let paidCourse = user.courses.find(
+        (course) => course.ID === courseId && course.Price != null
+      );
+
+      if (paidCourse) {
+        isPaidCourse = true;
+        return user;
+      }
+
+      user.courses = user.courses.filter((course) => course.ID !== courseId);
+    }
+    return user;
+  });
+
+  if (!isPaidCourse) {
+    courses = courses.filter((course) => course.ID !== courseId);
+    localStorage.setItem("Courses", JSON.stringify(courses));
+  } else {
+    showNotification(
+      "This course has been purchased by a user and cannot be deleted."
+    );
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  fetchCourses();
+}
+
+/*
+function deleteCourse(courseId) {
   if (confirm("Are you sure you want to delete this course?")) {
     let courses = JSON.parse(localStorage.getItem("Courses")) || [];
     if (courses && typeof courses === "string") {
@@ -613,7 +827,7 @@ function deleteCourse(courseId) {
     localStorage.setItem("Courses", JSON.stringify(courses));
     fetchCourses();
   }
-}
+}*/
 
 document.addEventListener("DOMContentLoaded", function () {
   const categories = JSON.parse(localStorage.getItem("categories")) || [];
