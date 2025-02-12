@@ -75,10 +75,17 @@
       }
 
       .form-step.active {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
         animation: slideIn 0.3s ease-in-out;
       }
 
       .form-step {
+        opacity: 1;
+        visibility: visible;
+        position: relative;
         animation: slideOut 0.3s ease-in-out;
       }
       input,

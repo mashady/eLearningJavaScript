@@ -1,4 +1,7 @@
 /* General Styles */
+@import url(./utils/global.css);
+@import url(./utils/fonts.css);
+
 body {
   font-family: "Poppins", sans-serif;
   background-color: #f8f9fa;
@@ -9,15 +12,17 @@ body {
 
 .title {
   text-align: center;
-  margin: 20px 0;
 }
 
 .title h1 {
-  font-size: 2.5rem;
-  color: #2c3e50;
+  font-family: "Poppins", serif;
   font-weight: 600;
+  font-style: normal;
+  font-size: 38px;
+  color: var(--darkblue);
+  border-bottom: 2px solid var(--lightblue2);
+  display: inline-block;
 }
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -69,21 +74,21 @@ body {
 }
 
 .form-buttons button[type="submit"] {
-  background-color: #3498db;
+  background-color: var(--darkblue);
   color: #fff;
 }
 
 .form-buttons button[type="submit"]:hover {
-  background-color: #2980b9;
+  background-color: var(--babyblue);
 }
 
 #update-category {
-  background-color: #2ecc71;
+  background-color: #46b0ca;
   color: #fff;
 }
 
 #update-category:hover {
-  background-color: #27ae60;
+  background-color: #3a98b2;
 }
 
 /* Search Container */
@@ -119,7 +124,7 @@ body {
 .table-container {
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.301);
   padding: 20px;
 }
 
@@ -142,7 +147,7 @@ body {
 }
 
 #categories-table th {
-  background-color: #3498db;
+  background-color: var(--darkblue);
   color: #fff;
   font-weight: 600;
 }
@@ -160,21 +165,21 @@ body {
   transition: background-color 0.3s ease;
 }
 
-#categories-table button.edit {
-  background-color: #f1c40f;
+#categories-table .edit-btn {
+  background-color: rgb(53, 184, 60);
   color: #fff;
 }
 
-#categories-table button.edit:hover {
-  background-color: #f39c12;
+#categories-table .edit-btn:hover {
+  background-color: rgb(34, 138, 39);
 }
 
-#categories-table button.delete {
+#categories-table .delete-btn {
   background-color: #e74c3c;
   color: #fff;
 }
 
-#categories-table button.delete:hover {
+#categories-table .delete-btn:hover {
   background-color: #c0392b;
 }
 

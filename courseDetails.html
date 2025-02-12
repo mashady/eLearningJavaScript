@@ -17,7 +17,7 @@
       body {
         font-family: "Poppins", sans-serif;
         background-color: #f9f9f9;
-        color: #333;
+        color: var(--darkblue);
         margin: 0;
       }
       .course-image {
@@ -26,6 +26,7 @@
       }
       .details {
         margin-top: 50px;
+        margin-bottom: 60px;
       }
       .details-content {
         display: flex;
@@ -44,14 +45,19 @@
       .course-image img {
         width: 100%;
         border-radius: 8px;
+        transition: transform 0.5s;
       }
-
+      .course-image img:hover
+      {
+        transform: scale(1.03);
+      }
       .course-info {
         flex: 1;
+        color: #222;
       }
 
       strong {
-        color: #222;
+        color: var(--darkblue);
       }
 
       .button-container {
@@ -80,7 +86,7 @@
         font-style: normal;
         font-size: 38px;
         margin-top: 30px;
-        color: var(--black);
+        color: var(--darkblue); 
         border-bottom: 2px solid var(--lightblue2);
         display: inline-block;
         margin-bottom: 60px;
@@ -152,25 +158,27 @@
         <h1 id="courseTitle">Course Details</h1>
       </div>
       <div class="details">
-        <div class="details-content">
-          <div class="course-image">
-            <img id="courseImage" src="" alt="Course Image" />
-          </div>
-          <div class="course-info">
-            <p id="courseDescription"></p>
-            <p><strong>Category:</strong> <span id="courseCategory"></span></p>
-            <p>
-              <strong>Instructor:</strong> <span id="courseInstructor"></span>
-            </p>
-            <p><strong>Price:</strong> <span id="coursePrice"></span></p>
-            <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
-            <!--
-            <div class="button-container">
-              <button id="enrollButton">Enroll Now</button>
+        <div class="container">
+          <div class="details-content">
+            <div class="course-image">
+              <img id="courseImage" src="" alt="Course Image" />
             </div>
-            -->
+            <div class="course-info">
+              <p> <strong>Description:</strong> <span id="courseDescription"></span></p>
+              <p><strong>Category:</strong> <span id="courseCategory"></span></p>
+              <p>
+                <strong>Instructor:</strong> <span id="courseInstructor"></span>
+              </p>
+              <p><strong>Price:</strong> <span id="coursePrice"></span></p>
+              <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
+              <!--
+              <div class="button-container">
+                <button id="enrollButton">Enroll Now</button>
+              </div>
+              -->
+            </div>
           </div>
-        </div>
+          </div>
       </div>
     </div>
     <div class="feedback-section">
@@ -204,7 +212,7 @@
       if (!isLogin()) {
         window.location.href = "/login.html";
       }
-
+      updateUI();
       document.getElementById("logout").addEventListener("click", () => {
         logOut();
         updateUI();

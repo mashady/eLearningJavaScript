@@ -39,7 +39,6 @@ function displayUserProfile(username) {
               <div class="card-content">
               <h3>${course.Title}</h3>
               <p><strong>Instructor:</strong> ${course.Instructor}</p>
-              <p>${course.Description}</p>
               <p><strong>Price:</strong> $${course.Price || 0}</p>
               <p><strong>Duration:</strong> ${course.Duration}</p>
               <p><strong>Your progress:</strong> ${
