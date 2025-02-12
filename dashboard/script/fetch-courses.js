@@ -741,6 +741,7 @@ function editCourse(courseId) {
   document.getElementById("image").value = course.Image;
   document.getElementById("category").value = course.Category;
   document.getElementById("description").value = course.Description;
+  document.getElementById("instructor").value = course.Instructor;
   document.getElementById("price").value = course.Price;
   document.getElementById("duration").value = course.Duration;
   lessons.length = 0;
@@ -760,6 +761,29 @@ function editCourse(courseId) {
 
   modalOverlay.classList.add("active");
   showStep(step1);
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  users = users.map((user) => {
+    user.courses = user.courses.map((userCourse) => {
+      if (userCourse.ID === courseId) {
+        return {
+          ...userCourse,
+          Title: course.Title,
+          Image: course.Image,
+          Category: course.Category,
+          Description: course.Description,
+          Instructor: course.Instructor,
+          Price: course.Price,
+          Duration: course.Duration,
+          Content: course.Content,
+        };
+      }
+      return userCourse;
+    });
+    return user;
+  });
+
+  localStorage.setItem("users", JSON.stringify(users));
 }
 
 function deleteCourse(courseId) {
