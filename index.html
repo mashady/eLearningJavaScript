@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>E-Learning</title>
     <link rel="stylesheet" href="./styles/home/home.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -199,7 +199,7 @@
       console.log(isLogin().username);
       
       console.log(getUserDataByUsername(isLogin().username).isAdmin)
-      if(getUserDataByUsername(isLogin().username).isAdmin == false) // edit this line
+      if(getUserDataByUsername(isLogin().username).isAdmin == true) // edit this line
         document.getElementById('dashboard').style.display = "inline"
     </script>
   </body>

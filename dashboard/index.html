@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Learning</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="./styles/Dashboard.css" />
     <link
       rel="stylesheet"
@@ -61,8 +61,43 @@
       </div>
     </div>
     <script type="module">
-      import { showNotification, logOut, isLogin } from "../utils/user.js";
+      // import { showNotification, logOut, isLogin } from "../utils/user.js";
+      // if (!isLogin()) {
+      //   window.location.href = "/";
+      // }
+      // document.getElementById("logout").addEventListener("click", handleLOgout);
+      // function handleLOgout() {
+      //   console.log("u r logged out");
+      //   logOut();
+      //   window.location.href = "/";
+      // }
+
+
+      // import { isLogin, getUserDataByUsername } from "../utils/user.js";
+      // updateUI();
+     
+      
+      // console.log(getUserDataByUsername(isLogin().username).isAdmin)
+      // if(getUserDataByUsername(isLogin().username).isAdmin == true){
+
+      //   window.location.href = "/";
+      // } // edit this line
+        
+      import {
+        showNotification,
+        logOut,
+        isLogin,
+        getUserDataByUsername,
+      } from "../utils/user.js";
       if (!isLogin()) {
+        window.location.href = "/";
+      }
+      console.log(isLogin().username);
+      console.log(getUserDataByUsername(isLogin().username).isAdmin);
+      console.log(isLogin().username);
+
+      console.log(getUserDataByUsername(isLogin().username).isAdmin);
+      if (getUserDataByUsername(isLogin().username).isAdmin == false) {
         window.location.href = "/";
       }
       document.getElementById("logout").addEventListener("click", handleLOgout);
