@@ -1,28 +1,3 @@
-const students = [
-  {
-    name: "John Doe",
-    courses: [
-      { name: "Mathematics", progress: 60 },
-      { name: "Science", progress: 45 },
-      { name: "History", progress: 80 },
-    ],
-  },
-  {
-    name: "Jane Smith",
-    courses: [
-      { name: "Mathematics", progress: 75 },
-      { name: "Literature", progress: 90 },
-    ],
-  },
-  {
-    name: "Alice Johnson",
-    courses: [
-      { name: "Physics", progress: 50 },
-      { name: "Chemistry", progress: 70 },
-    ],
-  },
-];
-
 const dashboardContainer = document.querySelector(".dashboard-container");
 const searchBar = document.getElementById("search-bar");
 

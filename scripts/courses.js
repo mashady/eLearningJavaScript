@@ -2,6 +2,16 @@ import coursesData from "../utils/fakeCourses.js";
 
 import { isLogin, showNotification, updateUI, logOut } from "../utils/user.js";
 
+const storedCategories = JSON.parse(localStorage.getItem("categories")) || [];
+const selectElement = document.getElementById("coursesSelection");
+
+storedCategories.forEach((category) => {
+  const option = document.createElement("option");
+  option.value = category.name;
+  option.textContent = category.name;
+  selectElement.appendChild(option);
+});
+
 /*
 if (localStorage.getItem("Courses") == "undefined") {
   console.log("courses exist but undifined so we cannot use json parse ");

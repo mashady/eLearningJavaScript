@@ -165,6 +165,8 @@ document.getElementById("registerForm").addEventListener("submit", (e) => {
     isAdmin: false,
     courses: [],
     wishlist: [],
+    completedLessons: [],
+    progressPercentage: 0,
   };
 
   users.push(newUser);
