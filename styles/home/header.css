@@ -1,7 +1,9 @@
 header {
   background-color: var(--darkblue);
-  height: 70vh;
+  height: 92vh;
+  
 }
+
 header .container {
   display: flex;
   gap: 30px;
@@ -10,29 +12,74 @@ header .container {
   align-items: center;
   height: 100%;
 }
-header .container div {
-  padding: 0 30px;
+header .container .headerTypo
+{
+  padding: 0 20px;
 }
 header .container .headerTypo h1 {
   font-size: 36px;
+  margin-bottom: 15px;
+}
+.letter
+{
+  color: #46b0ca;
+  font-size: 40px;
 }
 header .container .headerTypo p {
   font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #ffffff9d;
 }
-header .container .headerTypo button {
-  font-size: 16px;
-  width: 185px;
-  height: 54px;
-  background-color: var(--yellow);
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  margin-top: 30px;
-  font-family: "Poppins", serif;
-  font-weight: 500;
-  font-style: normal;
+
+.btn {
+  display: inline-block;
+  padding: 0;
 }
-header .container .headerTypo button a {
+
+.explore-btn {
+  color: white;
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #46b0ca;
+  border-radius: 8px;
   text-decoration: none;
-  color: var(--darkblue);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+.explore-btn:hover
+{
+  transform: scale(1.05);
+  background-color: #3a98b2;
+}
+  
+.explore-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: left 0.5s ease-in-out;
+}
+
+.explore-btn:hover::before {
+  left: 0;
+}
+
+header .container .illustartion img {
+  animation: moveUpDown 2s infinite ease-in-out;
+}
+@keyframes moveUpDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-30px);
+  }
 }

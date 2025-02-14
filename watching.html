@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/home/home.css" />
+    <link rel="stylesheet" href="./dashboard/styles/Dashboard.css" />
+    <link rel="stylesheet" href="./styles/utils/footer.css" />
+    <link rel="stylesheet" href="./styles/utils/notifi.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      .side-bar {
+        height: 86vh;
+        background-color: var(--darkblue);
+        color: white;
+        position: sticky;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        top: 0;
+        flex: 0.05;
+        transition: flex 0.3s ease-in-out;
+        overflow: hidden;
+        border-radius: 0 10px 10px 0;
+      }
+      #lessonLinks {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        left: 10px;
+        gap: 10px;
+        margin-top: 15px;
+        padding: 10px;
+      }
+      #lessonLinks {
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        pointer-events: none;
+      }
+
+      .side-bar:hover #lessonLinks {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      #lessonLinks a {
+        display: block;
+        color: var(--darkText);
+        border-bottom: #00ccff77 1px solid;
+        padding: 10px;
+        text-decoration: none;
+        margin-top: 10px;
+        border-radius: 5px;
+        transition: background 0.3s ease-in-out;
+      }
+
+      #lessonLinks a:hover {
+        background-color: #5080af70;
+      }
+
+      .side-bar:hover {
+        flex: 1.1;
+      }
+
+      .logo-txt {
+        width: 100%;
+        padding: 15px 10px;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+      }
+
+      .side-bar:hover .logo-txt {
+        opacity: 1;
+      }
+
+      .side-bar:hover .progress-container {
+        display: block;
+      }
+
+      .progress-container {
+        width: 100%;
+        height: 20px;
+        background-color: #e0e0e0;
+        border-radius: 25px;
+        margin-top: 20px;
+        position: relative;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+
+      .progress-bar {
+        height: 100%;
+        background-color: #4caf50;
+        width: 0%;
+        border-radius: 25px;
+        transition: width 0.3s ease-in-out;
+      }
+
+      #progress-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-weight: bold;
+        font-size: 14px;
+      }
+      .content {
+        padding: 25px 20px;
+        flex: 4;
+        text-align: center;
+        height: 43rem;
+      }
+
+      .courseTitle {
+        font-size: 28px;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+      .page-content {
+        background-color: var(--gray);
+        margin-bottom: 50px;
+      }
+      .lessonTitle {
+        font-size: 22px;
+        color: #34495e;
+        margin-bottom: 20px;
+      }
+      .completed-lesson i {
+        margin-left: 5px;
+      }
+      .video-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      iframe {
+        width: 80%;
+        max-width: 900px;
+        height: 500px;
+        border-radius: 10px;
+        border: 5px solid #2c3e50;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 30px;
+      }
+
+      button {
+        width: 140px;
+        padding: 12px;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+      }
+
+      #prevBtn {
+        background-color: var(--lightblue2);
+        color: var(--black);
+      }
+
+      #nextBtn {
+        background-color: var(--lightblue2);
+        color: var(--black);
+      }
+
+      button:disabled {
+        background: #bdc3c7 !important;
+      }
+
+      .btn {
+        position: fixed;
+        right: 20px;
+        background: linear-gradient(45deg, #007bff, #0056b3);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+      }
+      .btn:hover {
+        transform: scale(1.1);
+      }
+
+      .quiz-btn {
+        bottom: 80px;
+        background: linear-gradient(45deg, #28a745, #218838);
+      }
+
+      button:hover:not(:disabled) {
+        transform: scale(1.05);
+      }
+      .feedback-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(45deg, #ff416c, #ff4b2b);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 25px;
+        cursor: pointer;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        transition: 0.3s ease-in-out;
+      }
+
+      .feedback-btn:hover {
+        background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        transform: scale(1.1);
+      }
+
+      .feedback-btn:active {
+        transform: scale(0.95);
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          text-align: center;
+        }
+
+        .content {
+          margin-left: 0;
+          padding: 20px;
+        }
+
+        iframe {
+          width: 100%;
+        }
+      }
+      .sidebar-toggle {
+        position: absolute;
+        top: 3%;
+        right: 0px;
+        transform: translateY(-50%);
+        background-color: var(--darkblue);
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .side-bar:hover .sidebar-toggle {
+        opacity: 0;
+      }
+
+      .arrow-icon {
+        font-size: 25px;
+        display: block;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .side-bar:hover .arrow-icon {
+        transform: rotate(180deg);
+      }
+      #feedbackForm {
+        width: 90%;
+        margin: 10% auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #feedbackForm textarea {
+        width: 95%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        resize: none;
+        border: 1px solid #ccc;
+      }
+
+      #feedbackForm button {
+        background-color: #46b0ca;
+        border: none;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        width: 200px;
+        font-weight: 600;
+      }
+
+      #feedbackForm button:hover {
+        transform: scale(1.05);
+        background-color: #3a98b2;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo poppins-medium">
+        <a href="/">El madrasaa</a>
+      </div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
+      </ul>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <div id="profile" style="display: none">
+          <a id="profileLink" href="./profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none">
+          <a href="">logout</a>
+        </div>
+        <div class="loginBtn" id="login">
+          <a href="./login.html">Login</a>
+        </div>
+      </div>
+    </nav>
+    <div class="page-content" id="pgContent">
+      
+      <div class="side-bar">
+        <div class="logo-txt">Course Lessons</div>
+        <div class="sidebar-toggle">
+          <i class="arrow-icon fa-solid fa-bars"></i>
+        </div>
+        <div class="page-links">
+          <ul class="links" id="lessonLinks"></ul>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress-bar"></div>
+          <span id="progress-text">0%</span>
+        </div>
+      </div>
+
+      <div class="content" id="content">
+        <h2 id="courseTitle" class="courseTitle">Loading...</h2>
+        <p id="lessonTitle" class="lessonTitle">Lesson</p>
+
+        <div class="video-container">
+          <iframe id="lessonIframe" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="nav-buttons">
+          <button id="prevBtn">Prev</button>
+          <button id="nextBtn">Next</button>
+        </div>
+      </div>
+    </div>
+    <p style="margin-top: 50px; margin-bottom: 50px; text-align: center">
+      📄
+      <a id="lePDF" href="" target="_blank">Download Video Material (PDF)</a>
+    </p>
+    <button class="btn quiz-btn" id="quiz" style="margin-bottom: 10px">
+      📝 Take a Quiz
+    </button>
+    <button class="feedback-btn" id="feedBtn">💬 Give Feedback</button>
+    <div id="feedbackForm" style="display: none">
+      <h3>Feedback</h3>
+      <form id="feedbackFormContent">
+        <label for="feedback">Please share your feedback:</label><br />
+        <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea
+        ><br />
+        <button onclick="submitFeedback()">Submit Feedback</button>
+      </form>
+    </div>
+    <footer>
+      <div class="footer-top">
+        <div class="container">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 elmadrasaa. All rights reserved.</p>
+      </div>
+    </footer>
+    <script type="module">
+      import {
+        isLogin,
+        getUserDataByUsername,
+        updateUserData,
+        logOut,
+        updateUI,
+      } from "./utils/user.js";
+      updateUI();
+
+      document.getElementById("logout").addEventListener("click", () => {
+        logOut();
+        updateUI();
+        window.location.href = "/";
+      });
+
+      document.getElementById("feedBtn").addEventListener("click", openFeed);
+      function openFeed() {
+        document.getElementById("feedbackForm").style.display = "block";
+        document.getElementById("pgContent").style.display = "none";
+        document.getElementById("lePDF").style.display = "none";
+        console.log("feed");
+      }
+      let user = isLogin();
+      let userData = getUserDataByUsername(user.username);
+      document.getElementById("quiz").addEventListener("click", () => {
+        startQuiz();
+      });
+      function startQuiz() {
+        console.log("quiz");
+        window.location.href = "/quiz.html";
+      }
+      let fixedURL = window.location.search.replace(/\?(?=[^?]*$)/, "&");
+      const urlParams = new URLSearchParams(fixedURL);
+      let courseID = urlParams.get("courseID");
+      let lessonID = parseInt(urlParams.get("lessonID"), 10) || 1;
+
+      console.log(userData.courses[0]);
+      let allCourses = JSON.parse(localStorage.getItem("Courses"));
+      let ccoursex = allCourses.find((c) => String(c.ID) === String(courseID));
+      console.log(ccoursex);
+      console.log(allCourses.find((c) => String(c.ID) === String(courseID)));
+
+      if (!Array.isArray(userData.courses)) {
+        console.error("userData.courses is not an array");
+        userData.courses = [];
+      }
+      console.log(userData.courses);
+      const selectedCourse = userData.courses.find(
+        (course) => course.ID === courseID
+      );
+
+      let found = false;
+      userData.courses.forEach((course) => {
+        if (course.ID === courseID) {
+          found = true;
+        }
+        console.log(course.ID);
+        console.log(courseID);
+        console.log(found);
+      });
+
+      if (!ccoursex) {
+        console.log("Course not found!");
+      } else {
+        console.log(ccoursex);
+        console.log(selectedCourse);
+        document.getElementById("courseTitle").textContent = ccoursex.Title;
+
+        const lessonLinks = document.getElementById("lessonLinks");
+        const lessonIframe = document.getElementById("lessonIframe");
+        const lessonTitle = document.getElementById("lessonTitle");
+        const prevButton = document.getElementById("prevBtn");
+        const nextButton = document.getElementById("nextBtn");
+
+        const totalLessons = ccoursex.Content.length;
+
+        if (!ccoursex.completedLessons) {
+          ccoursex.completedLessons = 0;
+        }
+
+        function updateProgress() {
+          const progressPercentage = Math.round(
+            (ccoursex.completedLessons / totalLessons) * 100
+          );
+          ccoursex.progressPercentage = progressPercentage;
+          updateProgressBar(progressPercentage);
+        }
+
+        function updateLessonContent() {
+          const currentLesson = ccoursex.Content.find(
+            (lesson) => lesson.lesson_id === lessonID
+          );
+
+          if (!currentLesson) {
+            console.log("Lesson not found!");
+            window.location.href = `/watching.html?courseID=${courseID}&lessonID=1`;
+            return;
+          }
+          document.getElementById("lePDF").href = currentLesson.lesson_pdf;
+
+          lessonTitle.textContent = `Lesson ${lessonID}: ${currentLesson.lesson_title}`;
+          lessonIframe.src = currentLesson.lesson_video.replace(
+            "watch?v=",
+            "embed/"
+          );
+
+          prevButton.disabled = lessonID <= 1;
+          nextButton.disabled = lessonID >= totalLessons;
+
+          if (lessonID > ccoursex.completedLessons) {
+            ccoursex.completedLessons = lessonID;
+            console.log(ccoursex);
+            updateProgress();
+            updateUserData(userData);
+          }
+        }
+
+        ccoursex.Content.forEach((lesson) => {
+          let link = document.createElement("a");
+          link.href = `/watching.html?courseID=${courseID}&lessonID=${lesson.lesson_id}`;
+          link.textContent = `Lesson ${lesson.lesson_id}: ${lesson.lesson_title}`;
+
+          if (lesson.lesson_id <= ccoursex.completedLessons) {
+            link.style.color = "#4CAF50";
+          }
+
+          lessonLinks.appendChild(link);
+        });
+
+        prevButton.addEventListener("click", () => {
+          if (lessonID > 1) {
+            lessonID--;
+            navigateToLesson();
+          }
+        });
+
+        nextButton.addEventListener("click", () => {
+          if (lessonID < totalLessons) {
+            lessonID++;
+            navigateToLesson();
+          }
+        });
+
+        function navigateToLesson() {
+          window.location.href = `/watching.html?courseID=${courseID}&lessonID=${lessonID}`;
+        }
+
+        function updateProgressBar(percentage) {
+          const progressBar = document.getElementById("progress-bar");
+          const progressText = document.getElementById("progress-text");
+
+          percentage = Math.min(Math.max(percentage, 0), 100);
+
+          progressBar.style.width = `${percentage}%`;
+          progressText.textContent = `${percentage}%`;
+          const users = JSON.parse(localStorage.getItem("users"));
+          console.log(user);
+          console.log(userData.courses);
+          let oldUserCourse = userData.courses.find(
+            (c) => String(c.ID) === String(courseID)
+          );
+          oldUserCourse.completedLessons = lessonID;
+          oldUserCourse.progressPercentage = percentage;
+          console.log(percentage);
+
+          console.log(oldUserCourse);
+          users.forEach((user) => {
+            if (user.username === user.username) {
+              user.courses = user.courses.map((c) =>
+                c.ID === courseID ? oldUserCourse : c
+              );
+            }
+          });
+
+          console.log(users);
+
+          localStorage.setItem("users", JSON.stringify(users)); // Save updated data to local storage
+          // checkable
+
+          // after find old user course data update progress to the updated course into the local storage
+
+          /*if (updatedCourse) {
+              updatedCourse.progressPercentage = percentage;
+            }*/
+          // localStorage.setItem("Courses", JSON.stringify(updatedCourses)); // Save updated data to local storage
+
+          // Display feedback form if the user has completed at least 5 lessons
+
+          // after find old user course data update progress to the updated course into the local storage
+
+          /*if (updatedCourse) {
+              updatedCourse.progressPercentage = percentage;
+            }*/
+          // localStorage.setItem("Courses", JSON.stringify(updatedCourses)); // Save updated data to local storage
+
+          // Display feedback form if the user has completed at least 5 lessons
+        }
+
+        // Initialize
+        updateLessonContent();
+        updateProgress();
+      }
+
+      function displayAllCourses(courses) {
+        const coursesContainer = document.getElementById("coursesContainer");
+        if (!coursesContainer) return;
+
+        courses.forEach((course) => {
+          const courseElement = document.createElement("div");
+          courseElement.className = "course";
+          courseElement.innerHTML = `
+        <h3>${course.Title}</h3>
+        <p>Progress: ${course.progressPercentage || 0}%</p>
+        <a href="/watching.html?courseID=${
+          course.ID
+        }&lessonID=1">Start Course</a>
+      `;
+          coursesContainer.appendChild(courseElement);
+        });
+      }
+
+      displayAllCourses(userData.courses);
+
+      window.submitFeedback = function () {
+        let message = document.getElementById("feedback").value.trim();
+        if (!message) {
+          alert("Feedback message cannot be empty.");
+          return;
+        }
+
+        let feedback = {
+          username: user.username,
+          message: message,
+          courseID: courseID,
+          timestamp: new Date().toISOString(),
+        };
+        var feedbackList = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+        feedbackList.push(feedback);
+
+        localStorage.setItem("feedbacks", JSON.stringify(feedbackList));
+
+        window.location.href = "/";
+      };
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+        });
+    </script>
+  </body>
+</html>
+<!--
+  function displayFeedback() {
+    let feedbackContainer = document.getElementById("feedbackContainer");
+    feedbackContainer.innerHTML = ""; // Clear previous content
+
+    let feedbackList = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    if (feedbackList.length === 0) {
+        feedbackContainer.innerHTML = "<p>No feedback available yet.</p>";
+        return;
+    }
+
+    feedbackList.forEach((feedback, index) => {
+        let feedbackCard = document.createElement("div");
+        feedbackCard.classList.add("feedback-card");
+
+        feedbackCard.innerHTML = `
+            <div class="feedback-content">
+                <p class="feedback-message">"${feedback.message}"</p>
+                <span class="feedback-timestamp">${new Date(feedback.timestamp).toLocaleString()}</span>
+            </div>
+        `;
+
+        feedbackContainer.appendChild(feedbackCard);
+    });
+}
+
+// Call this function to load feedback on page load
+window.onload = displayFeedback;
+
+.feedback-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    transition: transform 0.3s ease-in-out;
+}
+
+.feedback-card:hover {
+    transform: scale(1.05);
+}
+
+.feedback-content {
+    text-align: center;
+}
+
+.feedback-message {
+    font-size: 16px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.feedback-timestamp {
+    font-size: 12px;
+    color: #777;
+}
+
+
+<div id="feedbackContainer"></div>
+
+-->

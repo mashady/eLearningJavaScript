@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/home/home.css" />
+    <link rel="stylesheet" href="./styles/utils/footer.css" />
+    <link rel="stylesheet" href="./styles/utils/notifi.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Course Details</title>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f9f9f9;
+        color: var(--darkblue);
+        margin: 0;
+      }
+      .course-image {
+        width: 50%;
+        max-width: 350px;
+      }
+      .details {
+        margin-top: 50px;
+        margin-bottom: 60px;
+      }
+      .details-content {
+        display: flex;
+        gap: 50px;
+        background-color: #fff;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .course-image {
+        display: flex;
+        align-items: center;
+        flex: 1;
+      }
+      .course-image img {
+        width: 100%;
+        border-radius: 8px;
+        transition: transform 0.5s;
+      }
+      .course-image img:hover
+      {
+        transform: scale(1.03);
+      }
+      .course-info {
+        flex: 1;
+        color: #222;
+      }
+
+      strong {
+        color: var(--darkblue);
+      }
+
+      .button-container {
+        margin-top: 15px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.3s ease-in-out;
+      }
+      .title {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .title h1 {
+        margin-bottom: 80px;
+        font-family: "Poppins", serif;
+        font-weight: 600;
+        font-style: normal;
+        font-size: 38px;
+        margin-top: 30px;
+        color: var(--darkblue); 
+        border-bottom: 2px solid var(--lightblue2);
+        display: inline-block;
+        margin-bottom: 60px;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+      .feedback-section {
+        margin-top: 40px;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .feedback-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+      }
+
+      .feedback-card h4 {
+        margin: 0 0 5px;
+        color: #007bff;
+      }
+
+      .feedback-card p {
+        margin: 5px 0;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          flex-direction: column;
+          text-align: center;
+        }
+        .course-image {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo poppins-medium">
+        <a href="/">El madrasaa</a>
+      </div>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
+      </ul>
+      <div style="display: flex; justify-content: center; align-items: center">
+        <div id="profile" style="display: none">
+          <a id="profileLink" href="/profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none">logout</div>
+        <div class="loginBtn" id="login">
+          <a href="/login.html">Login</a>
+        </div>
+      </div>
+    </nav>
+    <div class="course-details">
+      <div class="title">
+        <h1 id="courseTitle">Course Details</h1>
+      </div>
+      <div class="details">
+        <div class="container">
+          <div class="details-content">
+            <div class="course-image">
+              <img id="courseImage" src="" alt="Course Image" />
+            </div>
+            <div class="course-info">
+              <p> <strong>Description:</strong> <span id="courseDescription"></span></p>
+              <p><strong>Category:</strong> <span id="courseCategory"></span></p>
+              <p>
+                <strong>Instructor:</strong> <span id="courseInstructor"></span>
+              </p>
+              <p><strong>Price:</strong> <span id="coursePrice"></span></p>
+              <p><strong>Duration:</strong> <span id="courseDuration"></span></p>
+              <!--
+              <div class="button-container">
+                <button id="enrollButton">Enroll Now</button>
+              </div>
+              -->
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+    <div class="feedback-section">
+      <h2>What Our Students Say</h2>
+      <div id="feedbackContainer"></div>
+    </div>
+
+    <footer>
+      <div class="footer-top">
+        <div class="container">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 elmadrasaa. All rights reserved.</p>
+      </div>
+    </footer>
+    <script type="module">
+      import {
+        isLogin,
+        logOut,
+        updateUI,
+        displayUserProfile,
+      } from "../utils/user.js";
+
+      if (!isLogin()) {
+        window.location.href = "/login.html";
+      }
+      updateUI();
+      document.getElementById("logout").addEventListener("click", () => {
+        logOut();
+        updateUI();
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const courseID = urlParams.get("id");
+
+      let courses = JSON.parse(localStorage.getItem("Courses")) || [];
+
+      let selectedCourse = courses.find(
+        (course) => String(course.ID) === String(courseID)
+      );
+
+      if (selectedCourse) {
+        document.getElementById("courseTitle").textContent =
+          selectedCourse.Title;
+        document.getElementById("courseImage").src = selectedCourse.Image;
+        document.getElementById("courseDescription").textContent =
+          selectedCourse.Description;
+        document.getElementById("courseCategory").textContent =
+          selectedCourse.Category;
+        document.getElementById("courseInstructor").textContent =
+          selectedCourse.Instructor;
+        document.getElementById("coursePrice").textContent = `$${
+          selectedCourse.Price || 0
+        }`;
+        document.getElementById("courseDuration").textContent =
+          selectedCourse.Duration;
+      } else {
+        document.getElementById("courseTitle").textContent = "Course Not Found";
+        document.getElementById("courseDescription").textContent =
+          "The requested course does not exist.";
+      }
+      /*
+      document.getElementById("enrollButton").addEventListener("click", () => {
+        alert(`Enrolled in ${selectedCourse.Title}`);
+      });
+      */
+
+      let feedbackList = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+      let courseFeedback = feedbackList.filter(
+        (feedback) => String(feedback.courseID) === String(courseID)
+      );
+
+      function renderFeedback() {
+        const feedbackContainer = document.getElementById("feedbackContainer");
+        feedbackContainer.innerHTML = "";
+
+        if (courseFeedback.length === 0) {
+          feedbackContainer.innerHTML =
+            "<p>No feedback yet for this course.</p>";
+          return;
+        }
+
+        courseFeedback.forEach((feedback) => {
+          const feedbackCard = document.createElement("div");
+          feedbackCard.classList.add("feedback-card");
+          feedbackCard.innerHTML = `
+      <h4>${feedback.username}</h4>
+      <p>${feedback.message}</p>
+    `;
+          feedbackContainer.appendChild(feedbackCard);
+        });
+      }
+
+      renderFeedback();
+    </script>
+  </body>
+</html>

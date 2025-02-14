@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/courses.css" />
+
+    <title>Document</title>
+    <style>
+      @import url(./utils/global.css);
+      @import url(./utils/fonts.css);
+
+      body {
+        background-color: var(--grayBg);
+      }
+      .contact-page {
+        width: 100%;
+        margin-top: 100px;
+        max-width: 900px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 12px rgba(74, 74, 74, 0.299);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .error-message {
+        color: red;
+        font-size: 12px;
+        margin-top: 5px;
+        display: block;
+      }
+
+      #course-form {
+        padding: 25px;
+        border: #909abc solid 2px;
+        margin-top: 50px;
+      }
+      #courseList {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: center !important;
+      }
+      .course-title {
+        background-color: var(--darkblue);
+        display: inline-block;
+        margin: 30px;
+      }
+      .course-title h1 {
+        background: linear-gradient(90deg, #fdffee, #3cff00);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding: 1px 30px;
+        font-size: 1.5rem;
+        display: inline-block;
+      }
+
+      #course-form label {
+        display: block;
+        margin-top: 10px;
+        font-size: 14px;
+        color: var(--darkblue);
+        margin-bottom: 5px;
+      }
+
+      #course-form input,
+      #course-form textarea {
+        width: 97%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        color: var(--darkblue);
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+        resize: none;
+      }
+
+      #course-form input:focus,
+      #course-form textarea:focus,
+      #course-form select:focus {
+        border-color: var(--darkblue);
+        outline: none;
+      }
+      .info-buttons {
+        display: block;
+        width: 98.5%;
+        background-color: var(--darkblue);
+        color: #fff;
+        padding: 15px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .info-buttons:hover {
+        background-color: #909abc;
+        color: var(--darkblue);
+      }
+      .lesson-buttons {
+        display: block;
+        width: 98.5%;
+        padding: 15px 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        background-color: #909abc;
+        color: var(--darkblue);
+      }
+      .lesson-buttons:hover {
+        background-color: var(--darkblue);
+        color: #fff;
+      }
+      .courses-list .title {
+        margin: 20px -20px;
+      }
+      .course-title h2 {
+        background: linear-gradient(90deg, #fdffee, #3cff00);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        padding: 1px 30px;
+        font-size: 1.5rem;
+        display: inline-block;
+      }
+      select {
+        width: 85.5%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        color: var(--darkblue);
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+        resize: none;
+        margin-bottom: 17px;
+      }
+      select option {
+        background-color: var(--grayBg);
+        color: var(--black);
+        padding: 10px;
+      }
+
+      select option:hover {
+        background-color: var(--yellow);
+      }
+
+      #courses-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .course-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        box-sizing: border-box;
+      }
+
+      .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .course-card h3 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: var(--black);
+      }
+
+      .course-card p {
+        font-size: 1em;
+        color: var(--darkGray);
+        margin-bottom: 8px;
+      }
+
+      .course-card button {
+        background-color: #04cc1fd5;
+        color: rgb(247, 247, 247);
+        border: none;
+        margin-right: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .course-card button:last-child {
+        background-color: rgb(212, 27, 27);
+        color: var(--gray);
+      }
+
+      .course-card button:hover {
+        opacity: 0.8;
+      }
+
+      .search-section {
+        margin: 20px 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      #search-by {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        width: 30%;
+        background-color: #fff;
+      }
+
+      #search-input {
+        flex: 1;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .button {
+        background-color: var(--darkblue);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.3s;
+      }
+
+      .label {
+        color: azure;
+        background-color: azure;
+      }
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .modal {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 700px;
+        max-width: 90%;
+        position: relative;
+      }
+      .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: none;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .form-step {
+        display: none;
+      }
+
+      .form-step.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .errorMsg {
+        width: 82%;
+        color: #721c24 !important;
+        background-color: #f8d7da;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-align: center;
+        border: 1px solid #f5c6cb;
+        display: none;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(50px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideOut {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateX(-50px);
+        }
+      }
+
+      .form-step.active {
+        animation: slideIn 0.3s ease-in-out;
+      }
+
+      .form-step {
+        animation: slideOut 0.3s ease-in-out;
+      }
+
+      input,
+      textarea {
+        display: block;
+        margin-bottom: 20px;
+        border: 0.1rem solid gray;
+        color: var(--black);
+        background-color: transparent;
+        border-radius: 10px;
+        padding: 1rem;
+        outline: none;
+        font-size: 18px;
+        width: 80%;
+      }
+
+      button {
+        margin-top: 40px;
+        margin-bottom: 30px;
+        border: 1px solid #fff;
+        padding: 1rem;
+        background-color: var(--yellow);
+        border-radius: 10px;
+        cursor: pointer;
+        text-transform: capitalize;
+        font-size: 20px;
+        max-width: 80%;
+      }
+
+      #lessonFormContainer {
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .edit-section {
+        margin: 20px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      #courseSelect {
+        padding: 8px;
+        border-radius: 5px;
+        min-width: 200px;
+      }
+    </style>
+  </head>
+
+  <body class=".poppins-thin">
+    <div class="title">
+      <h1>Courses</h1>
+    </div>
+    <div class="container">
+      <div class="search-section" style="display: none">
+        <h2>Search Courses</h2>
+        <div class="search-controls">
+          <select id="search-by">
+            <option value="Title">Search by Course Name</option>
+            <option value="Category">Search by Category</option>
+          </select>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Enter search term"
+          />
+        </div>
+      </div>
+      <div id="overlay" class="overlay"></div>
+
+      <div id="notification" class="notification">
+        <span id="notification-message"></span>
+      </div>
+      <button id="openModal" class="button">Add Course</button>
+
+      <div id="modalOverlay" class="modal-overlay">
+        <div class="modal">
+          <span id="closeModal" class="close-modal">&times;</span>
+
+          <form id="multiStepForm">
+            <div id="step1" class="form-step active">
+              <h2>Step 1: General Information</h2>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                placeholder="Enter course title"
+              />
+              <span id="title-error" class="errorMsg"></span>
+
+              <input
+                type=""
+                id="image"
+                name="image"
+                placeholder="Put course cover"
+              />
+              <span id="image-error" class="errorMsg"></span>
+
+              <select id="category" name="category">
+                <option value="" disabled selected>Select a category</option>
+              </select>
+              <span id="category-error" class="errorMsg"></span>
+
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Add course description"
+              ></textarea>
+              <span id="description-error" class="errorMsg"></span>
+
+              <input
+                type="text"
+                id="price"
+                name="price"
+                step="0.01"
+                placeholder="Enter course price if free leave empty"
+              />
+              <span id="price-error" class="errorMsg"></span>
+
+              <input
+                type="text"
+                id="instructor"
+                name="instructor"
+                step="0.01"
+                placeholder="enter instructor name"
+              />
+              <span id="instructor-error" class="errorMsg"></span>
+
+              <input
+                type="text"
+                id="duration"
+                name="duration"
+                placeholder="Course duration"
+              />
+              <span id="duration-error" class="errorMsg"></span>
+
+              <button
+                type="button"
+                id="nextStep1"
+                style="
+                  background-color: var(--darkblue);
+                  color: #fff;
+                  border-radius: 8px;
+                "
+              >
+                Next
+              </button>
+            </div>
+
+            <div id="step2" class="form-step">
+              <h2>Step 2: Number of Lessons</h2>
+              <label for="lessonCount"
+                >How many lessons do you want to add?</label
+              >
+              <input
+                type="number"
+                id="lessonCount"
+                name="lessonCount"
+                min="1"
+                placeholder="enter lesson number"
+              />
+              <span id="lessonCount-error" class="errorMsg"></span>
+
+              <div style="display: flex; justify-content: space-between">
+                <button type="button" id="prevStep2">Previous</button>
+                <button type="button" id="nextStep2">Next</button>
+              </div>
+            </div>
+
+            <div id="lessonSteps" class="form-step">
+              <h2>Step <span id="currentLessonNumber"></span>: Add Lesson</h2>
+              <div id="lessonFormContainer">
+                <input
+                  type="text"
+                  id="lessonTitle"
+                  name="lessonTitle"
+                  placeholder="enter lesson title"
+                />
+                <span id="lessonTitle-error" class="errorMsg"></span>
+
+                <input
+                  type="text"
+                  id="lessonDuration"
+                  name="lessonDuration"
+                  placeholder="enter lesson duration"
+                />
+                <span id="lessonDuration-error" class="errorMsg"></span>
+
+                <input
+                  type=""
+                  id="lessonVideo"
+                  name="lessonVideo"
+                  placeholder="enter lesson video "
+                />
+                <span id="lessonVideo-error" class="errorMsg"></span>
+
+                <input
+                  type=""
+                  id="lessonPdf"
+                  name="lessonPdf"
+                  placeholder="enter lesson pdf url"
+                />
+                <span id="lessonPdf-error" class="errorMsg"></span>
+              </div>
+              <div style="display: flex; justify-content: space-between">
+                <button type="button" id="prevLessonStep">Previous</button>
+                <button type="button" id="nextLessonStep">Next</button>
+              </div>
+            </div>
+
+            <div id="finalStep" class="form-step">
+              <h2>Review and Submit</h2>
+              <p>
+                Please review your course details and lessons before submitting.
+              </p>
+              <div style="display: flex; justify-content: space-between">
+                <button type="button" id="prevFinalStep">Previous</button>
+                <button type="submit" id="submitForm">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="courses-list">
+        <div class="title">
+          <h2>Available Courses</h2>
+        </div>
+        <div id="courseList"></div>
+      </div>
+    </div>
+
+    <script type="module" src="../script/fetch-courses.js"></script>
+  </body>
+</html>

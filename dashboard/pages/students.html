@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="../styles/categories.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+      
+      .dashboard-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px;
+        justify-content: center !important;
+      }
+
+      .student-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 300px;
+        box-sizing: border-box;
+      }
+
+      .student-card h2 {
+        margin: 0 0 10px;
+        font-size: 1.5em;
+      }
+
+      .course-list {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .course-list li {
+        margin-bottom: 10px;
+      }
+
+      .progress-bar {
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 10px;
+        margin-top: 5px;
+      }
+
+      .progress {
+        background-color: var(--lightblue2);
+        height: 100%;
+      }
+      .search-container {
+        text-align: center;
+        margin: 20px 0;
+        background-color: transparent;
+        width: 800px;
+        background-color: #fff;
+      }
+      .search-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      #search-bar {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+      }
+
+      #search-bar:focus {
+        border-color: #76c7c0;
+        box-shadow: 0 0 5px rgba(118, 199, 192, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .student-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="title">
+      <h1 class="">Students</h1>
+    </div>
+
+    <div class="search-wrapper">
+      <div class="search-container">
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search by student name..."
+        />
+      </div>
+    </div>
+    <div class="dashboard-container"></div>
+
+    <script>
+      const dashboardContainer = document.querySelector(".dashboard-container");
+      const searchBar = document.getElementById("search-bar");
+
+      function getUsersFromLocalStorage() {
+        return JSON.parse(localStorage.getItem("users")) || [];
+      }
+
+      function renderUsers(filteredUsers) {
+        dashboardContainer.innerHTML = "";
+
+        filteredUsers.forEach((user) => {
+          console.log(user);
+          const card = document.createElement("div");
+          card.classList.add("student-card");
+
+          const name = document.createElement("h2");
+          name.textContent = user.username;
+          card.appendChild(name);
+
+          const courseList = document.createElement("ul");
+          courseList.classList.add("course-list");
+
+          const userCourses = user.courses;
+          console.log(userCourses);
+
+          userCourses.forEach((course) => {
+            const courseItem = document.createElement("li");
+            courseItem.textContent = course.Title;
+
+            const progressBar = document.createElement("div");
+            progressBar.classList.add("progress-bar");
+
+            const progress = document.createElement("div");
+            progress.classList.add("progress");
+            progress.style.width = (course.progressPercentage || 0) + "%";
+
+            progressBar.appendChild(progress);
+            courseItem.appendChild(progressBar);
+            courseList.appendChild(courseItem);
+          });
+
+          card.appendChild(courseList);
+          dashboardContainer.appendChild(card);
+        });
+      }
+
+      const users = getUsersFromLocalStorage();
+      renderUsers(users);
+
+      searchBar.addEventListener("input", (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredUsers = users.filter((user) =>
+          user.name.toLowerCase().includes(searchTerm)
+        );
+        renderUsers(filteredUsers);
+      });
+    </script>
+  </body>
+</html>

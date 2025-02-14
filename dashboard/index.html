@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles/Dashboard.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="page-content">
+      <div class="side-bar">
+        <div class="logo-txt">Dashboard</div>
+        <div class="page-links">
+          <ul class="links">
+            <li>
+              <a href="/">Home</a>
+            </li>
+            <li>
+              <a href="./pages/students.html" target="content-frame"
+                >Students</a
+              >
+            </li>
+            <li>
+              <a href="./pages/categories.html" target="content-frame"
+                >Categories</a
+              >
+            </li>
+            <li>
+              <a href="./pages/courses.html" target="content-frame">Courses</a>
+            </li>
+            <li>
+              <a href="./pages/CourseControl.html" target="content-frame"
+                >Controls</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="user-menu">
+          <div class="dropdown">
+            <ul class="dropdown-content">
+              <li id="logout">
+                Log Out <i class="fa-solid fa-right-from-bracket"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <main class="main-bar">
+        <div class="iframe-container">
+          <iframe name="content-frame" src="./pages/students.html"></iframe>
+        </div>
+      </main>
+      <div id="notification" class="notification">
+        <span id="notification-message"></span>
+      </div>
+    </div>
+    <script type="module">
+      // import { showNotification, logOut, isLogin } from "../utils/user.js";
+      // if (!isLogin()) {
+      //   window.location.href = "/";
+      // }
+      // document.getElementById("logout").addEventListener("click", handleLOgout);
+      // function handleLOgout() {
+      //   console.log("u r logged out");
+      //   logOut();
+      //   window.location.href = "/";
+      // }
+
+      // import { isLogin, getUserDataByUsername } from "../utils/user.js";
+      // updateUI();
+
+      // console.log(getUserDataByUsername(isLogin().username).isAdmin)
+      // if(getUserDataByUsername(isLogin().username).isAdmin == true){
+
+      //   window.location.href = "/";
+      // } // edit this line
+
+      import {
+        showNotification,
+        logOut,
+        isLogin,
+        getUserDataByUsername,
+      } from "../utils/user.js";
+      if (!isLogin()) {
+        window.location.href = "/";
+      }
+      console.log(isLogin().username);
+      console.log(getUserDataByUsername(isLogin().username).isAdmin);
+      console.log(isLogin().username);
+
+      console.log(getUserDataByUsername(isLogin().username).isAdmin);
+      if (getUserDataByUsername(isLogin().username).isAdmin == false) {
+        //window.location.href = "/";
+      }
+      document.getElementById("logout").addEventListener("click", handleLOgout);
+      function handleLOgout() {
+        console.log("u r logged out");
+        logOut();
+        window.location.href = "/";
+      }
+    </script>
+    <script></script>
+  </body>
+</html>

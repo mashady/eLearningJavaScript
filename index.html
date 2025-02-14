@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>E-Learning</title>
     <link rel="stylesheet" href="./styles/home/home.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
+      rel="stylesaheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
       integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
       crossorigin="anonymous"
@@ -23,133 +23,90 @@
     <!-- start navbar section -->
     <nav>
       <div class="logo poppins-medium">
-        <a href="/">elmadrasaa</a>
+        <a href="/">El madrasaa</a>
       </div>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/courses.html">Courses</a></li>
+        <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+        <li><a href="/wishes.html">Wishlist</a></li>
       </ul>
-      <div class="loginBtn">
-        <a href="/login.html">Login</a>
+      <div style="display: flex;justify-content: center;align-items: center;">
+        <div id="profile" style="display: none;">
+          <a id="dashboard" style="color: #FFF; text-decoration: none; margin-right: 10px; display: none;" href="./dashboard/index.html">Dashboard</a>
+          <a id="profileLink" href="./profile.html">profile</a>
+        </div>
+        <div class="loginBtn" id="logout" style="display: none;">
+          logout
+        </div>
+        <div class="loginBtn" id="login">
+          <a href="./login.html">Login</a>
+        </div>
       </div>
+      
     </nav>
     <!-- start header section -->
     <header>
       <div class="container">
         <div class="headerTypo">
-          <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</h1>
+          <h1>Welcome to  El madrasaa</h1>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde
-            nostrum sapiente et, beatae repellat facere nam, architecto odio
-            molestiae odit praesentium quam cupiditate provident optio officiis
-            harum voluptatibus. Veritatis, velit!
+            Discover a world of knowledge with our expert-led courses. Whether you're looking to enhance your skills or explore new subjects, we have the perfect learning experience for you.
           </p>
-          <button>
-            <a href="/courses">Explore courses</a>
-          </button>
+          <div class="btn">
+            <a href="./courses.html" class="explore-btn">Explore Courses</a>
+          </div>
         </div>
         <div class="illustartion">
-          <img src="./assets/header/header.png" alt="header image" />
+          <img src="./assets/header/freepik__adjust__93822-removebg.png"width="500px" alt="header image" />
         </div>
       </div>
     </header>
-    <!-- numbers section -->
-    <section class="numbers">
-      <div class="container">
-        <div class="countNumbers">
-          <div>
-            <span>21.000+</span>
-            <div>users</div>
-          </div>
-          <div>
-            <span>100+</span>
-            <div>users</div>
-          </div>
-          <div>
-            <span>150+</span>
-            <div>users</div>
-          </div>
-        </div>
-        <div class="spans">
-          <span>
-            <img src="./assets/header/5.png" alt="image " />
-            LOREM</span
-          >
-          <span>
-            <img src="./assets/header/2.png" alt="image " />
-
-            DITLANCE</span
-          >
-          <span>
-            <img src="./assets/header/3.png" alt="image " />
-
-            OWTHEST</span
-          >
-          <span>
-            <img src="./assets/header/4.png" alt="image " />
-
-            NEOVASI</span
-          >
-          <span>
-            <img src="./assets/header/5.png" alt="image " />
-
-            ONAGO</span
-          >
-        </div>
-      </div>
-    </section>
     <!-- info section -->
     <section class="info">
-      <h1>elmadrasaa E-Learning</h1>
+      <h1>Our Features</h1>
       <div class="container">
         <div>
           <img src="./assets/info/1.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Free Courses</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Empower your journey with free courses designed to provide quality education for everyone.
           </p>
         </div>
         <div>
           <img src="./assets/info/2.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Interactive Learning
+          </h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Engage in interactive sessions and enhance your skills with hands-on projects.
           </p>
         </div>
         <div>
           <img src="./assets/info/3.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2> Certified Programs</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Earn certificates that add value to your career and showcase your skills.
           </p>
         </div>
         <div>
           <img src="./assets/info/4.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Flexible Schedule</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Learn at your own pace with courses that fit into your busy schedule.
           </p>
         </div>
         <div>
           <img src="./assets/info/5.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2> Global Community</h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Join a vibrant community of learners from around the world.
           </p>
         </div>
         <div>
           <img src="./assets/info/6.png" alt="" />
-          <h2>Kursus Gratis</h2>
+          <h2>Expert Support </h2>
           <p>
-            Kami menyediakan beberapa kursus gratis untuk menunjang ketersediaan
-            pendidikan untuk masyarakat kurang mampu
+            Get personalized support and guidance from our experienced instructors.
           </p>
         </div>
       </div>
@@ -158,178 +115,92 @@
     <section class="branding">
       <div class="container">
         <div>
-          <span> Tentang Kami </span>
-          <h2>
-            EDUFREE Layanan E-Learning Gratis Untuk Membantu Kamu Bertumbuh
-          </h2>
+          <span>🚀 Learn, Grow, and Succeed – All for Free!</span>
           <p>
-            Edufree diharapkann bisa menjadi layanan yang bermanfaat bagi
-            kedepanya dalam bidang pendidikan
+            At EduFree, we believe that education should be accessible to everyone. Our free e-learning platform is designed to help you develop new skills, expand your knowledge, and achieve your goals—anytime, anywhere.
           </p>
+            <span>
+              Join our community of learners and take the next step in your journey toward success!
+          </span>
         </div>
         <div>
-          <img src="./assets/branding/brand.png" alt="" />
+          <img src="./assets/branding/8621573_3953003.jpg" alt="" />
         </div>
       </div>
     </section>
     <!-- browse section  -->
     <section class="broswe">
+      <h1>Explore Our Free Courses</h1>
       <div class="container">
-        <div class="broswe-header">
-          <h2>Rekomendasi Kursus Untuk Kamu</h2>
-          <button class="headerBtn">
-            <a href="/courses">Explore more</a>
-          </button>
-        </div>
-
-        <hr />
         <div class="broswe-wrapper">
           <div class="broswe-card">
-            <img src="./assets/broswe/browse1.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
+            <img src="./assets/broswe/browse1.png" alt="Web Programming Basics" />
+            <h3>Web Programming Basics</h3>
+            <p>Learn the fundamentals of web development with hands-on practice.</p>
             <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
+              <span><i class="fa-regular fa-clock"></i> 4.5 hours</span>
+              <span><i class="fa-solid fa-video"></i> 20 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 1,900 students</span>
             </div>
           </div>
+    
           <div class="broswe-card">
-            <img src="./assets/broswe/browse2.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
+            <img src="./assets/broswe/browse2.png" alt="JavaScript for Beginners" />
+            <h3>JavaScript for Beginners</h3>
+            <p>Start your JavaScript journey and build dynamic web applications.</p>
             <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
+              <span><i class="fa-regular fa-clock"></i> 5 hours</span>
+              <span><i class="fa-solid fa-video"></i> 25 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 2,300 students</span>
             </div>
           </div>
+    
           <div class="broswe-card">
-            <img src="./assets/broswe/browse3.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
+            <img src="./assets/broswe/browse3.png" alt="Python Programming" />
+            <h3>Python Programming</h3>
+            <p>Master Python and start creating real-world applications.</p>
             <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
+              <span><i class="fa-regular fa-clock"></i> 6 hours</span>
+              <span><i class="fa-solid fa-video"></i> 30 videos</span>
+              <span><i class="fa-solid fa-people-group"></i> 3,500 students</span>
             </div>
           </div>
-          <div class="broswe-card">
-            <img src="./assets/broswe/browse1.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
-            <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
-            </div>
-          </div>
-          <div class="broswe-card">
-            <img src="./assets/broswe/browse2.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
-            <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
-            </div>
-          </div>
-          <div class="broswe-card">
-            <img src="./assets/broswe/browse3.png" />
-            <h3>Dasar Pemrograman WEB</h3>
-            <p>Materi pembelajarn mengenai pembuatan website tingkat pemula</p>
-            <div>
-              <span>
-                <i class="fa-regular fa-clock"></i>
-                <span>4.5 am</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-video"></i>
-                <span>20 video</span>
-              </span>
-              <span>
-                <i class="fa-solid fa-people-group"></i>
-                <span>1.900 student</span>
-              </span>
-            </div>
-          </div>
+        </div>
+    
+        <div class="broswe-header">
+            <a href="./courses.html">Explore More</a>
         </div>
       </div>
     </section>
+    
     <!--footer section -->
     <footer>
-        <div class="footer-top ">
-          <div class="container">
-            <div>
-                <h1>
-                    elmadrasaa
-                </h1>
-                <p>
-                    Edufree adalah layanan e-learning gratis yang dikembangkan oleh
-                    elmadrasaa. Kami memiliki kursus gratis yang dapat membantu kamu
-                    bertumbuh.
-                </p>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom container">
-          <div>&copy; 2025 elmadrasaa. All rights reserved.</div>
-          <div>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-        </div>
+      <div class="footer-top">
+        <div class="container">
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/courses.html">Courses</a></li>
+            <li><a href="/enrolledCourses.html">Enrolled courses</a></li>
+            <li><a href="/wishes.html">Wishlist</a></li>
+          </ul>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>© 2025 elmadrasaa. All rights reserved.</p>
       </div>
     </footer>
-    
+    <script type="module">
+      import { updateUI, logOut, isLogin, getUserDataByUsername } from "./utils/user.js";
+      updateUI();
+      document.getElementById("logout").addEventListener("click", () => {
+          logOut();
+          updateUI(); 
+      });
+      console.log(isLogin().username);
+      
+      console.log(getUserDataByUsername(isLogin().username).isAdmin)
+      if(getUserDataByUsername(isLogin().username).isAdmin == false) // edit this line
+        document.getElementById('dashboard').style.display = "inline"
+    </script>
   </body>
 </html>
