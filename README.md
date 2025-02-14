@@ -40,3 +40,7 @@ cd el-madrasaa
 ```
 
 ### 2. Enjoy 💜
+
+## Demo
+
+https://el-madrasaa.netlify.app/
