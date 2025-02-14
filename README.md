@@ -1,6 +1,6 @@
 # El Madrasaa - Online Learning Schools
 
-![El Madrasaa Header](https://example.com/path-to-your-header-image.jpg)
+![El Madrasaa Header](https://github.com/mashady/eLearningJavaScript/blob/main/demo.png)
 **El Madrasaa** is an online learning platform that allows users to enroll in various courses offered by schools, manage their enrollment, and participate in a wide variety of learning activities. The platform also provides an **Admin Panel** with a variety of features to manage courses, students, and other functionalities.
 
 ## Features
