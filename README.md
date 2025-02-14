@@ -1,6 +1,7 @@
 # El Madrasaa - Online Learning Schools
 
 ![El Madrasaa Header](https://github.com/mashady/eLearningJavaScript/blob/main/demo.png)
+
 **El Madrasaa** is an online learning platform that allows users to enroll in various courses offered by schools, manage their enrollment, and participate in a wide variety of learning activities. The platform also provides an **Admin Panel** with a variety of features to manage courses, students, and other functionalities.
 
 ## Features
@@ -34,7 +35,7 @@ To run this project locally on your machine, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/el-madrasaa.git
+git clone https://github.com/mashady/eLearningJavaScript.git
 cd el-madrasaa
 ```
 
