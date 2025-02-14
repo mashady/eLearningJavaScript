@@ -1,72 +1,72 @@
-  // Map each question identifier to its correct answer value.
-  const correctAnswers = {
-    q1: "A",    // HyperText Markup Language
-    q2: "B",    // <br>
-    q3: "B",    // <header>
-    q4: "B",    // Alternative text
-    q5: "B",    // <a>
-    q6: "C",    // Cascading Style Sheets
-    q7: "C",    // color
-    q8: "B",    // line-height
-    q9: "C",    // /* comment */
-    q10: "A",   // background-color
-    q11: "B",   // #header
-    q12: "B",   // .active
-    q13: "C",   // display: flex
-    q14: "B",   // padding
-    q15: "A",   // z-index
-    q16: "A",   // Document Object Model
-    q17: "B",   // let
-    q18: "B",   // Netscape
-    q19: "A",   // A function combined with its lexical scope
-    q20: "B",   // The global object (non-strict mode)
-    q21: "A",   // var arr = []
-    q22: "A",   // push()
-    q23: "A",   // == compares value only; === compares value and type
-    q24: "B",   // JSON.parse()
-    q25: "B",   // =
-    q26: "B",   // Catching common coding mistakes
-    q27: "A",   // //
-    q28: "B",   // onclick
-    q29: "A",   // "number"
-    q30: "D"    // Float (JavaScript does not have a distinct float type)
-  };
+const correctAnswers = {
+  q1: "A",
+  q2: "B",
+  q3: "B",
+  q4: "B",
+  q5: "B",
+  q6: "C",
+  q7: "C",
+  q8: "B",
+  q9: "C",
+  q10: "A",
+  q11: "B",
+  q12: "B",
+  q13: "C",
+  q14: "B",
+  q15: "A",
+  q16: "A",
+  q17: "B",
+  q18: "B",
+  q19: "A",
+  q20: "B",
+  q21: "A",
+  q22: "A",
+  q23: "A",
+  q24: "B",
+  q25: "B",
+  q26: "B",
+  q27: "A",
+  q28: "B",
+  q29: "A",
+  q30: "D",
+};
 
-  function submitQuiz() {
-    let score = 0;
-    // Update this count when all questions are added (30 for full quiz)
-    const totalQuestions = 30;
-    
-    // Loop through each question and process feedback within its container
-    for (let i = 1; i <= totalQuestions; i++) {
-      const qName = "q" + i;
-      const questionDiv = document.getElementById("question" + i);
-      // Remove any existing feedback if re-submitting
-      const existingFeedback = questionDiv.querySelector(".feedback");
-      if (existingFeedback) {
-        existingFeedback.remove();
-      }
-      const selectedOption = document.querySelector('input[name="' + qName + '"]:checked');
-      const userAnswer = selectedOption ? selectedOption.value : "No Answer";
-      const correctAnswer = correctAnswers[qName];
-      
-      // Create a new feedback element
-      const feedbackDiv = document.createElement("div");
-      feedbackDiv.classList.add("feedback");
-      
-      if (selectedOption && userAnswer === correctAnswer) {
-        feedbackDiv.classList.add("correct");
-        feedbackDiv.innerText = "Correct! Your Answer: " + userAnswer;
-        score++;
-      } else {
-        feedbackDiv.classList.add("incorrect");
-        feedbackDiv.innerText = "Incorrect. Your Answer: " + userAnswer + ". Correct Answer: " + correctAnswer;
-      }
-      // Append feedback inside the same question container
-      questionDiv.appendChild(feedbackDiv);
+function submitQuiz() {
+  let score = 0;
+  const totalQuestions = 30;
+
+  for (let i = 1; i <= totalQuestions; i++) {
+    const qName = "q" + i;
+    const questionDiv = document.getElementById("question" + i);
+    const existingFeedback = questionDiv.querySelector(".feedback");
+    if (existingFeedback) {
+      existingFeedback.remove();
     }
-    
-    // Display final score summary below the form
-    const finalScoreDiv = document.getElementById("finalScore");
-    finalScoreDiv.innerHTML = "Your total score is " + score + " out of " + totalQuestions;
+    const selectedOption = document.querySelector(
+      'input[name="' + qName + '"]:checked'
+    );
+    const userAnswer = selectedOption ? selectedOption.value : "No Answer";
+    const correctAnswer = correctAnswers[qName];
+
+    const feedbackDiv = document.createElement("div");
+    feedbackDiv.classList.add("feedback");
+
+    if (selectedOption && userAnswer === correctAnswer) {
+      feedbackDiv.classList.add("correct");
+      feedbackDiv.innerText = "Correct! Your Answer: " + userAnswer;
+      score++;
+    } else {
+      feedbackDiv.classList.add("incorrect");
+      feedbackDiv.innerText =
+        "Incorrect. Your Answer: " +
+        userAnswer +
+        ". Correct Answer: " +
+        correctAnswer;
+    }
+    questionDiv.appendChild(feedbackDiv);
   }
+
+  const finalScoreDiv = document.getElementById("finalScore");
+  finalScoreDiv.innerHTML =
+    "Your total score is " + score + " out of " + totalQuestions;
+}

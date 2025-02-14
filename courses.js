@@ -71,9 +71,9 @@ function courses(courses, coursesPerPage, paginationContainer) {
 
     const filteredCourses = isLogin()
       ? courses.filter(
-        (course) =>
-          !userCourses.some((userCourse) => userCourse.ID === course.ID)
-      )
+          (course) =>
+            !userCourses.some((userCourse) => userCourse.ID === course.ID)
+        )
       : courses;
     if (filteredCourses.length == 0) {
       document.getElementById("noAvail").style.display = "inline";
@@ -98,7 +98,8 @@ function courses(courses, coursesPerPage, paginationContainer) {
         <h3>${course.Title}</h3>
         <p><strong>Instructor:</strong> ${course.Instructor}</p>
         <p>${course.Description}</p>
-        <p><strong>Price:</strong> ${course.Price === null ? "Free" : `$${course.Price}`
+        <p><strong>Price:</strong> ${
+          course.Price === null ? "Free" : `$${course.Price}`
         }</p>
         <p><strong>Duration:</strong> ${course.Duration}</p>
         <div class="card-options">
@@ -124,8 +125,7 @@ function courses(courses, coursesPerPage, paginationContainer) {
   function setupPagination() {
     const pagination = document.querySelector(paginationContainer);
     pagination.innerHTML = "";
-    console.log(pagination)
-
+    console.log(pagination);
 
     for (let i = 1; i <= totalPages; i++) {
       const link = document.createElement("a");
@@ -148,109 +148,14 @@ function courses(courses, coursesPerPage, paginationContainer) {
 
       pagination.appendChild(link);
     }
-
   }
 
   showCourses(currentPage);
   setupPagination();
-
 }
 
 courses(localcourses, 6, "#pagination");
 
-/*function enroll(courseID) {
-  console.log(isLogin());
-  if (isLogin() == null) {
-    showNotification("Please log in to enroll in courses.", 1000);
-    return;
-  }
-
-  const course = localcourses.find((c) => c.ID == courseID);
-  console.log(course);
-
-  if (userCourses.some((c) => c.ID == courseID)) {
-    showNotification("You are already enrolled in this course!", 600);
-
-    return;
-  }
-
-  if (userWishes.some((c) => c.ID == courseID)) {
-    userWishes = userWishes.filter((c) => c.ID !== courseID);
-    showNotification(
-      "This course has been removed from your wishlist and added to your enrolled courses.",
-      600
-    );
-  }
-  showNotification("You have successfully enrolled", 600);
-  userCourses.push(course);
-
-  const updatedUsers = users.map((u) =>
-    u.username === username
-      ? { ...u, courses: userCourses, wishlist: userWishes }
-      : u
-  );
-  console.log(updatedUsers);
-  localStorage.setItem("users", JSON.stringify(updatedUsers));
-
-  courses(localcourses);
-}
-*/
-/*function enroll(courseID) {
-  console.log(isLogin());
-  if (isLogin() == null) {
-    showNotification("Please log in to enroll in courses.", 1000);
-    return;
-  }
-
-  const course = localcourses.find((c) => c.ID == courseID);
-  console.log(course);
-
-  if (userCourses.some((c) => c.ID == courseID)) {
-    showNotification("You are already enrolled in this course!", 1000);
-    return;
-  }
-
-  if (userWishes.some((c) => c.ID == courseID)) {
-    userWishes = userWishes.filter((c) => c.ID !== courseID);
-    showNotification(
-      "This course has been removed from your wishlist and added to your enrolled courses.",
-      600
-    );
-  }
-
-  if (course.Price === null) {
-    let pendingCourses =
-      JSON.parse(localStorage.getItem("pendingCourses")) || [];
-    pendingCourses.push({ username, course });
-
-    localStorage.setItem("pendingCourses", JSON.stringify(pendingCourses));
-    showNotification("Your enrollment request is pending approval.", 600);
-  } else {
-    processPayment(course)
-      .then((paymentSuccess) => {
-        if (paymentSuccess) {
-          showNotification("Payment successful! You are now enrolled.", 1000);
-          userCourses.push(course);
-
-          const updatedUsers = users.map((u) =>
-            u.username === username
-              ? { ...u, courses: userCourses, wishlist: userWishes }
-              : u
-          );
-          localStorage.setItem("users", JSON.stringify(updatedUsers));
-        } else {
-          console.log("Payment failed");
-          showNotification("Payment failed. Please try again.", 1000);
-        }
-      })
-      .catch((error) => {
-        console.error("Payment error:", error);
-        showNotification("An error occurred during payment.", 1000);
-      });
-  }
-
-  courses(localcourses);
-}*/
 function enroll(courseID) {
   if (!isLogin()) {
     showNotification("Please log in to enroll in courses.", 2000);
@@ -323,7 +228,7 @@ function enroll(courseID) {
 
           document.getElementById("paypal-popup-overlay").style.display =
             "none";
-            courses(localcourses, 6, "#pagination");
+          courses(localcourses, 6, "#pagination");
         });
       },
       onError: function (err) {

@@ -72,17 +72,15 @@
       //   window.location.href = "/";
       // }
 
-
       // import { isLogin, getUserDataByUsername } from "../utils/user.js";
       // updateUI();
-     
-      
+
       // console.log(getUserDataByUsername(isLogin().username).isAdmin)
       // if(getUserDataByUsername(isLogin().username).isAdmin == true){
 
       //   window.location.href = "/";
       // } // edit this line
-        
+
       import {
         showNotification,
         logOut,
@@ -98,7 +96,7 @@
 
       console.log(getUserDataByUsername(isLogin().username).isAdmin);
       if (getUserDataByUsername(isLogin().username).isAdmin == false) {
-        window.location.href = "/";
+        //window.location.href = "/";
       }
       document.getElementById("logout").addEventListener("click", handleLOgout);
       function handleLOgout() {
