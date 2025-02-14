@@ -1,4 +1,4 @@
-# El Madrasaa - Online Learning Schools
+# El Madrasaa - Online Learning School
 
 ![El Madrasaa Header](https://github.com/mashady/eLearningJavaScript/blob/main/demo.png)
 
