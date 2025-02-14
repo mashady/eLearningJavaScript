@@ -35,8 +35,8 @@ To run this project locally on your machine, follow these steps:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/mashady/eLearningJavaScript.git
-cd eLearningJavaScript
+git clone https://github.com/mashady/el-madrasaa.git
+cd el-madrasaa
 ```
 
 ### 2. Enjoy 💜
